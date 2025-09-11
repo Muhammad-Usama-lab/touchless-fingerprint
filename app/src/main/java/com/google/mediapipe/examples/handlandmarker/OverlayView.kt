@@ -44,7 +44,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
     private var captureTriggered = false
 
     interface CaptureListener {
-        fun onCapture()
+        fun onCapture(result: HandLandmarkerResult)
     }
 
     init {
@@ -116,7 +116,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
                 if (handNearRightEdge && isStable) {
                     if (!captureTriggered) {
-                        captureListener?.onCapture()
+                        captureListener?.onCapture(handLandmarkerResult)
                         captureTriggered = true
                     }
                     landmark.forEachIndexed { index, normalizedLandmark ->

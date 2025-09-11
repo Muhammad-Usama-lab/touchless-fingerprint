@@ -18,6 +18,9 @@ package com.google.mediapipe.examples.handlandmarker.fragment
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.res.Configuration
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -45,6 +48,8 @@ import com.google.mediapipe.examples.handlandmarker.OverlayView
 import com.google.mediapipe.examples.handlandmarker.R
 import com.google.mediapipe.examples.handlandmarker.databinding.FragmentCameraBinding
 import com.google.mediapipe.tasks.vision.core.RunningMode
+import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -71,6 +76,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     private var camera: Camera? = null
     private var cameraProvider: ProcessCameraProvider? = null
     private var cameraFacing = CameraSelector.LENS_FACING_BACK
+    private var latestHandLandmarkerResult: HandLandmarkerResult? = null
 
     /** Blocking ML operations are performed using this executor */
     private lateinit var backgroundExecutor: ExecutorService
@@ -456,12 +462,88 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
                     Log.d(TAG, msg)
+
+                    output.savedUri?.let { uri ->
+                        val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, uri))
+                        } else {
+                            MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
+                        }
+
+                        latestHandLandmarkerResult?.let { result ->
+                            val fingerNames = mapOf(
+                                4 to "Thumb",
+                                8 to "Index Finger",
+                                12 to "Middle Finger",
+                                16 to "Ring Finger",
+                                20 to "Pinky Finger"
+                            )
+
+                            val fingerLandmarks = mapOf(
+                                "Thumb" to listOf(1, 2, 3, 4),
+                                "Index Finger" to listOf(5, 6, 7, 8),
+                                "Middle Finger" to listOf(9, 10, 11, 12),
+                                "Ring Finger" to listOf(13, 14, 15, 16),
+                                "Pinky Finger" to listOf(17, 18, 19, 20)
+                            )
+
+                            for (landmark in result.landmarks()) {
+                                for ((fingerName, landmarkIndices) in fingerLandmarks) {
+                                    var minX = bitmap.width
+                                    var minY = bitmap.height
+                                    var maxX = 0
+                                    var maxY = 0
+
+                                    for (index in landmarkIndices) {
+                                        val l = landmark[index]
+                                        val x = (l.x() * bitmap.width).toInt()
+                                        val y = (l.y() * bitmap.height).toInt()
+
+                                        if (x < minX) minX = x
+                                        if (y < minY) minY = y
+                                        if (x > maxX) maxX = x
+                                        if (y > maxY) maxY = y
+                                    }
+
+                                    // Add some padding
+                                    minX = (minX - 20).coerceAtLeast(0)
+                                    minY = (minY - 20).coerceAtLeast(0)
+                                    maxX = (maxX + 20).coerceAtMost(bitmap.width)
+                                    maxY = (maxY + 20).coerceAtMost(bitmap.height)
+
+                                    val croppedBitmap = Bitmap.createBitmap(bitmap, minX, minY, maxX - minX, maxY - minY)
+
+                                    val croppedName = "${name}_${fingerName}"
+                                    val croppedContentValues = ContentValues().apply {
+                                        put(MediaStore.MediaColumns.DISPLAY_NAME, croppedName)
+                                        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+                                        put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/HandLandmarker/Cropped")
+                                    }
+
+                                    val croppedUri = requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, croppedContentValues)
+
+                                    croppedUri?.let {
+                                        val stream = requireContext().contentResolver.openOutputStream(it)
+                                        stream?.let { outStream ->
+                                            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+                                            outStream.flush()
+                                            outStream.close()
+                                            val croppedMsg = "Cropped finger saved: $it"
+                                            Toast.makeText(requireContext(), croppedMsg, Toast.LENGTH_SHORT).show()
+                                            Log.d(TAG, croppedMsg)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         )
     }
 
-    override fun onCapture() {
+    override fun onCapture(result: HandLandmarkerResult) {
+        latestHandLandmarkerResult = result
         activity?.runOnUiThread {
             fragmentCameraBinding.captureButton.performClick()
         }
