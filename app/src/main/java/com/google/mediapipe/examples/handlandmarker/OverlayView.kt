@@ -65,7 +65,35 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
         results?.let { handLandmarkerResult ->
+            val fingerNames = mapOf(
+                4 to "Thumb",
+                8 to "Index Finger",
+                12 to "Middle Finger",
+                16 to "Ring Finger",
+                20 to "Pinky Finger"
+            )
+
             for (landmark in handLandmarkerResult.landmarks()) {
+                var handNearRightEdge = false
+                for (normalizedLandmark in landmark) {
+                    val x = normalizedLandmark.x() * imageWidth * scaleFactor
+                    if (x > width * 0.8) {
+                        handNearRightEdge = true
+                        break
+                    }
+                }
+
+                if (handNearRightEdge) {
+                    landmark.forEachIndexed { index, normalizedLandmark ->
+                        if (fingerNames.containsKey(index)) {
+                            val fingerName = fingerNames[index]
+                            val x = normalizedLandmark.x() * imageWidth * scaleFactor
+                            val y = normalizedLandmark.y() * imageHeight * scaleFactor
+                            android.util.Log.d("HandLandmarker", "$fingerName: ($x, $y)")
+                        }
+                    }
+                }
+
                 for (normalizedLandmark in landmark) {
                     canvas.drawPoint(
                         normalizedLandmark.x() * imageWidth * scaleFactor,
