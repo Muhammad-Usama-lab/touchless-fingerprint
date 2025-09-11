@@ -32,6 +32,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
     View(context, attrs) {
 
     private var results: HandLandmarkerResult? = null
+    private var previousResults: HandLandmarkerResult? = null
     private var linePaint = Paint()
     private var pointPaint = Paint()
 
@@ -39,16 +40,29 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
     private var imageWidth: Int = 1
     private var imageHeight: Int = 1
 
+    private var captureListener: CaptureListener? = null
+    private var captureTriggered = false
+
+    interface CaptureListener {
+        fun onCapture()
+    }
+
     init {
         initPaints()
     }
 
+    fun setCaptureListener(listener: CaptureListener) {
+        this.captureListener = listener
+    }
+
     fun clear() {
         results = null
+        previousResults = null
         linePaint.reset()
         pointPaint.reset()
         invalidate()
         initPaints()
+        captureTriggered = false
     }
 
     private fun initPaints() {
@@ -73,7 +87,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                 20 to "Pinky Finger"
             )
 
-            for (landmark in handLandmarkerResult.landmarks()) {
+            for ((handIndex, landmark) in handLandmarkerResult.landmarks().withIndex()) {
                 var handNearRightEdge = false
                 for (normalizedLandmark in landmark) {
                     val x = normalizedLandmark.x() * imageWidth * scaleFactor
@@ -83,7 +97,28 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                     }
                 }
 
-                if (handNearRightEdge) {
+                var isStable = false
+                previousResults?.let { prevResult ->
+                    if (prevResult.landmarks().size > handIndex) {
+                        val prevLandmark = prevResult.landmarks()[handIndex]
+                        var totalDistance = 0f
+                        for (i in landmark.indices) {
+                            val dx = landmark[i].x() - prevLandmark[i].x()
+                            val dy = landmark[i].y() - prevLandmark[i].y()
+                            totalDistance += kotlin.math.sqrt(dx * dx + dy * dy)
+                        }
+                        val averageDistance = totalDistance / landmark.size
+                        if (averageDistance < 0.01) { // Stability threshold
+                            isStable = true
+                        }
+                    }
+                }
+
+                if (handNearRightEdge && isStable) {
+                    if (!captureTriggered) {
+                        captureListener?.onCapture()
+                        captureTriggered = true
+                    }
                     landmark.forEachIndexed { index, normalizedLandmark ->
                         if (fingerNames.containsKey(index)) {
                             val fingerName = fingerNames[index]
@@ -125,6 +160,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         imageWidth: Int,
         runningMode: RunningMode = RunningMode.IMAGE
     ) {
+        previousResults = results
         results = handLandmarkerResults
 
         this.imageHeight = imageHeight

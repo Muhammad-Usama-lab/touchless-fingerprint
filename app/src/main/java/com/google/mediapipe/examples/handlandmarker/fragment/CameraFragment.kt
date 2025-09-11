@@ -41,6 +41,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.google.mediapipe.examples.handlandmarker.HandLandmarkerHelper
 import com.google.mediapipe.examples.handlandmarker.MainViewModel
+import com.google.mediapipe.examples.handlandmarker.OverlayView
 import com.google.mediapipe.examples.handlandmarker.R
 import com.google.mediapipe.examples.handlandmarker.databinding.FragmentCameraBinding
 import com.google.mediapipe.tasks.vision.core.RunningMode
@@ -51,7 +52,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener {
+class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener {
 
     companion object {
         private const val TAG = "Hand Landmarker"
@@ -162,6 +163,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener {
         fragmentCameraBinding.captureButton.setOnClickListener {
             takePhoto()
         }
+
+        fragmentCameraBinding.overlay.setCaptureListener(this)
     }
 
     private fun initBottomSheetControls() {
@@ -456,5 +459,11 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener {
                 }
             }
         )
+    }
+
+    override fun onCapture() {
+        activity?.runOnUiThread {
+            fragmentCameraBinding.captureButton.performClick()
+        }
     }
 }
