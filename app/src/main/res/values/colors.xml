@@ -15,11 +15,11 @@
     ~ limitations under the License.
 -->
 <resources>
-    <color name="mp_color_primary">#007F8B</color>
-    <color name="mp_color_primary_variant">#12B5CB</color>
-    <color name="mp_color_primary_dark">#00676D</color>
-    <color name="mp_color_secondary">#FBBC04</color>
-    <color name="mp_color_secondary_variant">#F9AB00</color>
+    <color name="mp_color_primary">#8A2438</color>
+    <color name="mp_color_primary_variant">#6A1B2C</color>
+    <color name="mp_color_primary_dark">#6A1B2C</color>
+    <color name="mp_color_secondary">#3A1F54</color>
+    <color name="mp_color_secondary_variant">#54224D</color>
     <color name="mp_color_error">#B00020</color>
     <color name="toolbar_background">#E0E0E0</color>
     <color name="ic_launcher_background">#FFFFFF</color>
@@ -28,4 +28,8 @@
     <color name="icActive">#FFFFFFFF</color>
     <color name="icFocused">#DDFFFFFF</color>
     <color name="icPressed">#AAFFFFFF</color>
+
+    <color name="rmst_color_primary">#8A2438</color>
+    <color name="rmst_color_primary_dark">#6A1B2C</color>
+    <color name="rmst_color_accent">#3A1F54</color>
 </resources>

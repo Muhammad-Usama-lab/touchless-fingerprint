@@ -108,7 +108,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                             totalDistance += kotlin.math.sqrt(dx * dx + dy * dy)
                         }
                         val averageDistance = totalDistance / landmark.size
-                        if (averageDistance < 0.01) { // Stability threshold
+                        if (averageDistance < 0.005) { // Stability threshold
                             isStable = true
                         }
                     }
@@ -119,14 +119,14 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                         captureListener?.onCapture(handLandmarkerResult)
                         captureTriggered = true
                     }
-                    landmark.forEachIndexed { index, normalizedLandmark ->
-                        if (fingerNames.containsKey(index)) {
-                            val fingerName = fingerNames[index]
-                            val x = normalizedLandmark.x() * imageWidth * scaleFactor
-                            val y = normalizedLandmark.y() * imageHeight * scaleFactor
-                            android.util.Log.d("HandLandmarker", "$fingerName: ($x, $y)")
-                        }
-                    }
+//                    landmark.forEachIndexed { index, normalizedLandmark ->
+//                        if (fingerNames.containsKey(index)) {
+//                            val fingerName = fingerNames[index]
+//                            val x = normalizedLandmark.x() * imageWidth * scaleFactor
+//                            val y = normalizedLandmark.y() * imageHeight * scaleFactor
+//                            android.util.Log.d("HandLandmarker", "$fingerName: ($x, $y)")
+//                        }
+//                    }
                 }
 
                 for (normalizedLandmark in landmark) {

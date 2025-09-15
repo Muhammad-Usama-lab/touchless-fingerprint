@@ -17,10 +17,8 @@ package com.google.mediapipe.examples.handlandmarker.fragment
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.content.Context
 import android.content.res.Configuration
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -51,11 +49,21 @@ import com.google.mediapipe.tasks.vision.core.RunningMode
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+
+import android.net.Uri
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import java.io.File
 
 class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener {
 
@@ -461,85 +469,63 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     onImageSaved(output: ImageCapture.OutputFileResults){
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                    uploadImageToApi(output.savedUri)
                     Log.d(TAG, msg)
 
-                    output.savedUri?.let { uri ->
-                        val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                            ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, uri))
-                        } else {
-                            MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
-                        }
 
-                        latestHandLandmarkerResult?.let { result ->
-                            val fingerNames = mapOf(
-                                4 to "Thumb",
-                                8 to "Index Finger",
-                                12 to "Middle Finger",
-                                16 to "Ring Finger",
-                                20 to "Pinky Finger"
-                            )
-
-                            val fingerLandmarks = mapOf(
-                                "Thumb" to listOf(1, 2, 3, 4),
-                                "Index Finger" to listOf(5, 6, 7, 8),
-                                "Middle Finger" to listOf(9, 10, 11, 12),
-                                "Ring Finger" to listOf(13, 14, 15, 16),
-                                "Pinky Finger" to listOf(17, 18, 19, 20)
-                            )
-
-                            for (landmark in result.landmarks()) {
-                                for ((fingerName, landmarkIndices) in fingerLandmarks) {
-                                    var minX = bitmap.width
-                                    var minY = bitmap.height
-                                    var maxX = 0
-                                    var maxY = 0
-
-                                    for (index in landmarkIndices) {
-                                        val l = landmark[index]
-                                        val x = (l.x() * bitmap.width).toInt()
-                                        val y = (l.y() * bitmap.height).toInt()
-
-                                        if (x < minX) minX = x
-                                        if (y < minY) minY = y
-                                        if (x > maxX) maxX = x
-                                        if (y > maxY) maxY = y
-                                    }
-
-                                    // Add some padding
-                                    minX = (minX - 20).coerceAtLeast(0)
-                                    minY = (minY - 20).coerceAtLeast(0)
-                                    maxX = (maxX + 20).coerceAtMost(bitmap.width)
-                                    maxY = (maxY + 20).coerceAtMost(bitmap.height)
-
-                                    val croppedBitmap = Bitmap.createBitmap(bitmap, minX, minY, maxX - minX, maxY - minY)
-
-                                    val croppedName = "${name}_${fingerName}"
-                                    val croppedContentValues = ContentValues().apply {
-                                        put(MediaStore.MediaColumns.DISPLAY_NAME, croppedName)
-                                        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-                                        put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/HandLandmarker/Cropped")
-                                    }
-
-                                    val croppedUri = requireContext().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, croppedContentValues)
-
-                                    croppedUri?.let {
-                                        val stream = requireContext().contentResolver.openOutputStream(it)
-                                        stream?.let { outStream ->
-                                            croppedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
-                                            outStream.flush()
-                                            outStream.close()
-                                            val croppedMsg = "Cropped finger saved: $it"
-                                            Toast.makeText(requireContext(), croppedMsg, Toast.LENGTH_SHORT).show()
-                                            Log.d(TAG, croppedMsg)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
         )
+    }
+
+
+    private fun uploadImageToApi(imageUri: Uri?) {
+        if (imageUri == null) return
+
+        lifecycleScope.launch {
+            try {
+                val file = getFileFromUri(imageUri) // convert Uri → File
+                val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                val multipart = MultipartBody.Part.createFormData("image", file.name, requestBody)
+
+                // Get token from SharedPreferences
+                val sharedPreferences = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                val token = sharedPreferences.getString("auth_token", null)
+
+                if (token == null) {
+                    Log.e(TAG, "Token not found in SharedPreferences")
+                    return@launch
+                }
+
+                // Build the request
+                val client = OkHttpClient()
+                val request = Request.Builder()
+                    .url("http://172.21.21.151:8000/biometrics/register") // 192.168.0.110
+                    .post(multipart.body)
+                    .addHeader("Authorization", "Token " + token)
+                    .build()
+
+                val response = client.newCall(request).execute()
+                if (response.isSuccessful) {
+                    Log.d(TAG, "Upload success: ${response.body?.string()}")
+                } else {
+                    Log.e(TAG, "Upload failed: ${response.code} ${response.message}")
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Upload error", e)
+            }
+        }
+    }
+
+    // Helper: convert Uri to File
+    private fun getFileFromUri(uri: Uri): File {
+        val inputStream = requireContext().contentResolver.openInputStream(uri)!!
+        val file = File(requireContext().cacheDir, "upload_${System.currentTimeMillis()}.jpg")
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+        outputStream.close()
+        inputStream.close()
+        return file
     }
 
     override fun onCapture(result: HandLandmarkerResult) {
