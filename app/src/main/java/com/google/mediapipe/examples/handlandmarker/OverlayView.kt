@@ -108,7 +108,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                             totalDistance += kotlin.math.sqrt(dx * dx + dy * dy)
                         }
                         val averageDistance = totalDistance / landmark.size
-                        if (averageDistance < 0.005) { // Stability threshold
+                        if (averageDistance < 0.008) { // Stability threshold
                             isStable = true
                         }
                     }

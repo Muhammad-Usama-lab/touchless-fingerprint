@@ -17,7 +17,18 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/permissions_fragment">
+    app:startDestination="@id/start_biometrics_fragment">
+
+    <fragment
+        android:id="@+id/start_biometrics_fragment"
+        android:name="com.google.mediapipe.examples.handlandmarker.fragment.StartBiometricsFragment"
+        android:label="StartBiometricsFragment">
+        <action
+            android:id="@+id/action_start_biometrics_to_camera"
+            app:destination="@id/camera_fragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/start_biometrics_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/permissions_fragment"

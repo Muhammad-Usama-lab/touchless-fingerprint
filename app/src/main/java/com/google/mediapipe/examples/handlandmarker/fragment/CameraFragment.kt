@@ -58,12 +58,17 @@ import android.net.Uri
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
+
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import java.io.File
+
+import android.util.Base64
+import org.json.JSONObject
+import kotlinx.coroutines.Dispatchers
+import com.google.mediapipe.examples.handlandmarker.BiometricsCompletedDialogFragment
+
 
 class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener {
 
@@ -179,6 +184,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
         }
 
         fragmentCameraBinding.overlay.setCaptureListener(this)
+
+        // Initialize progress bar
+        fragmentCameraBinding.progressBar.visibility = View.GONE
     }
 
     private fun initBottomSheetControls() {
@@ -482,13 +490,13 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     private fun uploadImageToApi(imageUri: Uri?) {
         if (imageUri == null) return
 
-        lifecycleScope.launch {
-            try {
-                val file = getFileFromUri(imageUri) // convert Uri → File
-                val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                val multipart = MultipartBody.Part.createFormData("image", file.name, requestBody)
+        lifecycleScope.launch(Dispatchers.IO) {
+            activity?.runOnUiThread {
+                fragmentCameraBinding.progressBar.visibility = View.VISIBLE
+            }
 
-                // Get token from SharedPreferences
+            try {
+                // Get token
                 val sharedPreferences = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                 val token = sharedPreferences.getString("auth_token", null)
 
@@ -497,36 +505,63 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     return@launch
                 }
 
-                // Build the request
+                // Read image as bytes
+                val inputStream = requireContext().contentResolver.openInputStream(imageUri)!!
+                val bytes = inputStream.readBytes()
+                inputStream.close()
+
+                // Convert to Base64
+                val base64Image = Base64.encodeToString(bytes, Base64.NO_WRAP)
+
+                // Create JSON body
+                val json = JSONObject().apply {
+                    put("imageData", base64Image)
+                }
+                val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
+
+                // Build request
                 val client = OkHttpClient()
                 val request = Request.Builder()
-                    .url("http://172.21.21.151:8000/biometrics/register") // 192.168.0.110
-                    .post(multipart.body)
+                    .url("http://192.168.0.110:8000/biometrics/register")
+                    .post(requestBody)
                     .addHeader("Authorization", "Token " + token)
                     .build()
 
+                // Send
                 val response = client.newCall(request).execute()
                 if (response.isSuccessful) {
                     Log.d(TAG, "Upload success: ${response.body?.string()}")
+                    // Delete the image after successful upload
+                    try {
+                        val rowsDeleted = requireContext().contentResolver.delete(imageUri, null, null)
+                        if (rowsDeleted > 0) {
+                            Log.d(TAG, "Image deleted successfully: $imageUri")
+                        } else {
+                            Log.e(TAG, "Failed to delete image: $imageUri")
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Error deleting image: $imageUri", e)
+                    }
+
+                    // Show biometrics completed dialog
+                    activity?.runOnUiThread {
+                        val dialog = BiometricsCompletedDialogFragment()
+                        dialog.show(childFragmentManager, BiometricsCompletedDialogFragment.TAG)
+                    }
                 } else {
                     Log.e(TAG, "Upload failed: ${response.code} ${response.message}")
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Upload error", e)
+            } finally {
+                activity?.runOnUiThread {
+                    fragmentCameraBinding.progressBar.visibility = View.GONE
+                }
             }
         }
     }
 
-    // Helper: convert Uri to File
-    private fun getFileFromUri(uri: Uri): File {
-        val inputStream = requireContext().contentResolver.openInputStream(uri)!!
-        val file = File(requireContext().cacheDir, "upload_${System.currentTimeMillis()}.jpg")
-        val outputStream = FileOutputStream(file)
-        inputStream.copyTo(outputStream)
-        outputStream.close()
-        inputStream.close()
-        return file
-    }
+    
 
     override fun onCapture(result: HandLandmarkerResult) {
         latestHandLandmarkerResult = result

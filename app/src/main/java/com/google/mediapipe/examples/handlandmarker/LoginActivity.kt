@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
     private fun verifyToken(token: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val url = "http://172.21.21.151:8000/biometrics/verifyToken?token=$token"
+                val url = "http://192.168.0.110:8000/biometrics/verifyToken?token=$token"
                 val client = OkHttpClient()
                 val request = Request.Builder().url(url).build()
                 val response = client.newCall(request).execute()
@@ -50,8 +50,9 @@ class LoginActivity : AppCompatActivity() {
                         val company = companyObject.toString()
                         withContext(Dispatchers.Main) {
                             saveAuthData(token, company)
-                            val welcomeDialog = WelcomeDialogFragment.newInstance(companyName)
-                            welcomeDialog.show(supportFragmentManager, "WelcomeDialog")
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
                     } else {
                         withContext(Dispatchers.Main) {
