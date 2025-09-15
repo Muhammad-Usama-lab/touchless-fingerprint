@@ -25,9 +25,7 @@
         android:label="StartBiometricsFragment">
         <action
             android:id="@+id/action_start_biometrics_to_camera"
-            app:destination="@id/camera_fragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/start_biometrics_fragment" />
+            app:destination="@id/camera_fragment" />
     </fragment>
 
     <fragment

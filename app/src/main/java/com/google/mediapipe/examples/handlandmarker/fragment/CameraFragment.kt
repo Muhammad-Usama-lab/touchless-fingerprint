@@ -68,9 +68,10 @@ import android.util.Base64
 import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
 import com.google.mediapipe.examples.handlandmarker.BiometricsCompletedDialogFragment
+import androidx.navigation.fragment.findNavController
 
 
-class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener {
+class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener, BiometricsCompletedDialogFragment.BiometricsCompletedListener {
 
     companion object {
         private const val TAG = "Hand Landmarker"
@@ -187,6 +188,12 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 
         // Initialize progress bar
         fragmentCameraBinding.progressBar.visibility = View.GONE
+
+        // Hide capture button
+        fragmentCameraBinding.captureButton.visibility = View.GONE
+
+        // Hide bottom sheet
+        fragmentCameraBinding.bottomSheetLayout.root.visibility = View.GONE
     }
 
     private fun initBottomSheetControls() {
@@ -493,6 +500,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
         lifecycleScope.launch(Dispatchers.IO) {
             activity?.runOnUiThread {
                 fragmentCameraBinding.progressBar.visibility = View.VISIBLE
+                camera?.cameraControl?.enableTorch(false)
             }
 
             try {
@@ -568,5 +576,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
         activity?.runOnUiThread {
             fragmentCameraBinding.captureButton.performClick()
         }
+    }
+
+    override fun onBiometricsCompleted() {
+        findNavController().popBackStack(R.id.start_biometrics_fragment, false)
     }
 }

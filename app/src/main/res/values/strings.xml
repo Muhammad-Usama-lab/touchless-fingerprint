@@ -44,6 +44,7 @@
         Threshold</string>
     <string name="label_num_hands">Number of Hands</string>
     <string name="label_delegate">Delegate</string>
+    <string name="fingerprint_icon_content_description">Fingerprint icon</string>
 
     <string-array name="delegate_spinner_titles">
         <item>CPU</item>

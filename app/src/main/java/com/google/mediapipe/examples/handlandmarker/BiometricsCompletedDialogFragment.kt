@@ -1,6 +1,7 @@
 package com.google.mediapipe.examples.handlandmarker
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,21 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 
 class BiometricsCompletedDialogFragment : DialogFragment() {
+
+    interface BiometricsCompletedListener {
+        fun onBiometricsCompleted()
+    }
+
+    private var listener: BiometricsCompletedListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (parentFragment is BiometricsCompletedListener) {
+            listener = parentFragment as BiometricsCompletedListener
+        } else if (context is BiometricsCompletedListener) {
+            listener = context as BiometricsCompletedListener
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +40,7 @@ class BiometricsCompletedDialogFragment : DialogFragment() {
         val okButton: Button = view.findViewById(R.id.dialog_ok_button)
         okButton.setOnClickListener {
             dismiss()
+            listener?.onBiometricsCompleted()
         }
     }
 
