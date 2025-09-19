@@ -35,6 +35,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Camera
 import androidx.camera.core.AspectRatio
+import androidx.camera.core.FocusMeteringAction
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -65,6 +66,7 @@ import okhttp3.RequestBody
 import java.io.File
 
 import android.util.Base64
+import android.graphics.Bitmap
 import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
 import com.google.mediapipe.examples.handlandmarker.BiometricsCompletedDialogFragment
@@ -91,25 +93,21 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     private var cameraProvider: ProcessCameraProvider? = null
     private var cameraFacing = CameraSelector.LENS_FACING_BACK
     private var latestHandLandmarkerResult: HandLandmarkerResult? = null
+    private var isFocusing = false
+    private var lastFocusTime = 0L
 
     /** Blocking ML operations are performed using this executor */
     private lateinit var backgroundExecutor: ExecutorService
 
     override fun onResume() {
         super.onResume()
-        // Make sure that all permissions are still present, since the
-        // user could have removed them while the app was in paused state.
-        if (!PermissionsFragment.hasPermissions(requireContext())) {
-            Navigation.findNavController(
-                requireActivity(), R.id.fragment_container
-            ).navigate(R.id.action_camera_to_permissions)
-        }
-
         // Start the HandLandmarkerHelper again when users come back
         // to the foreground.
-        backgroundExecutor.execute {
-            if (handLandmarkerHelper.isClose()) {
-                handLandmarkerHelper.setupHandLandmarker()
+        if (this::backgroundExecutor.isInitialized) {
+            backgroundExecutor.execute {
+                if (this::handLandmarkerHelper.isInitialized && handLandmarkerHelper.isClose()) {
+                    handLandmarkerHelper.setupHandLandmarker()
+                }
             }
         }
     }
@@ -133,10 +131,12 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
         super.onDestroyView()
 
         // Shut down our background executor
-        backgroundExecutor.shutdown()
-        backgroundExecutor.awaitTermination(
-            Long.MAX_VALUE, TimeUnit.NANOSECONDS
-        )
+        if (this::backgroundExecutor.isInitialized) {
+            backgroundExecutor.shutdown()
+            backgroundExecutor.awaitTermination(
+                Long.MAX_VALUE, TimeUnit.NANOSECONDS
+            )
+        }
     }
 
     override fun onCreateView(
@@ -154,46 +154,61 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize our background executor
-        backgroundExecutor = Executors.newSingleThreadExecutor()
+        if (!PermissionsFragment.hasPermissions(requireContext())) {
+            Navigation.findNavController(
+                requireActivity(), R.id.fragment_container
+            ).navigate(R.id.action_camera_to_permissions)
+        } else {
+            // Initialize our background executor
+            backgroundExecutor = Executors.newSingleThreadExecutor()
 
-        // Wait for the views to be properly laid out
-        fragmentCameraBinding.viewFinder.post {
-            // Set up the camera and its use cases
-            setUpCamera()
+            // Wait for the views to be properly laid out
+            fragmentCameraBinding.viewFinder.post {
+                // Set up the camera and its use cases
+                setUpCamera()
+
+                // Set up tap-to-focus
+                fragmentCameraBinding.viewFinder.setOnTouchListener { _, event ->
+                    val factory = fragmentCameraBinding.viewFinder.meteringPointFactory
+                    val point = factory.createPoint(event.x, event.y)
+                    val action = FocusMeteringAction.Builder(point).build()
+                    camera?.cameraControl?.startFocusAndMetering(action)
+                    true
+                }
+            }
+
+            // Create the HandLandmarkerHelper that will handle the inference
+            backgroundExecutor.execute {
+                handLandmarkerHelper = HandLandmarkerHelper(
+                    context = requireContext(),
+                    runningMode = RunningMode.LIVE_STREAM,
+                    minHandDetectionConfidence = viewModel.currentMinHandDetectionConfidence,
+                    minHandTrackingConfidence = viewModel.currentMinHandTrackingConfidence,
+                    minHandPresenceConfidence = viewModel.currentMinHandPresenceConfidence,
+                    maxNumHands = viewModel.currentMaxHands,
+                    currentDelegate = viewModel.currentDelegate,
+                    handLandmarkerHelperListener = this
+                )
+            }
+
+            // Attach listeners to UI control widgets
+            initBottomSheetControls()
+
+            fragmentCameraBinding.captureButton.setOnClickListener {
+                takePhoto()
+            }
+
+            fragmentCameraBinding.overlay.setCaptureListener(this)
+
+            // Initialize progress bar
+            fragmentCameraBinding.progressBar.visibility = View.GONE
+
+            // Hide capture button
+            fragmentCameraBinding.captureButton.visibility = View.GONE
+
+            // Hide bottom sheet
+            fragmentCameraBinding.bottomSheetLayout.root.visibility = View.GONE
         }
-
-        // Create the HandLandmarkerHelper that will handle the inference
-        backgroundExecutor.execute {
-            handLandmarkerHelper = HandLandmarkerHelper(
-                context = requireContext(),
-                runningMode = RunningMode.LIVE_STREAM,
-                minHandDetectionConfidence = viewModel.currentMinHandDetectionConfidence,
-                minHandTrackingConfidence = viewModel.currentMinHandTrackingConfidence,
-                minHandPresenceConfidence = viewModel.currentMinHandPresenceConfidence,
-                maxNumHands = viewModel.currentMaxHands,
-                currentDelegate = viewModel.currentDelegate,
-                handLandmarkerHelperListener = this
-            )
-        }
-
-        // Attach listeners to UI control widgets
-        initBottomSheetControls()
-
-        fragmentCameraBinding.captureButton.setOnClickListener {
-            takePhoto()
-        }
-
-        fragmentCameraBinding.overlay.setCaptureListener(this)
-
-        // Initialize progress bar
-        fragmentCameraBinding.progressBar.visibility = View.GONE
-
-        // Hide capture button
-        fragmentCameraBinding.captureButton.visibility = View.GONE
-
-        // Hide bottom sheet
-        fragmentCameraBinding.bottomSheetLayout.root.visibility = View.GONE
     }
 
     private fun initBottomSheetControls() {
@@ -433,6 +448,27 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     RunningMode.LIVE_STREAM
                 )
 
+                // Trigger auto-focus on hand detection
+                if (resultBundle.results.first().landmarks().isNotEmpty()) {
+                    if (!isFocusing && (System.currentTimeMillis() - lastFocusTime > 1000)) {
+                        isFocusing = true
+                        val landmarks = resultBundle.results.first().landmarks().first()
+                        val centerX = landmarks.map { it.x() }.average().toFloat()
+                        val centerY = landmarks.map { it.y() }.average().toFloat()
+
+                        val viewWidth = fragmentCameraBinding.viewFinder.width
+                        val viewHeight = fragmentCameraBinding.viewFinder.height
+
+                        val point = fragmentCameraBinding.viewFinder.meteringPointFactory.createPoint(centerX * viewWidth, centerY * viewHeight)
+                        val action = FocusMeteringAction.Builder(point).build()
+                        val future = camera?.cameraControl?.startFocusAndMetering(action)
+                        future?.addListener({
+                            isFocusing = false
+                            lastFocusTime = System.currentTimeMillis()
+                        }, ContextCompat.getMainExecutor(requireContext()))
+                    }
+                }
+
                 // Force a redraw
                 fragmentCameraBinding.overlay.invalidate()
             }
@@ -513,13 +549,14 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     return@launch
                 }
 
-                // Read image as bytes
-                val inputStream = requireContext().contentResolver.openInputStream(imageUri)!!
-                val bytes = inputStream.readBytes()
-                inputStream.close()
+                // Decode and compress the image
+                val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
+                val outputStream = java.io.ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
+                val compressedBytes = outputStream.toByteArray()
 
                 // Convert to Base64
-                val base64Image = Base64.encodeToString(bytes, Base64.NO_WRAP)
+                val base64Image = Base64.encodeToString(compressedBytes, Base64.NO_WRAP)
 
                 // Create JSON body
                 val json = JSONObject().apply {
@@ -530,7 +567,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                 // Build request
                 val client = OkHttpClient()
                 val request = Request.Builder()
-                    .url("http://192.168.0.110:8000/biometrics/register")
+                    .url("https://demo.rmstservices.com/biometrics/register")
                     .post(requestBody)
                     .addHeader("Authorization", "Token " + token)
                     .build()
@@ -574,7 +611,19 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     override fun onCapture(result: HandLandmarkerResult) {
         latestHandLandmarkerResult = result
         activity?.runOnUiThread {
-            fragmentCameraBinding.captureButton.performClick()
+            val landmarks = result.landmarks().first()
+            val centerX = landmarks.map { it.x() }.average().toFloat()
+            val centerY = landmarks.map { it.y() }.average().toFloat()
+
+            val viewWidth = fragmentCameraBinding.viewFinder.width
+            val viewHeight = fragmentCameraBinding.viewFinder.height
+
+            val point = fragmentCameraBinding.viewFinder.meteringPointFactory.createPoint(centerX * viewWidth, centerY * viewHeight)
+            val action = FocusMeteringAction.Builder(point).build()
+            val future = camera?.cameraControl?.startFocusAndMetering(action)
+            future?.addListener({
+                takePhoto()
+            }, ContextCompat.getMainExecutor(requireContext()))
         }
     }
 
