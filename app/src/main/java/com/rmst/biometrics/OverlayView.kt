@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.mediapipe.examples.handlandmarker
+package com.rmst.biometrics
 
 import android.content.Context
 import android.graphics.Canvas
@@ -27,6 +27,7 @@ import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarker
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sqrt
 
 class OverlayView(context: Context?, attrs: AttributeSet?) :
     View(context, attrs) {
@@ -105,7 +106,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                         for (i in landmark.indices) {
                             val dx = landmark[i].x() - prevLandmark[i].x()
                             val dy = landmark[i].y() - prevLandmark[i].y()
-                            totalDistance += kotlin.math.sqrt(dx * dx + dy * dy)
+                            totalDistance += sqrt(dx * dx + dy * dy)
                         }
                         val averageDistance = totalDistance / landmark.size
                         if (averageDistance < 0.008) { // Stability threshold

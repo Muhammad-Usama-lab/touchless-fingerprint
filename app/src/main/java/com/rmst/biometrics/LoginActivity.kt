@@ -1,12 +1,11 @@
-package com.google.mediapipe.examples.handlandmarker
+package com.rmst.biometrics
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.mediapipe.examples.handlandmarker.databinding.ActivityLoginBinding
+import com.rmst.biometrics.databinding.ActivityLoginBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -84,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun saveAuthData(token: String, company: String) {
-        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
         sharedPreferences.edit()
             .putString("auth_token", token)
             .putString("company_data", company)

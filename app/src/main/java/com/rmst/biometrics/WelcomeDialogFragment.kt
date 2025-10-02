@@ -1,5 +1,6 @@
-package com.google.mediapipe.examples.handlandmarker
+package com.rmst.biometrics
 
+import com.rmst.biometrics.R
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Typeface
@@ -60,7 +61,7 @@ class WelcomeDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.setBackgroundDrawableResource(R.color.transparent)
         return dialog
     }
 }

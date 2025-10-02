@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/start_biometrics_fragment"
-        android:name="com.google.mediapipe.examples.handlandmarker.fragment.StartBiometricsFragment"
+        android:name="com.rmst.biometrics.fragment.StartBiometricsFragment"
         android:label="StartBiometricsFragment">
         <action
             android:id="@+id/action_start_biometrics_to_camera"
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/permissions_fragment"
-        android:name="com.google.mediapipe.examples.handlandmarker.fragment.PermissionsFragment"
+        android:name="com.rmst.biometrics.fragment.PermissionsFragment"
         android:label="PermissionsFragment">
 
         <action
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/camera_fragment"
-        android:name="com.google.mediapipe.examples.handlandmarker.fragment.CameraFragment"
+        android:name="com.rmst.biometrics.fragment.CameraFragment"
         android:label="CameraFragment">
 
         <action
@@ -55,6 +55,6 @@
 
     <fragment
         android:id="@+id/gallery_fragment"
-        android:name="com.google.mediapipe.examples.handlandmarker.fragment.GalleryFragment"
+        android:name="com.rmst.biometrics.fragment.GalleryFragment"
         android:label="GalleryFragment" />
 </navigation>

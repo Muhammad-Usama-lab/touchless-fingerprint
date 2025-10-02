@@ -28,6 +28,7 @@
     <color name="icActive">#FFFFFFFF</color>
     <color name="icFocused">#DDFFFFFF</color>
     <color name="icPressed">#AAFFFFFF</color>
+    <color name="transparent">#000000</color>
 
     <color name="rmst_color_primary">#8A2438</color>
     <color name="rmst_color_primary_dark">#6A1B2C</color>

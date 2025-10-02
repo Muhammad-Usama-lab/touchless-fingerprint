@@ -1,12 +1,11 @@
-package com.google.mediapipe.examples.handlandmarker
+package com.rmst.biometrics
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.google.mediapipe.examples.handlandmarker.databinding.ActivitySplashBinding
+import com.rmst.biometrics.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 
@@ -18,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+            val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
             val token = sharedPreferences.getString("auth_token", null)
 
             if (token != null) {

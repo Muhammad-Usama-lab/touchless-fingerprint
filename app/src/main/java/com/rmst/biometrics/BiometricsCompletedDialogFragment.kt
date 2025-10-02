@@ -1,5 +1,6 @@
-package com.google.mediapipe.examples.handlandmarker
+package com.rmst.biometrics
 
+import com.rmst.biometrics.R
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
+
 
 class BiometricsCompletedDialogFragment : DialogFragment() {
 

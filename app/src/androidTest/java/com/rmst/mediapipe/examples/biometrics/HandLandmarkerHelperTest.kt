@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.mediapipe.examples.handlandmarker
+package com.rmst.mediapipe.examples.biometrics
 
 import android.content.res.AssetManager
 import android.graphics.Bitmap
@@ -27,6 +27,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.google.mediapipe.framework.image.BitmapImageBuilder
 import com.google.mediapipe.tasks.components.containers.Category
 import com.google.mediapipe.tasks.vision.core.RunningMode
+import com.rmst.biometrics.HandLandmarkerHelper
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before

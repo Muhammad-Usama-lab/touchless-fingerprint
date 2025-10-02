@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.mediapipe.examples.handlandmarker
+package com.rmst.biometrics
 
 import androidx.lifecycle.ViewModel
 

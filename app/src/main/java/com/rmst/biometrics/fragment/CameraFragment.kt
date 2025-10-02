@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.mediapipe.examples.handlandmarker.fragment
+package com.rmst.biometrics.fragment
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -41,14 +41,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import com.google.mediapipe.examples.handlandmarker.HandLandmarkerHelper
-import com.google.mediapipe.examples.handlandmarker.MainViewModel
-import com.google.mediapipe.examples.handlandmarker.OverlayView
-import com.google.mediapipe.examples.handlandmarker.R
-import com.google.mediapipe.examples.handlandmarker.databinding.FragmentCameraBinding
+import com.rmst.biometrics.HandLandmarkerHelper
+import com.rmst.biometrics.MainViewModel
+import com.rmst.biometrics.OverlayView
+import com.rmst.biometrics.R
+
+
+import com.rmst.biometrics.databinding.FragmentCameraBinding
 import com.google.mediapipe.tasks.vision.core.RunningMode
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
-import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
@@ -63,14 +64,14 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
-import java.io.File
 
 import android.util.Base64
 import android.graphics.Bitmap
 import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
-import com.google.mediapipe.examples.handlandmarker.BiometricsCompletedDialogFragment
+import com.rmst.biometrics.BiometricsCompletedDialogFragment
 import androidx.navigation.fragment.findNavController
+import java.io.ByteArrayOutputStream
 
 
 class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener, BiometricsCompletedDialogFragment.BiometricsCompletedListener {
@@ -551,7 +552,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 
                 // Decode and compress the image
                 val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
-                val outputStream = java.io.ByteArrayOutputStream()
+                val outputStream = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
                 val compressedBytes = outputStream.toByteArray()
 
