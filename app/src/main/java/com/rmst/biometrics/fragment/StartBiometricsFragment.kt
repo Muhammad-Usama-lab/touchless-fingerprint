@@ -26,5 +26,10 @@ class StartBiometricsFragment : Fragment() {
         startBiometricsButton.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_start_biometrics_to_camera)
         }
+
+        val launchSdkButton: Button = view.findViewById(R.id.launch_sdk_button)
+        launchSdkButton.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_start_biometrics_to_sdk)
+        }
     }
 }

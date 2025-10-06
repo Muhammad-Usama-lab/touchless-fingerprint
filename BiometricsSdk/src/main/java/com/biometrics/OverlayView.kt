@@ -1,5 +1,5 @@
 
-package com.rmst.biometrics
+package com.biometrics
 
 import android.content.Context
 import android.graphics.Canvas
