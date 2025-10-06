@@ -13,9 +13,7 @@
         <action
             android:id="@+id/action_start_biometrics_to_camera"
             app:destination="@id/camera_fragment" />
-        <action
-            android:id="@+id/action_start_biometrics_to_sdk"
-            app:destination="@id/camera_fragment_sdk" />
+
     </fragment>
 
     <fragment
@@ -48,9 +46,5 @@
         android:name="com.rmst.biometrics.fragment.GalleryFragment"
         android:label="GalleryFragment" />
 
-    <fragment
-        android:id="@+id/camera_fragment_sdk"
-        android:name="com.biometrics.fragment.CameraFragment"
-        android:label="CameraFragmentSdk"
-        tools:layout="@layout/fragment_camera_sdk" />
+
 </navigation>

@@ -52,7 +52,7 @@ android {
 
     defaultConfig {
         minSdk 24
-        targetSdk 32
+        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -105,4 +105,9 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.squareup.okio:okio:3.2.0'
+
+    // Navigation library
+    def nav_version = "2.5.3"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }

@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import android.content.Intent
+import com.biometrics.BiometricsActivity
 import com.rmst.biometrics.R
+import androidx.navigation.Navigation
 
 class StartBiometricsFragment : Fragment() {
 
@@ -29,7 +31,9 @@ class StartBiometricsFragment : Fragment() {
 
         val launchSdkButton: Button = view.findViewById(R.id.launch_sdk_button)
         launchSdkButton.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_start_biometrics_to_sdk)
+            val intent = Intent(requireActivity(), BiometricsActivity::class.java)
+            intent.putExtra("auth_token", "7b6b6da44c9b4adaa8a73dcca5667b3d92e44856b5e9340cdaa120a792f36543") // Replace with a real token for testing
+            startActivity(intent)
         }
     }
 }
