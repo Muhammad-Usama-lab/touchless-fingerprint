@@ -15,7 +15,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
 
-class OverlayView(context: Context?, attrs: AttributeSet?) :
+public class OverlayView(context: Context?, attrs: AttributeSet?) :
     View(context, attrs) {
 
     private var results: HandLandmarkerResult? = null
@@ -54,7 +54,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
     private fun initPaints() {
         linePaint.color =
-            ContextCompat.getColor(context!!, R.color.mp_color_primary)
+            ContextCompat.getColor(context!!, R.color.bsdk_color_primary)
         linePaint.strokeWidth = LANDMARK_STROKE_WIDTH
         linePaint.style = Paint.Style.STROKE
 

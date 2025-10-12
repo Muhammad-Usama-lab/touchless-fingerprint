@@ -33,7 +33,7 @@ class BiometricsCompletedDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_biometrics_completed, container, false)
+        return inflater.inflate(R.layout.bsdk_dialog_biometrics_completed, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

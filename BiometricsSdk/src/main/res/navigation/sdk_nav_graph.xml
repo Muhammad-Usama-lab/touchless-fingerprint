@@ -9,7 +9,7 @@
         android:id="@+id/sdk_launcher_fragment"
         android:name="com.biometrics.fragment.SdkLauncherFragment"
         android:label="SdkLauncherFragment"
-        tools:layout="@layout/fragment_sdk_launcher">
+        tools:layout="@layout/bsdk_fragment_sdk_launcher">
         <action
             android:id="@+id/action_sdkLauncherFragment_to_cameraFragment"
             app:destination="@id/camera_fragment_sdk" />
@@ -19,6 +19,6 @@
         android:id="@+id/camera_fragment_sdk"
         android:name="com.biometrics.fragment.CameraFragment"
         android:label="CameraFragment"
-        tools:layout="@layout/fragment_camera_sdk" />
+        tools:layout="@layout/bsdk_fragment_camera_sdk" />
 
 </navigation>

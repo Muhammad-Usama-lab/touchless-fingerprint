@@ -33,7 +33,7 @@ import com.biometrics.OverlayView
 import com.biometrics.R
 
 
-import com.biometrics.databinding.FragmentCameraSdkBinding
+import com.biometrics.databinding.BsdkFragmentCameraSdkBinding
 import com.google.mediapipe.tasks.vision.core.RunningMode
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
 import java.text.SimpleDateFormat
@@ -62,19 +62,25 @@ import java.io.ByteArrayOutputStream
 import android.Manifest
 
 
-class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener {
+import androidx.activity.OnBackPressedCallback
+
+import com.biometrics.model.BiometricsResult
+import com.biometrics.viewmodel.BiometricsSharedViewModel
+
+class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener, ConfirmationDialogFragment.ConfirmationListener {
 
     companion object {
         private const val TAG = "RMST Biomterics"
     }
 
-    private var _fragmentCameraBinding: FragmentCameraSdkBinding? = null
+    private var _fragmentCameraBinding: BsdkFragmentCameraSdkBinding? = null
 
     private val fragmentCameraBinding
         get() = _fragmentCameraBinding!!
 
     private lateinit var handLandmarkerHelper: HandLandmarkerHelper
     private val viewModel: MainViewModel by activityViewModels()
+    private val sharedViewModel: BiometricsSharedViewModel by activityViewModels()
     private var preview: Preview? = null
     private var imageCapture: ImageCapture? = null
     private var imageAnalyzer: ImageAnalysis? = null
@@ -148,7 +154,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
         savedInstanceState: Bundle?
     ): View {
         _fragmentCameraBinding =
-            FragmentCameraSdkBinding.inflate(inflater, container, false)
+            BsdkFragmentCameraSdkBinding.inflate(inflater, container, false)
 
         return fragmentCameraBinding.root
     }
@@ -166,6 +172,20 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
             requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
 
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val dialog = ConfirmationDialogFragment()
+                dialog.show(childFragmentManager, ConfirmationDialogFragment.TAG)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+    }
+
+    override fun onConfirmation(confirmed: Boolean) {
+        if (confirmed) {
+            sharedViewModel.postResult(BiometricsResult.Cancelled)
+        }
     }
 
 
@@ -545,12 +565,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
             }
 
             try {
-                // Get token
-                val sharedPreferences = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-                val token = sharedPreferences.getString("auth_token", null)
-
+                val token = sharedViewModel.token
                 if (token == null) {
-                    Log.e(TAG, "Token not found in SharedPreferences")
+                    sharedViewModel.postResult(BiometricsResult.Error("Auth token not found"))
                     return@launch
                 }
 
@@ -579,30 +596,25 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 
                 // Send
                 val response = client.newCall(request).execute()
-                if (response.isSuccessful) {
-                    Log.d(TAG, "Upload success: ${response.body?.string()}")
+                val responseBody = response.body?.string()
+
+                if (response.isSuccessful && responseBody != null) {
                     // Delete the image after successful upload
                     try {
-                        val rowsDeleted = requireContext().contentResolver.delete(imageUri, null, null)
-                        if (rowsDeleted > 0) {
-                            Log.d(TAG, "Image deleted successfully: $imageUri")
-                        } else {
-                            Log.e(TAG, "Failed to delete image: $imageUri")
-                        }
+                        requireContext().contentResolver.delete(imageUri, null, null)
                     } catch (e: Exception) {
                         Log.e(TAG, "Error deleting image: $imageUri", e)
                     }
 
-                    // Show biometrics completed dialog
-                    activity?.runOnUiThread {
-                        val dialog = BiometricsCompletedDialogFragment()
-                        dialog.show(childFragmentManager, BiometricsCompletedDialogFragment.TAG)
-                    }
+                    val resultJson = JSONObject(responseBody)
+                    val transactionId = resultJson.optString("transactionId", "N/A")
+                    sharedViewModel.postResult(BiometricsResult.Success(transactionId))
+
                 } else {
-                    Log.e(TAG, "Upload failed: ${response.code} ${response.message}")
+                    sharedViewModel.postResult(BiometricsResult.Error("Upload failed: ${response.code} ${response.message}"))
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "Upload error", e)
+                sharedViewModel.postResult(BiometricsResult.Error("Upload error: ${e.message}"))
             } finally {
                 activity?.runOnUiThread {
                     fragmentCameraBinding.progressBar.visibility = View.GONE

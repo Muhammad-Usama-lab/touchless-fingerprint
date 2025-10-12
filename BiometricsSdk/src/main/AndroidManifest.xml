@@ -11,7 +11,7 @@
         <activity
             android:name=".BiometricsActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/bsdk_AppTheme"/>
     </application>
 
 </manifest>

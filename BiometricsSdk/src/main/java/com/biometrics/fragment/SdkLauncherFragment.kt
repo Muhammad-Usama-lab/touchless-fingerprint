@@ -1,15 +1,16 @@
 package com.biometrics.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.biometrics.R
-import com.biometrics.databinding.FragmentSdkLauncherBinding
+import com.biometrics.databinding.BsdkFragmentSdkLauncherBinding
+import com.biometrics.model.BiometricsResult
+import com.biometrics.viewmodel.BiometricsSharedViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,26 +21,26 @@ import org.json.JSONObject
 
 class SdkLauncherFragment : Fragment() {
 
-    private var _binding: FragmentSdkLauncherBinding? = null
+    private var _binding: BsdkFragmentSdkLauncherBinding? = null
     private val binding get() = _binding!!
+    private val sharedViewModel: BiometricsSharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSdkLauncherBinding.inflate(inflater, container, false)
+        _binding = BsdkFragmentSdkLauncherBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val token = activity?.intent?.getStringExtra("auth_token")
+        val token = sharedViewModel.token
 
         if (token.isNullOrEmpty()) {
-            Toast.makeText(requireContext(), "Error: Token is missing", Toast.LENGTH_LONG).show()
-            activity?.finish()
+            sharedViewModel.postResult(BiometricsResult.Error("Token is missing"))
         } else {
             verifyToken(token)
         }
@@ -61,23 +62,14 @@ class SdkLauncherFragment : Fragment() {
                             findNavController().navigate(R.id.action_sdkLauncherFragment_to_cameraFragment)
                         }
                     } else {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(requireContext(), "Invalid token", Toast.LENGTH_LONG).show()
-                            activity?.finish()
-                        }
+                        sharedViewModel.postResult(BiometricsResult.Error("Invalid token"))
                     }
                 } else {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), "Error: ${response.message}", Toast.LENGTH_LONG).show()
-                        activity?.finish()
-                    }
+                    sharedViewModel.postResult(BiometricsResult.Error("API Error: ${response.message}"))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Error verifying token: ${e.message}", Toast.LENGTH_LONG).show()
-                    activity?.finish()
-                }
+                sharedViewModel.postResult(BiometricsResult.Error("Exception: ${e.message}"))
             }
         }
     }
