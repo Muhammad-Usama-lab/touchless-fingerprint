@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import android.util.Log
 import org.json.JSONObject
 
 class SdkLauncherFragment : Fragment() {
@@ -40,8 +41,10 @@ class SdkLauncherFragment : Fragment() {
         val token = sharedViewModel.token
 
         if (token.isNullOrEmpty()) {
+            Log.d("SdkLauncherFragment", "Token is missing or empty.")
             sharedViewModel.postResult(BiometricsResult.Error("Token is missing"))
         } else {
+            Log.d("SdkLauncherFragment", "Token received: $token")
             verifyToken(token)
         }
     }
@@ -50,14 +53,19 @@ class SdkLauncherFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val url = "https://demo.rmstservices.com/biometrics/verifyToken?token=$token"
+                Log.d("SdkLauncherFragment", "Verifying token with URL: $url")
                 val client = OkHttpClient()
                 val request = Request.Builder().url(url).build()
                 val response = client.newCall(request).execute()
 
                 val responseBody = response.body?.string()
+                Log.d("SdkLauncherFragment", "API Response Code: ${response.code}, Message: ${response.message}")
+                Log.d("SdkLauncherFragment", "API Response Body: $responseBody")
+
                 if (response.isSuccessful && responseBody != null) {
                     val jsonObject = JSONObject(responseBody)
                     if (jsonObject.getBoolean("success")) {
+                        Log.d("SdkLauncherFragment", "Token verification successful.")
                         withContext(Dispatchers.Main) {
                             findNavController().navigate(R.id.action_sdkLauncherFragment_to_cameraFragment)
                         }

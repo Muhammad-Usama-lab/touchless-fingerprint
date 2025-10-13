@@ -67,7 +67,22 @@ import androidx.activity.OnBackPressedCallback
 import com.biometrics.model.BiometricsResult
 import com.biometrics.viewmodel.BiometricsSharedViewModel
 
+import com.biometrics.utils.FingertipExtractor
+
+
+import android.graphics.BitmapFactory
+import android.graphics.ImageFormat
+import android.graphics.Matrix
+import android.graphics.Rect
+import android.graphics.YuvImage
+
+
 class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener, ConfirmationDialogFragment.ConfirmationListener {
+
+    private lateinit var fingertipExtractor: FingertipExtractor
+    private var isCapturingFingerprints = false
+    private var hasAutoCapture = false // Track if we already auto-captured
+
 
     companion object {
         private const val TAG = "RMST Biomterics"
@@ -194,6 +209,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     private fun setupCameraAndExecutor() {
         // Initialize our background executor
         backgroundExecutor = Executors.newSingleThreadExecutor()
+        // Initialize fingertip extractor
+        fingertipExtractor = FingertipExtractor(requireContext())
+
 
         // Wait for the views to be properly laid out
         fragmentCameraBinding.viewFinder.post {
@@ -441,11 +459,73 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
         }
     }
 
+
+    // MODIFY: detectHand method to pass both imageProxy and result
+    private var pendingBitmap: Bitmap? = null
+
+    private var pendingIsFrontCamera: Boolean = false
+
     private fun detectHand(imageProxy: ImageProxy) {
+        // Convert ImageProxy to Bitmap NOW (before it gets closed)
+        try {
+            pendingBitmap = imageProxyToBitmap(imageProxy, cameraFacing == CameraSelector.LENS_FACING_FRONT)
+            pendingIsFrontCamera = cameraFacing == CameraSelector.LENS_FACING_FRONT
+        } catch (e: Exception) {
+            Log.e(TAG, "Error converting ImageProxy to Bitmap", e)
+        }
+
         handLandmarkerHelper.detectLiveStream(
             imageProxy = imageProxy,
             isFrontCamera = cameraFacing == CameraSelector.LENS_FACING_FRONT
         )
+    }
+
+
+    private fun imageProxyToBitmap(imageProxy: ImageProxy, isFrontCamera: Boolean): Bitmap {
+        val plane = imageProxy.planes[0]
+        val buffer = plane.buffer
+
+        val pixelStride = plane.pixelStride
+        val rowStride = plane.rowStride
+        val rowPadding = rowStride - pixelStride * imageProxy.width
+
+        // Create bitmap with correct dimensions accounting for padding
+        val bitmap = Bitmap.createBitmap(
+            imageProxy.width + rowPadding / pixelStride,
+            imageProxy.height,
+            Bitmap.Config.ARGB_8888
+        )
+
+        buffer.rewind()
+        bitmap.copyPixelsFromBuffer(buffer)
+
+        // Crop to actual image size if there's padding
+        val croppedBitmap = if (rowPadding != 0) {
+            Bitmap.createBitmap(bitmap, 0, 0, imageProxy.width, imageProxy.height)
+        } else {
+            bitmap
+        }
+
+        // Handle rotation
+        val rotationDegrees = imageProxy.imageInfo.rotationDegrees
+        if (rotationDegrees != 0 || isFrontCamera) {
+            val matrix = Matrix()
+            matrix.postRotate(rotationDegrees.toFloat())
+            if (isFrontCamera) {
+                matrix.postScale(-1f, 1f)
+            }
+            return Bitmap.createBitmap(
+                croppedBitmap,
+                0,
+                0,
+                croppedBitmap.width,
+                croppedBitmap.height,
+                matrix,
+                true
+            )
+        }
+
+        return croppedBitmap
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -472,6 +552,28 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     resultBundle.inputImageWidth,
                     RunningMode.LIVE_STREAM
                 )
+
+
+
+                // Check if hand is detected and we have good landmarks
+                val handResult = resultBundle.results.first()
+                if (handResult.landmarks().isNotEmpty() && !isCapturingFingerprints && !hasAutoCapture) {
+                    // Get hand confidence (if available)
+                    val hasGoodDetection = handResult.landmarks().first().size == 21
+
+                    if (hasGoodDetection) {
+                        // Auto-capture on first good detection
+                        val bitmap = pendingBitmap
+                        if (bitmap != null) {
+                            hasAutoCapture = true // Prevent multiple captures
+                            captureFingerprints(bitmap, handResult, pendingIsFrontCamera)
+                        }
+                    }
+                } else if (handResult.landmarks().isEmpty()) {
+                    // Reset auto-capture flag when hand is removed
+                    hasAutoCapture = false
+                }
+
 
                 // Trigger auto-focus on hand detection
                 if (resultBundle.results.first().landmarks().isNotEmpty()) {
@@ -510,6 +612,80 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
             }
         }
     }
+
+
+    // NEW: Add a method to capture fingertips in real-time
+    private fun captureFingerprints(bitmap: Bitmap, handResult: HandLandmarkerResult, isFrontCamera: Boolean) {
+
+        if (isCapturingFingerprints) return
+
+        isCapturingFingerprints = true
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                // Show progress on UI
+                activity?.runOnUiThread {
+                    fragmentCameraBinding.progressBar.visibility = View.VISIBLE
+                    fragmentCameraBinding.captureButton.isEnabled = false
+                    Toast.makeText(requireContext(), "Capturing fingerprints...", Toast.LENGTH_SHORT).show()
+                }
+
+                // Extract fingertips from the pre-converted bitmap
+                val fingertips = fingertipExtractor.extractFingertipsFromBitmap(
+                    bitmap,
+                    handResult,
+                    isFrontCamera
+                )
+
+                activity?.runOnUiThread {
+                    fragmentCameraBinding.progressBar.visibility = View.GONE
+                    fragmentCameraBinding.captureButton.isEnabled = true
+
+                    if (fingertips.isNotEmpty()) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Captured ${fingertips.size} fingertips!",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        // Log file paths
+                        fingertips.forEach { fingertip ->
+                            Log.d(TAG, "${fingertip.fingerName}: ${fingertip.filePath}")
+                        }
+
+                        // TODO: Now you can convert these to WSQ format
+                        // processFingerprints(fingertips)
+
+                        // Reset flag after successful capture so user can capture again
+                        hasAutoCapture = false
+
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "No fingertips detected",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        hasAutoCapture = false // Allow retry
+                    }
+                }
+
+            } catch (e: Exception) {
+                Log.e(TAG, "Error capturing fingerprints", e)
+                activity?.runOnUiThread {
+                    fragmentCameraBinding.progressBar.visibility = View.GONE
+                    fragmentCameraBinding.captureButton.isEnabled = true
+                    Toast.makeText(
+                        requireContext(),
+                        "Error: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } finally {
+                isCapturingFingerprints = false
+            }
+        }
+    }
+
 
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
@@ -627,6 +803,16 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 
     override fun onCapture(result: HandLandmarkerResult) {
         latestHandLandmarkerResult = result
+
+        // Use the converted bitmap instead of ImageProxy
+        val bitmap = pendingBitmap
+        if (bitmap != null && !hasAutoCapture) {
+            hasAutoCapture = true
+            captureFingerprints(bitmap, result, pendingIsFrontCamera)
+        } else {
+            Toast.makeText(requireContext(), "No image available", Toast.LENGTH_SHORT).show()
+        }
+
         activity?.runOnUiThread {
             val landmarks = result.landmarks().first()
             val centerX = landmarks.map { it.x() }.average().toFloat()

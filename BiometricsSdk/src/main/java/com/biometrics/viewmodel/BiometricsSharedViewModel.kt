@@ -13,6 +13,6 @@ class BiometricsSharedViewModel : ViewModel() {
     var token: String? = null
 
     fun postResult(result: BiometricsResult) {
-        _result.value = result
+        _result.postValue(result)
     }
 }
