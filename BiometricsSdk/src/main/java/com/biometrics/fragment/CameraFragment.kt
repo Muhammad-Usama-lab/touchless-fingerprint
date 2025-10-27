@@ -3,7 +3,6 @@ package com.biometrics.fragment
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
-import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.provider.MediaStore
@@ -53,18 +52,24 @@ import okhttp3.RequestBody
 
 import android.util.Base64
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Paint
 import androidx.activity.result.contract.ActivityResultContracts
 import org.json.JSONObject
 import kotlinx.coroutines.Dispatchers
 import com.biometrics.BiometricsCompletedDialogFragment
 
 import java.io.ByteArrayOutputStream
+import java.io.File
 import android.Manifest
 
 
 import androidx.activity.OnBackPressedCallback
 
 import com.biometrics.model.BiometricsResult
+import com.biometrics.utils.FingerprintExtractor
 import com.biometrics.viewmodel.BiometricsSharedViewModel
 
 class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener, ConfirmationDialogFragment.ConfirmationListener {
@@ -73,6 +78,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
         private const val TAG = "RMST Biomterics"
     }
 
+    private val fingerprintExtractor = FingerprintExtractor()
     private var _fragmentCameraBinding: BsdkFragmentCameraSdkBinding? = null
 
     private val fragmentCameraBinding
@@ -571,14 +577,15 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     return@launch
                 }
 
-                // Decode and compress the image
+                // Decode the image
                 val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
-                val outputStream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
-                val compressedBytes = outputStream.toByteArray()
 
-                // Convert to Base64
-                val base64Image = Base64.encodeToString(compressedBytes, Base64.NO_WRAP)
+                val outputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+                val imageBytes = outputStream.toByteArray()
+
+                // Convert image bytes to Base64
+                val base64Image = Base64.encodeToString(imageBytes, Base64.NO_WRAP)
 
                 // Create JSON body
                 val json = JSONObject().apply {

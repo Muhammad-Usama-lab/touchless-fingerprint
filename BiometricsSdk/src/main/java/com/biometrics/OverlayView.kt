@@ -3,7 +3,6 @@ package com.biometrics
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
@@ -14,6 +13,12 @@ import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
+
+
+import android.graphics.Color
+import android.graphics.DashPathEffect
+import android.graphics.RectF
+import com.biometrics.utils.FingerprintExtractor
 
 public class OverlayView(context: Context?, attrs: AttributeSet?) :
     View(context, attrs) {
@@ -29,6 +34,13 @@ public class OverlayView(context: Context?, attrs: AttributeSet?) :
 
     private var captureListener: CaptureListener? = null
     private var captureTriggered = false
+
+    // CALUDE AI.
+
+    private val fingerprintExtractor = FingerprintExtractor()
+    private var fingerprintROIs = mutableMapOf<FingerprintExtractor.FingerType, RectF>()
+    private var fingerQualityScores = mutableMapOf<FingerprintExtractor.FingerType, Float>()
+
 
     interface CaptureListener {
         fun onCapture(result: HandLandmarkerResult)
