@@ -47,4 +47,19 @@
         android:layout_gravity="center"
         android:visibility="gone" />
 
+    <TextView
+    android:id="@+id/capturingIndicator"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Capturing..."
+    android:textSize="24sp"
+    android:textColor="@android:color/white"
+    android:background="#80000000"
+    android:padding="16dp"
+    android:visibility="gone"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="100dp"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

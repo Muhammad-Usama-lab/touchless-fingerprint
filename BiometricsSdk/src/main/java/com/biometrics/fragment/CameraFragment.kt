@@ -468,6 +468,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     ) {
         activity?.runOnUiThread {
             if (_fragmentCameraBinding != null) {
+
+
+
 //                fragmentCameraBinding.bottomSheetLayout.inferenceTimeVal.text =
 //                    String.format("%d ms", resultBundle.inferenceTime)
 
@@ -518,6 +521,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     }
 
     private fun takePhoto() {
+        Toast.makeText(requireContext(), "Capturing...", Toast.LENGTH_SHORT).show()
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
 

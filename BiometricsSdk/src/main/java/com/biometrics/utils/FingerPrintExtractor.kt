@@ -33,10 +33,10 @@ class FingerprintExtractor {
         )
 
         // Padding percentage around detected finger region
-        private const val PADDING_PERCENT = 0.15f
+        private const val PADDING_PERCENT = 0.30f
 
         // Minimum quality score (0-100)
-        private const val MIN_QUALITY_SCORE = 50
+        private const val MIN_QUALITY_SCORE = 60
     }
 
     enum class FingerType {
