@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allowedTools": [
+      "Read",
+      "Write(BiometricSdk/**)",
+      "Write(app/**)",
+      "Write(gradle/**)",
+      "Write(build.gradle)",
+      "Write(settings.gradle)",
+      "Bash(git *)"
+    ],
+    "deny": [
+      "Read(.env*)",
+      "Bash(rm -rf)"
+    ]
+  }
+}

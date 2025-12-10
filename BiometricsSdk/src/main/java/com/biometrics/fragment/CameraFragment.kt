@@ -553,18 +553,29 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 
                 override fun
                     onImageSaved(output: ImageCapture.OutputFileResults){
-                    val msg = "Photo capture succeeded: ${output.savedUri}"
+                    val msg = "Photo saved locally: ${output.savedUri}"
                     Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
-                    uploadImageToApi(output.savedUri)
+
+                    // === API UPLOAD DISABLED - IMAGE SAVED LOCALLY ===
+                    // uploadImageToApi(output.savedUri)
+
                     Log.d(TAG, msg)
 
-
+                    // Show success and finish
+                    activity?.runOnUiThread {
+                        fragmentCameraBinding.progressBar.visibility = View.GONE
+                        sharedViewModel.postResult(BiometricsResult.Success("LOCAL_SAVE_${System.currentTimeMillis()}"))
+                    }
                 }
             }
         )
     }
 
 
+    // ========================================================================
+    // === API UPLOAD CODE - COMMENTED OUT (IMAGES NOW SAVED LOCALLY) ===
+    // ========================================================================
+    /*
     private fun uploadImageToApi(imageUri: Uri?) {
         if (imageUri == null) return
 
@@ -633,6 +644,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
             }
         }
     }
+    */
+    // ========================================================================
 
     
 
