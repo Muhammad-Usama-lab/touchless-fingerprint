@@ -64,7 +64,7 @@ import com.biometrics.BiometricsCompletedDialogFragment
 import java.io.ByteArrayOutputStream
 import java.io.File
 import android.Manifest
-
+import java.nio.ByteBuffer
 
 import androidx.activity.OnBackPressedCallback
 
@@ -96,6 +96,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     private var latestHandLandmarkerResult: HandLandmarkerResult? = null
     private var isFocusing = false
     private var lastFocusTime = 0L
+    private var shouldCaptureNextFrame = false
+    private var isProcessingCapture = false
 
 
     private val requestPermissionLauncher =
@@ -448,10 +450,28 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     }
 
     private fun detectHand(imageProxy: ImageProxy) {
+        // Capture bitmap BEFORE detectLiveStream (which closes the ImageProxy)
+        val capturedBitmap = if (shouldCaptureNextFrame && !isProcessingCapture && latestHandLandmarkerResult != null) {
+            shouldCaptureNextFrame = false
+            isProcessingCapture = true
+            // Convert NOW while ImageProxy is still open
+            imageProxyToBitmap(imageProxy)
+        } else {
+            null
+        }
+
+        // Now run hand detection (this will close the ImageProxy)
         handLandmarkerHelper.detectLiveStream(
             imageProxy = imageProxy,
             isFrontCamera = cameraFacing == CameraSelector.LENS_FACING_FRONT
         )
+
+        // Process captured bitmap in background if we have one
+        if (capturedBitmap != null && latestHandLandmarkerResult != null) {
+            lifecycleScope.launch(Dispatchers.IO) {
+                captureAndProcessFrame(capturedBitmap, latestHandLandmarkerResult!!)
+            }
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -518,6 +538,146 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 //                )
             }
         }
+    }
+
+    /**
+     * Convert ImageProxy to Bitmap
+     * ImageAnalysis is configured with OUTPUT_IMAGE_FORMAT_RGBA_8888
+     * IMPORTANT: Rewinds buffer after reading so HandLandmarkerHelper can use it
+     */
+    private fun imageProxyToBitmap(imageProxy: ImageProxy): Bitmap {
+        val planeProxy = imageProxy.planes[0]
+        val buffer: ByteBuffer = planeProxy.buffer
+        val pixelStride = planeProxy.pixelStride
+        val rowStride = planeProxy.rowStride
+        val rowPadding = rowStride - pixelStride * imageProxy.width
+
+        // Save original buffer position
+        val originalPosition = buffer.position()
+
+        // Rewind to start
+        buffer.rewind()
+
+        // Create bitmap with padding
+        val bitmap = Bitmap.createBitmap(
+            imageProxy.width + rowPadding / pixelStride,
+            imageProxy.height,
+            Bitmap.Config.ARGB_8888
+        )
+
+        // Copy RGBA pixels directly from buffer to bitmap
+        bitmap.copyPixelsFromBuffer(buffer)
+
+        // CRITICAL: Restore buffer position so detectLiveStream can read it!
+        buffer.position(originalPosition)
+
+        // Crop to actual size if there's row padding
+        return if (rowPadding == 0) {
+            bitmap
+        } else {
+            Bitmap.createBitmap(bitmap, 0, 0, imageProxy.width, imageProxy.height)
+        }
+    }
+
+    /**
+     * Process captured frame: extract fingerprints and save
+     */
+    private fun captureAndProcessFrame(bitmap: Bitmap, landmarks: HandLandmarkerResult) {
+        try {
+            activity?.runOnUiThread {
+                fragmentCameraBinding.progressBar.visibility = View.VISIBLE
+                camera?.cameraControl?.enableTorch(false)
+            }
+
+            Log.d(TAG, "Processing bitmap: ${bitmap.width}x${bitmap.height}, format: ${bitmap.config}")
+
+            // Extract fingerprints using the FingerprintExtractor
+            val extraction = fingerprintExtractor.extractFingerprints(bitmap, landmarks, 0)
+
+            if (extraction != null && extraction.fingerprints.isNotEmpty()) {
+                Log.d(TAG, "Extracted ${extraction.fingerprints.size} fingerprints, quality: ${extraction.overallQuality}")
+
+                // Save hand image + fingerprints
+                saveHandAndFingerprints(bitmap, extraction)
+
+                activity?.runOnUiThread {
+                    val fingerprintCount = extraction.fingerprints.size
+                    Toast.makeText(
+                        requireContext(),
+                        "Saved: Hand + $fingerprintCount fingerprints",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    fragmentCameraBinding.progressBar.visibility = View.GONE
+                    sharedViewModel.postResult(BiometricsResult.Success("LOCAL_SAVE_${System.currentTimeMillis()}"))
+                }
+            } else {
+                val reason = if (extraction == null) "extraction returned null" else "0 fingerprints passed quality check"
+                Log.w(TAG, "Fingerprint extraction failed: $reason")
+
+                activity?.runOnUiThread {
+                    Toast.makeText(requireContext(), "No quality fingerprints extracted", Toast.LENGTH_SHORT).show()
+                    fragmentCameraBinding.progressBar.visibility = View.GONE
+                    sharedViewModel.postResult(BiometricsResult.Error("No fingerprints extracted"))
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error processing capture: ${e.message}", e)
+            activity?.runOnUiThread {
+                Toast.makeText(requireContext(), "Capture error: ${e.message}", Toast.LENGTH_SHORT).show()
+                fragmentCameraBinding.progressBar.visibility = View.GONE
+                sharedViewModel.postResult(BiometricsResult.Error("Capture error: ${e.message}"))
+            }
+        } finally {
+            isProcessingCapture = false
+        }
+    }
+
+    /**
+     * Save hand image and extracted fingerprints to storage
+     */
+    private fun saveHandAndFingerprints(
+        handBitmap: Bitmap,
+        extraction: FingerprintExtractor.ExtractionResult
+    ) {
+        val timestamp = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US).format(System.currentTimeMillis())
+
+        // Save hand image
+        val handName = "${timestamp}_HAND"
+        saveImageToGallery(handBitmap, handName)
+
+        // Save each fingerprint
+        for (fingerprint in extraction.fingerprints) {
+            val fingerprintName = "${timestamp}_${fingerprint.fingerType.name}"
+            saveImageToGallery(fingerprint.bitmap, fingerprintName)
+            Log.d(TAG, "Saved ${fingerprint.fingerType.name} with quality: ${fingerprint.qualityScore}")
+        }
+
+        Log.d(TAG, "Saved hand + ${extraction.fingerprints.size} fingerprints. Overall quality: ${extraction.overallQuality}")
+    }
+
+    /**
+     * Save a bitmap to gallery
+     */
+    private fun saveImageToGallery(bitmap: Bitmap, displayName: String): Uri? {
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, displayName)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/HandLandmarker")
+        }
+
+        val uri = requireContext().contentResolver.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
+        )
+
+        uri?.let {
+            requireContext().contentResolver.openOutputStream(it)?.use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 95, outputStream)
+            }
+        }
+
+        return uri
     }
 
     private fun takePhoto() {
@@ -650,8 +810,15 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     
 
     override fun onCapture(result: HandLandmarkerResult) {
+        if (isProcessingCapture) {
+            return // Already processing, ignore
+        }
+
         latestHandLandmarkerResult = result
+
         activity?.runOnUiThread {
+            Toast.makeText(requireContext(), "Capturing fingerprints...", Toast.LENGTH_SHORT).show()
+
             val landmarks = result.landmarks().first()
             val centerX = landmarks.map { it.x() }.average().toFloat()
             val centerY = landmarks.map { it.y() }.average().toFloat()
@@ -663,7 +830,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
             val action = FocusMeteringAction.Builder(point).build()
             val future = camera?.cameraControl?.startFocusAndMetering(action)
             future?.addListener({
-                takePhoto()
+                // Set flag to capture next frame from ImageAnalysis
+                shouldCaptureNextFrame = true
             }, ContextCompat.getMainExecutor(requireContext()))
         }
     }

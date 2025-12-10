@@ -1,0 +1,566 @@
+2025-12-10 17:12:33.108  1698-1895  TranDynami...rollerImpl system_server                        E  TranDynamicBarAnimControllerImpl setSimplifyAnimByLauncherType pkgName:com.rmst.biometrics
+2025-12-10 17:12:33.108  1698-1895  TranDynami...rollerImpl system_server                        E  end setSimplifyAnimByLauncherType mSimplifyAnimOpenPkgName:com.rmst.biometrics simplifyAnimByLauncherType:0
+2025-12-10 17:12:33.160  1698-4890  TranDynami...rollerImpl system_server                        E  TranDynamicBarAnimControllerImpl setSimplifyAnimByLauncherType pkgName:com.rmst.biometrics
+2025-12-10 17:12:33.160  1698-4890  TranDynami...rollerImpl system_server                        E  end setSimplifyAnimByLauncherType mSimplifyAnimOpenPkgName:com.rmst.biometrics simplifyAnimByLauncherType:1
+---------------------------- PROCESS STARTED (22361) for package com.rmst.biometrics ----------------------------
+2025-12-10 17:12:33.564 22361-22361 DebugTheme...emeUpdated com.rmst.biometrics                  D  reload start !TranResourcesUtils.isRunningOnSystemServer()=true currentForegroundUser=0
+2025-12-10 17:12:33.574 22361-22361 ApplicationLoaders      com.rmst.biometrics                  D  Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+2025-12-10 17:12:33.574 22361-22361 ApplicationLoaders      com.rmst.biometrics                  D  Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+2025-12-10 17:12:33.578 22361-22361 ziparchive              com.rmst.biometrics                  W  Unable to open '/data/data/com.rmst.biometrics/code_cache/.overlay/base.apk/classes6.dm': No such file or directory
+2025-12-10 17:12:33.579 22361-22361 ziparchive              com.rmst.biometrics                  W  Unable to open '/data/data/com.rmst.biometrics/code_cache/.overlay/base.apk/classes3.dm': No such file or directory
+2025-12-10 17:12:33.581 22361-22361 rmst.biometrics         com.rmst.biometrics                  W  ClassLoaderContext classpath size mismatch. expected=0, found=2 (PCL[]{PCL[/system_ext/framework/androidx.window.extensions.jar*982563657]#PCL[/system_ext/framework/androidx.window.sidecar.jar*391518838]} | PCL[/data/data/com.rmst.biometrics/code_cache/.overlay/base.apk/classes6.dex*2351851380:/data/data/com.rmst.biometrics/code_cache/.overlay/base.apk/classes3.dex*2928926496]{PCL[/system_ext/framework/androidx.window.extensions.jar*982563657]#PCL[/system_ext/framework/androidx.window.sidecar.jar*391518838]})
+2025-12-10 17:12:33.584 22361-22361 nativeloader            com.rmst.biometrics                  D  Configuring clns-7 for other apk /data/app/~~e-s_eUUU0ObzHlcAnb0DXw==/com.rmst.biometrics-tpkas6IPNKh-DpndU6De7Q==/base.apk. target_sdk_version=33, uses_libraries=, library_path=/data/app/~~e-s_eUUU0ObzHlcAnb0DXw==/com.rmst.biometrics-tpkas6IPNKh-DpndU6De7Q==/lib/arm64:/data/app/~~e-s_eUUU0ObzHlcAnb0DXw==/com.rmst.biometrics-tpkas6IPNKh-DpndU6De7Q==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/com.rmst.biometrics
+2025-12-10 17:12:33.601 22361-22361 GraphicsEnvironment     com.rmst.biometrics                  V  Currently set values for:
+2025-12-10 17:12:33.601 22361-22361 GraphicsEnvironment     com.rmst.biometrics                  V    angle_gl_driver_selection_pkgs=[]
+2025-12-10 17:12:33.601 22361-22361 GraphicsEnvironment     com.rmst.biometrics                  V    angle_gl_driver_selection_values=[]
+2025-12-10 17:12:33.601 22361-22361 GraphicsEnvironment     com.rmst.biometrics                  V  Global.Settings values are invalid: number of packages: 0, number of values: 0
+2025-12-10 17:12:33.602 22361-22361 GraphicsEnvironment     com.rmst.biometrics                  V  Neither updatable production driver nor prerelease driver is supported.
+2025-12-10 17:12:33.608 22361-22361 LoadedApk               com.rmst.biometrics                  I  No resource references to update in package com.transsion.theme.icon
+2025-12-10 17:12:33.616 22361-22361 CompatChangeReporter    com.rmst.biometrics                  D  Compat change id reported: 183155436; UID 10271; state: ENABLED
+2025-12-10 17:12:33.626 22361-22361 os.SingleLiceFactory    com.rmst.biometrics                  D  using android.app.IActivityThreadLice$DefaultImpl@cb7dba1 instead of com.transsion.activityembedding.ActivityEmbeddingLiceFactory  from android.app.IActivityThreadLice
+2025-12-10 17:12:33.657 22361-22384 libMEOW                 com.rmst.biometrics                  D  meow new tls: 0xb4000070b6d16090
+2025-12-10 17:12:33.657 22361-22384 libMEOW                 com.rmst.biometrics                  D  meow reload base cfg path: na
+2025-12-10 17:12:33.657 22361-22384 libMEOW                 com.rmst.biometrics                  D  meow reload overlay cfg path: na
+2025-12-10 17:12:33.657 22361-22384 QT                      com.rmst.biometrics                  W  qt_process_init() called
+2025-12-10 17:12:33.657 22361-22384 QT                      com.rmst.biometrics                  E  [QT]file does not exist
+2025-12-10 17:12:33.657 22361-22384 QT                      com.rmst.biometrics                  W  Support!!
+2025-12-10 17:12:33.658 22361-22384 libMEOW_gift            com.rmst.biometrics                  I  open /data/performance/gift/arc.ini
+2025-12-10 17:12:33.658 22361-22384 QT                      com.rmst.biometrics                  E  [QT]file does not exist
+2025-12-10 17:12:33.658 22361-22384 libMEOW                 com.rmst.biometrics                  D  applied 1 plugins for [com.rmst.biometrics]:
+2025-12-10 17:12:33.658 22361-22384 libMEOW                 com.rmst.biometrics                  D    plugin 1: [libMEOW_gift.so]: 0xb400007136c9f820
+2025-12-10 17:12:33.658 22361-22384 libMEOW                 com.rmst.biometrics                  D  rebuild call chain: 0xb4000070b6d260a0
+2025-12-10 17:12:33.658 22361-22384 libMEOW                 com.rmst.biometrics                  D  meow delete tls: 0xb4000070b6d16090
+2025-12-10 17:12:33.666 22361-22361 ActivityThread          com.rmst.biometrics                  D  ++ activityComponent:com.rmst.biometrics/com.rmst.biometrics.SplashActivity counts:1 ALEAK_CLEAR_SUPPORT:true
+2025-12-10 17:12:33.720 22361-22361 TranClassInfo           com.rmst.biometrics                  D  instance successfully. com.transsion.hubcore.internal.TranInternalViewImpl@ae8496b from com.transsion.hubcore.internal.ITranInternalView
+2025-12-10 17:12:33.721 22361-22361 os.SingleLice           com.rmst.biometrics                  D  instance successfully. com.transsion.whitenavigation.v1.WhiteNavigationLice@f080cc8 from com.transsion.whitenavigation.WhiteNavigationLiceFactory
+2025-12-10 17:12:33.721 22361-22361 os.SingleLiceFactory    com.rmst.biometrics                  D  instance successfully. com.transsion.whitenavigation.v1.WhiteNavigationLice@f080cc8 from com.android.internal.IInternalViewLice
+2025-12-10 17:12:33.721 22361-22361 os.SingleLice           com.rmst.biometrics                  D  instance successfully. com.transsion.screenshothelper.v1.ScreenShotHelperImplLice@5029161 from com.transsion.screenshothelper.ScreenShotHelperImplLiceFactory
+2025-12-10 17:12:33.721 22361-22361 os.SingleLiceFactory    com.rmst.biometrics                  D  instance successfully. com.transsion.screenshothelper.v1.ScreenShotHelperImplLice@5029161 from com.android.internal.IInternalViewLice
+2025-12-10 17:12:33.722 22361-22361 os.SingleLiceFactory    com.rmst.biometrics                  D  using com.android.internal.IInternalViewLice$DefaultImpl@c69a486 instead of com.transsion.flamboyant.FlamboyantLiceFactory  from com.android.internal.IInternalViewLice
+2025-12-10 17:12:33.722 22361-22361 os.LiceInfo             com.rmst.biometrics                  D  instance successfully. com.transsion.internal.InternalViewLice@ec01147 from com.android.internal.IInternalViewLice
+2025-12-10 17:12:33.722 22361-22361 PhoneWindow             com.rmst.biometrics                  I  SplashActivity#generateLayout:Window_statusBarColor=0Xff757575
+2025-12-10 17:12:33.723 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  Modify naviBarColor to 0xFFF0F0F0, and windowBackgroundColor is fffafafa   /windowIsTranslucent:false
+2025-12-10 17:12:33.723 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  Modify naviBarColor to white 0xFFF0F0F0
+2025-12-10 17:12:33.736 22361-22361 rmst.biometrics         com.rmst.biometrics                  W  Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflection, allowed)
+2025-12-10 17:12:33.736 22361-22361 rmst.biometrics         com.rmst.biometrics                  W  Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
+2025-12-10 17:12:33.738 22361-22372 ActivityThreadLice      com.rmst.biometrics                  D  received OSMessage 110001
+2025-12-10 17:12:33.739 22361-22372 ActivityThreadLice      com.rmst.biometrics                  D  send OSMessage 110001 to [-1]
+2025-12-10 17:12:33.741 22361-22372 OSServiceManager        com.rmst.biometrics                  D  update local os service os.activity from null to android.os.BinderProxy@ebabe5e
+2025-12-10 17:12:33.757 22361-22361 nativeloader            com.rmst.biometrics                  D  Load libpowerhalwrap_jni.so using system ns (caller=/system_ext/framework/mediatek-framework.jar): ok
+2025-12-10 17:12:33.757 22361-22361 PowerHalWrapper         com.rmst.biometrics                  I  PowerHalWrapper.getInstance 
+2025-12-10 17:12:33.758 22361-22361 M-ProMotion             com.rmst.biometrics                  I  M-ProMotion is disabled
+2025-12-10 17:12:33.759 22361-22361 TranClassInfo           com.rmst.biometrics                  D  instance successfully. com.transsion.connectivity.linkbooming.TranMultilinkComponentImpl@895dca from com.transsion.hubcore.linkbooming.ITranMultilinkComponent
+2025-12-10 17:12:33.760 22361-22385 PowerHalWrapper         com.rmst.biometrics                  I  PowerHalWrapper.getInstance 
+2025-12-10 17:12:33.762 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#3 r.window=nulla.mFinished = falsewillBeVisible = true
+2025-12-10 17:12:33.762 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#4 addView a.mVisibleFromClient=truea.mWindowAdded=falsedecor=DecorView@4a5cfb1[]
+2025-12-10 17:12:33.762 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#5 addView decor=DecorView@4a5cfb1[]
+2025-12-10 17:12:33.768 22361-22361 MbrainDebugManagerImpl  com.rmst.biometrics                  D  getService failed
+2025-12-10 17:12:33.782 22361-22361 VRI[SplashActivity]     com.rmst.biometrics                  D  hardware acceleration = true, forceHwAccelerated = false
+2025-12-10 17:12:33.783 22361-22361 ViewRootImpl            com.rmst.biometrics                  D  setView appearance:0 com.rmst.biometrics/com.rmst.biometrics.SplashActivity
+2025-12-10 17:12:33.788 22361-22361 os.SingleLiceFactory    com.rmst.biometrics                  D  instance successfully. com.transsion.widget.v3.FloatingToolbarLice@e019ffa from com.android.internal.IInternalViewLice
+2025-12-10 17:12:33.789 22361-22361 InputEventReceiver      com.rmst.biometrics                  D  Input log is disabled in InputEventReceiver.
+2025-12-10 17:12:33.792 22361-22361 TranVersion             com.rmst.biometrics                  I  TranVersion static initializer: default = 35.3.9.1
+                                                                                                     debug = false, debug_version = 35.3.9.1
+2025-12-10 17:12:33.804 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  add APPEARANCE_LIGHT_NAVIGATION_BARS for DecorView@4a5cfb1[SplashActivity]
+2025-12-10 17:12:33.816 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [](id:575900000000,api:0,p:-1,c:22361) connect: controlledByApp=false
+2025-12-10 17:12:33.817 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[SplashActivity]#0](f:0,a:0) constructor()
+2025-12-10 17:12:33.817 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[SplashActivity]#0](f:0,a:0) update width=1080 height=2292 format=-1 mTransformHint=0
+2025-12-10 17:12:33.823 22361-22381 libMEOW                 com.rmst.biometrics                  D  meow new tls: 0xb4000070b6d260a0
+2025-12-10 17:12:33.823 22361-22381 libMEOW                 com.rmst.biometrics                  D  applied 1 plugins for [com.rmst.biometrics]:
+2025-12-10 17:12:33.823 22361-22381 libMEOW                 com.rmst.biometrics                  D    plugin 1: [libMEOW_gift.so]: 0xb400007136c9f820
+2025-12-10 17:12:33.823 22361-22381 libMEOW                 com.rmst.biometrics                  D  rebuild call chain: 0xb4000070b6d660e0
+2025-12-10 17:12:33.842 22361-22381 MAGT_SYNC_FRAME         com.rmst.biometrics                  D  MAGT Sync: MAGT is not supported. Disabling Sync.
+2025-12-10 17:12:33.845 22361-22381 libc                    com.rmst.biometrics                  W  Access denied finding property "vendor.mbrain.enabled"
+2025-12-10 17:12:33.845 22361-22381 rmst.biometrics         com.rmst.biometrics                  D  MBrain is disabled
+2025-12-10 17:12:33.845 22361-22381 rmst.biometrics         com.rmst.biometrics                  D  initMbrain failed
+2025-12-10 17:12:33.857 22361-22381 GrallocExtra            com.rmst.biometrics                  I  gralloc_extra_query:is_SW3D 0
+2025-12-10 17:12:33.857 22361-22381 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[SplashActivity]#0](f:0,a:1) acquireNextBufferLocked size=1080x2292 mFrameNumber=1 applyTransaction=true mTimestamp=157701542852552(auto) mPendingTransactions.size=0 graphicBufferId=96039763705856 transform=0
+2025-12-10 17:12:33.857 22361-22381 BLASTBufferQueue        com.rmst.biometrics                  D  MS: debug.sf.msleep=0, bufferCount=2, ratio=0.900000
+2025-12-10 17:12:33.857 22361-22381 libc                    com.rmst.biometrics                  W  Access denied finding property "vendor.mbrain.enabled"
+2025-12-10 17:12:33.857 22361-22381 rmst.biometrics         com.rmst.biometrics                  D  MBrain is disabled
+2025-12-10 17:12:33.857 22361-22381 rmst.biometrics         com.rmst.biometrics                  D  initMbrain failed
+2025-12-10 17:12:33.871 22361-22447 InsetsController        com.rmst.biometrics                  I  Insets animation onAnimationStart mShow:false, mDurationMs:340, types:statusBars
+2025-12-10 17:12:34.226 22361-22447 InsetsController        com.rmst.biometrics                  I  Insets animation onAnimationEnd
+2025-12-10 17:12:34.240 22361-22447 InteractionJankMonitor  com.rmst.biometrics                  W  Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.rmst.biometrics
+2025-12-10 17:12:35.398 22361-22365 rmst.biometrics         com.rmst.biometrics                  I  Compiler allocated 6969KB to compile void android.view.ViewRootImpl.performTraversals()
+2025-12-10 17:12:35.755  1698-3129  TranDynami...rollerImpl system_server                        E  TranDynamicBarAnimControllerImpl setSimplifyAnimByLauncherType pkgName:com.rmst.biometrics
+2025-12-10 17:12:35.755  1698-3129  TranDynami...rollerImpl system_server                        E  end setSimplifyAnimByLauncherType mSimplifyAnimOpenPkgName:com.rmst.biometrics simplifyAnimByLauncherType:0
+2025-12-10 17:12:35.782 22361-22452 libMEOW                 com.rmst.biometrics                  D  meow new tls: 0xb4000070b6d760f0
+2025-12-10 17:12:35.783 22361-22452 libMEOW                 com.rmst.biometrics                  D  applied 1 plugins for [com.rmst.biometrics]:
+2025-12-10 17:12:35.783 22361-22452 libMEOW                 com.rmst.biometrics                  D    plugin 1: [libMEOW_gift.so]: 0xb400007136c9f820
+2025-12-10 17:12:35.783 22361-22452 libMEOW                 com.rmst.biometrics                  D  rebuild call chain: 0xb4000070b6d86100
+2025-12-10 17:12:35.783 22361-22452 libMEOW                 com.rmst.biometrics                  D  meow delete tls: 0xb4000070b6d760f0
+2025-12-10 17:12:35.784 22361-22361 ActivityThread          com.rmst.biometrics                  D  ++ activityComponent:com.rmst.biometrics/com.rmst.biometrics.MainActivity counts:1 ALEAK_CLEAR_SUPPORT:true
+2025-12-10 17:12:35.821 22361-22361 PhoneWindow             com.rmst.biometrics                  I  MainActivity#generateLayout:Window_statusBarColor=0Xff8a2438
+2025-12-10 17:12:35.821 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  Modify naviBarColor to 0xFFF0F0F0, and windowBackgroundColor is ffffffff   /windowIsTranslucent:false
+2025-12-10 17:12:35.822 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  Modify naviBarColor to white 0xFFF0F0F0
+2025-12-10 17:12:35.830 22361-22361 os.FrameworkDoorMan     com.rmst.biometrics                  D  add field mTypefaceNative to class android.graphics.Paint by source-modified.
+2025-12-10 17:12:35.830 22361-22361 os.FrameworkDoorMan     com.rmst.biometrics                  D  add field mOSTypefaceFlag to class android.graphics.Paint by source-modified.
+2025-12-10 17:12:35.832 22361-22361 CompatChangeReporter    com.rmst.biometrics                  D  Compat change id reported: 210923482; UID 10271; state: ENABLED
+2025-12-10 17:12:35.865 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#3 r.window=nulla.mFinished = falsewillBeVisible = true
+2025-12-10 17:12:35.865 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#4 addView a.mVisibleFromClient=truea.mWindowAdded=falsedecor=DecorView@f3638ae[]
+2025-12-10 17:12:35.865 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#5 addView decor=DecorView@f3638ae[]
+2025-12-10 17:12:35.869 22361-22361 VRI[MainActivity]       com.rmst.biometrics                  D  hardware acceleration = true, forceHwAccelerated = false
+2025-12-10 17:12:35.869 22361-22361 ViewRootImpl            com.rmst.biometrics                  D  setView appearance:0 com.rmst.biometrics/com.rmst.biometrics.MainActivity
+2025-12-10 17:12:35.872 22361-22361 InputEventReceiver      com.rmst.biometrics                  D  Input log is disabled in InputEventReceiver.
+2025-12-10 17:12:35.887 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  add APPEARANCE_LIGHT_NAVIGATION_BARS for DecorView@f3638ae[MainActivity]
+2025-12-10 17:12:35.896 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [](id:575900000001,api:0,p:-1,c:22361) connect: controlledByApp=false
+2025-12-10 17:12:35.896 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#1](f:0,a:0) constructor()
+2025-12-10 17:12:35.896 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#1](f:0,a:0) update width=1080 height=2400 format=-1 mTransformHint=0
+2025-12-10 17:12:35.924 22361-22381 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#1](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=157703609579321(auto) mPendingTransactions.size=0 graphicBufferId=96039763705867 transform=0
+2025-12-10 17:12:35.925 22361-22361 Choreographer           com.rmst.biometrics                  W  Already have a pending vsync event.  There should only be one at a time.
+2025-12-10 17:12:35.948 22361-22447 InsetsController        com.rmst.biometrics                  I  Insets animation onAnimationStart mShow:true, mDurationMs:500, types:statusBars
+2025-12-10 17:12:36.261 22361-22361 VRI[SplashActivity]     com.rmst.biometrics                  D  visibilityChanged oldVisibility=true newVisibility=false
+2025-12-10 17:12:36.287 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[SplashActivity]#0](f:0,a:1) destructor()
+2025-12-10 17:12:36.287 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [VRI[SplashActivity]#0(BLAST Consumer)0](id:575900000000,api:0,p:-1,c:22361) disconnect
+2025-12-10 17:12:36.290 22361-22361 ActivityThread          com.rmst.biometrics                  D  mToDestroying.remove:ActivityRecord{7e5abd1 token=android.os.BinderProxy@be7be81 {com.rmst.biometrics/com.rmst.biometrics.SplashActivity}}
+2025-12-10 17:12:36.292 22361-22361 WindowOnBackDispatcher  com.rmst.biometrics                  W  sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda12@1746b3
+2025-12-10 17:12:36.293 22361-22361 View                    com.rmst.biometrics                  D  [Warning] assignParent to null: this = DecorView@4a5cfb1[SplashActivity]
+2025-12-10 17:12:36.462 22361-22447 InsetsController        com.rmst.biometrics                  I  Insets animation onAnimationEnd
+2025-12-10 17:12:36.666 22361-22365 rmst.biometrics         com.rmst.biometrics                  I  Compiler allocated 4215KB to compile void android.widget.TextView.<init>(android.content.Context, android.util.AttributeSet, int, int)
+2025-12-10 17:12:38.195 22361-22372 FdLeakLice              com.rmst.biometrics                  D  FdLeakCheck app is not systemapp!!!
+2025-12-10 17:13:01.516 22361-22361 os.LiceInfo             com.rmst.biometrics                  D  instance successfully. com.transsion.message.bank.v1.MessageBankLice@1c8340d from com.transsion.message.bank.IMessageBankLice
+2025-12-10 17:13:01.517 22361-22361 TextSelection           com.rmst.biometrics                  D  call hasMessage cause invalidateCache
+2025-12-10 17:13:01.537 22361-22366 rmst.biometrics         com.rmst.biometrics                  W  Cleared Reference was only reachable from finalizer (only reported once)
+2025-12-10 17:13:01.638  1698-5047  TranDynami...rollerImpl system_server                        E  TranDynamicBarAnimControllerImpl setSimplifyAnimByLauncherType pkgName:com.rmst.biometrics
+2025-12-10 17:13:01.638  1698-5047  TranDynami...rollerImpl system_server                        E  end setSimplifyAnimByLauncherType mSimplifyAnimOpenPkgName:com.rmst.biometrics simplifyAnimByLauncherType:0
+2025-12-10 17:13:01.670 22361-22550 libMEOW                 com.rmst.biometrics                  D  meow new tls: 0xb4000070b6dc6140
+2025-12-10 17:13:01.670 22361-22550 libMEOW                 com.rmst.biometrics                  D  applied 1 plugins for [com.rmst.biometrics]:
+2025-12-10 17:13:01.670 22361-22550 libMEOW                 com.rmst.biometrics                  D    plugin 1: [libMEOW_gift.so]: 0xb400007136c9f820
+2025-12-10 17:13:01.671 22361-22550 libMEOW                 com.rmst.biometrics                  D  rebuild call chain: 0xb4000070b6df6170
+2025-12-10 17:13:01.671 22361-22550 libMEOW                 com.rmst.biometrics                  D  meow delete tls: 0xb4000070b6dc6140
+2025-12-10 17:13:01.673 22361-22361 ActivityThread          com.rmst.biometrics                  D  ++ activityComponent:com.rmst.biometrics/com.biometrics.BiometricsActivity counts:1 ALEAK_CLEAR_SUPPORT:true
+2025-12-10 17:13:01.685 22361-22361 PhoneWindow             com.rmst.biometrics                  I  BiometricsActivity#generateLayout:Window_statusBarColor=0Xff8a2438
+2025-12-10 17:13:01.685 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  Modify naviBarColor to 0xFFF0F0F0, and windowBackgroundColor is ffffffff   /windowIsTranslucent:false
+2025-12-10 17:13:01.685 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  Modify naviBarColor to white 0xFFF0F0F0
+2025-12-10 17:13:01.727 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#3 r.window=nulla.mFinished = falsewillBeVisible = true
+2025-12-10 17:13:01.727 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#4 addView a.mVisibleFromClient=truea.mWindowAdded=falsedecor=DecorView@813a43e[]
+2025-12-10 17:13:01.727 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#5 addView decor=DecorView@813a43e[]
+2025-12-10 17:13:01.734 22361-22361 VRI[BiometricsActivity] com.rmst.biometrics                  D  hardware acceleration = true, forceHwAccelerated = false
+2025-12-10 17:13:01.734 22361-22361 ViewRootImpl            com.rmst.biometrics                  D  setView appearance:0 com.rmst.biometrics/com.biometrics.BiometricsActivity
+2025-12-10 17:13:01.737 22361-22361 InputEventReceiver      com.rmst.biometrics                  D  Input log is disabled in InputEventReceiver.
+2025-12-10 17:13:01.742 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  add APPEARANCE_LIGHT_NAVIGATION_BARS for DecorView@813a43e[BiometricsActivity]
+2025-12-10 17:13:01.752 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [](id:575900000002,api:0,p:-1,c:22361) connect: controlledByApp=false
+2025-12-10 17:13:01.752 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[BiometricsActivity]#2](f:0,a:0) constructor()
+2025-12-10 17:13:01.752 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[BiometricsActivity]#2](f:0,a:0) update width=1080 height=2400 format=-1 mTransformHint=0
+2025-12-10 17:13:01.759 22361-22381 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[BiometricsActivity]#2](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=157729445266322(auto) mPendingTransactions.size=0 graphicBufferId=96039763705868 transform=0
+2025-12-10 17:13:01.764 22361-22361 Choreographer           com.rmst.biometrics                  W  Already have a pending vsync event.  There should only be one at a time.
+2025-12-10 17:13:02.080 22361-22361 VRI[MainActivity]       com.rmst.biometrics                  D  visibilityChanged oldVisibility=true newVisibility=false
+2025-12-10 17:13:02.089 22361-22381 HWUI                    com.rmst.biometrics                  D  endAllActiveAnimators on 0xb400007086cfecf0 (RippleDrawable) with handle 0xb400007236ccf9d0
+2025-12-10 17:13:02.094 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#1](f:0,a:1) destructor()
+2025-12-10 17:13:02.094 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [VRI[MainActivity]#1(BLAST Consumer)1](id:575900000001,api:0,p:-1,c:22361) disconnect
+2025-12-10 17:13:02.776 22361-22564 CameraManagerGlobal     com.rmst.biometrics                  I  Connecting to camera service
+2025-12-10 17:13:02.784 22361-22564 TranClassInfo           com.rmst.biometrics                  D  instance successfully. com.transsion.camera.camadapter.Implement.TranCamAdapterComponentImpl@c90c8e7 from com.transsion.hubcore.camadapter.ITranCamAdapterComponent
+2025-12-10 17:13:02.784 22361-22564 TranClassInfo           com.rmst.biometrics                  D  instance successfully. com.transsion.hubcore.hardware.camera2.TranCameraManagerImpl@861c94 from com.transsion.hubcore.hardware.camera2.ITranCameraManager
+2025-12-10 17:13:02.796 22361-22564 CameraRepository        com.rmst.biometrics                  D  Added camera: 0
+2025-12-10 17:13:02.805 22361-22564 TranClassInfo           com.rmst.biometrics                  D  instance successfully. com.transsion.hubcore.hardware.camera2.impl.TranCameraMetadataNativeImpl@377347e from com.transsion.hubcore.hardware.camera2.impl.ITranCameraMetadataNative
+2025-12-10 17:13:02.813 22361-22564 Camera2CameraInfo       com.rmst.biometrics                  I  Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
+2025-12-10 17:13:02.815 22361-22564 CameraRepository        com.rmst.biometrics                  D  Added camera: 1
+2025-12-10 17:13:02.820 22361-22562 nativeloader            com.rmst.biometrics                  D  Load /data/app/~~e-s_eUUU0ObzHlcAnb0DXw==/com.rmst.biometrics-tpkas6IPNKh-DpndU6De7Q==/base.apk!/lib/arm64-v8a/libmediapipe_tasks_vision_jni.so using ns clns-7 from class loader (caller=/data/app/~~e-s_eUUU0ObzHlcAnb0DXw==/com.rmst.biometrics-tpkas6IPNKh-DpndU6De7Q==/base.apk!classes11.dex): ok
+2025-12-10 17:13:02.824 22361-22564 Camera2CameraInfo       com.rmst.biometrics                  I  Device Level: INFO_SUPPORTED_HARDWARE_LEVEL_FULL
+2025-12-10 17:13:02.825 22361-22564 CameraValidator         com.rmst.biometrics                  D  Verifying camera lens facing on TECNO-KM6, lensFacingInteger: null
+2025-12-10 17:13:02.847 22361-22361 TranClassInfo           com.rmst.biometrics                  D  instance successfully. com.transsion.hubcore.hardware.camera2.params.TranStreamConfigurationMapImpl@9c124fd from com.transsion.hubcore.hardware.camera2.params.ITranStreamConfigurationMap
+2025-12-10 17:13:02.849 22361-22567 TranClassInfo           com.rmst.biometrics                  D  instance successfully. com.transsion.hubcore.database.sqlite.TranSQLiteDatabaseImpl@18013f9 from com.transsion.hubcore.database.sqlite.ITranSQLiteDatabase
+2025-12-10 17:13:02.849 22361-22567 TranClassInfo           com.rmst.biometrics                  D  instance successfully. com.transsion.hubcore.spdopts.others.implement.TranSQLiteDatabaseComponentImpl@5348f3e from com.transsion.hubcore.spdcomponent.ITranSQLiteDatabaseComponent
+2025-12-10 17:13:02.856 22361-22567 TransportR...oScheduler com.rmst.biometrics                  D  Scheduling upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) with jobId=916989176 in 30000ms(Backend next call timestamp 1765367742636). Attempt 1
+2025-12-10 17:13:02.856 22361-22567 CompatChangeReporter    com.rmst.biometrics                  D  Compat change id reported: 194532703; UID 10271; state: ENABLED
+2025-12-10 17:13:02.867 22361-22361 TranStream...tionMapExt com.rmst.biometrics                  D  loadAppInfoFromXML 11
+2025-12-10 17:13:02.904 22361-22361 DeferrableSurface       com.rmst.biometrics                  D  Surface created[total_surfaces=1, used_surfaces=0](androidx.camera.core.SurfaceRequest$2@98a476d}
+2025-12-10 17:13:02.907 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [](id:575900000003,api:0,p:-1,c:22361) connect: controlledByApp=true
+2025-12-10 17:13:02.908 22361-22361 CameraOrientationUtil   com.rmst.biometrics                  D  getRelativeImageRotation: destRotationDegrees=0, sourceRotationDegrees=90, isOppositeFacing=true, result=90
+2025-12-10 17:13:02.908 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [](id:575900000004,api:0,p:-1,c:22361) connect: controlledByApp=true
+2025-12-10 17:13:02.909 22361-22361 CameraOrientationUtil   com.rmst.biometrics                  D  getRelativeImageRotation: destRotationDegrees=0, sourceRotationDegrees=90, isOppositeFacing=true, result=90
+2025-12-10 17:13:02.910 22361-22361 DeferrableSurface       com.rmst.biometrics                  D  Surface created[total_surfaces=2, used_surfaces=0](androidx.camera.core.impl.ImmediateSurface@275b3f0}
+2025-12-10 17:13:02.914 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [](id:575900000005,api:0,p:-1,c:22361) connect: controlledByApp=true
+2025-12-10 17:13:02.915 22361-22361 DeferrableSurface       com.rmst.biometrics                  D  Surface created[total_surfaces=3, used_surfaces=0](androidx.camera.core.impl.ImmediateSurface@90a08f}
+2025-12-10 17:13:02.918 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use case androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551 ACTIVE
+2025-12-10 17:13:02.919 22361-22361 CameraOrientationUtil   com.rmst.biometrics                  D  getRelativeImageRotation: destRotationDegrees=0, sourceRotationDegrees=90, isOppositeFacing=true, result=90
+2025-12-10 17:13:02.919 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 17:13:02.919 22361-22361 PreviewView             com.rmst.biometrics                  D  Surface requested by Preview.
+2025-12-10 17:13:02.922 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  loadTunerAppList + 
+2025-12-10 17:13:02.922 22361-22361 AppResolutionTuner      com.rmst.biometrics                  W  Target file doesn't exist: /data/retuner/sf_resolution_tuner_app_list.xml
+2025-12-10 17:13:02.923 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use case androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107 INACTIVE
+2025-12-10 17:13:02.923 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 17:13:02.927 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use case androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105 ACTIVE
+2025-12-10 17:13:02.927 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.tencent.ig', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.927 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.tencent.tmgp.pubgmhd', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.927 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 17:13:02.927 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.pubg.krmobile', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.928 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='vn.vng.pubgmobile', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.928 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.rekoo.pubgm', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.928 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.tencent.tmgp.sgame', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.928 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.dts.freefireth', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.928 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.dts.freefiremax', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.929 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.mobile.legends', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.929 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.tencent.tmgp.cod', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.929 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.activision.callofduty.shooter', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.929 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.garena.game.codm', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.929 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.vng.codmvn', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.930 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.carxtech.sr', scale='1.4', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.930 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  loadTunerAppList - 
+2025-12-10 17:13:02.930 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  loadTunerAppList + 
+2025-12-10 17:13:02.930 22361-22361 AppResolutionTuner      com.rmst.biometrics                  W  Target file doesn't exist: /data/retuner/sf_resolution_tuner_app_list.xml
+2025-12-10 17:13:02.931 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use case androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551 ACTIVE
+2025-12-10 17:13:02.931 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 17:13:02.934 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 17:13:02.935 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.tencent.ig', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.936 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.tencent.tmgp.pubgmhd', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.936 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.pubg.krmobile', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.936 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='vn.vng.pubgmobile', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.936 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.rekoo.pubgm', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.937 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.tencent.tmgp.sgame', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.937 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.dts.freefireth', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.937 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.dts.freefiremax', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.937 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.mobile.legends', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.937 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.tencent.tmgp.cod', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.938 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.activision.callofduty.shooter', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.938 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.garena.game.codm', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.938 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.vng.codmvn', scale='1.0', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.938 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  dom2xml: App{packageName='com.carxtech.sr', scale='1.4', filteredWindows= []', scalingFlow= surfaceview'}
+2025-12-10 17:13:02.938 22361-22361 AppResolutionTuner      com.rmst.biometrics                  D  loadTunerAppList - 
+2025-12-10 17:13:02.939 22361-22361 SurfaceExt              com.rmst.biometrics                  D  initResolutionTunner, mPackageName:com.rmst.biometrics,mContainPackageName:falsemXScaleValue:1.0,mYScaleValue:1.0
+2025-12-10 17:13:02.939 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use cases [androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551] now ATTACHED
+2025-12-10 17:13:02.940 22361-22361 PreviewView             com.rmst.biometrics                  D  Preview transformation info updated. TransformationInfo{cropRect=Rect(0, 0 - 1600, 1200), rotationDegrees=90, targetRotation=0}
+2025-12-10 17:13:02.940 22361-22361 PreviewTransform        com.rmst.biometrics                  D  Transformation info set: TransformationInfo{cropRect=Rect(0, 0 - 1600, 1200), rotationDegrees=90, targetRotation=0} 1600x1200 false
+2025-12-10 17:13:02.940 22361-22361 CameraOrientationUtil   com.rmst.biometrics                  D  getRelativeImageRotation: destRotationDegrees=0, sourceRotationDegrees=90, isOppositeFacing=true, result=90
+2025-12-10 17:13:02.941 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  All use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107] for camera: 0
+2025-12-10 17:13:02.943 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105] for camera: 0
+2025-12-10 17:13:02.945 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Resetting Capture Session
+2025-12-10 17:13:02.945 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Releasing session in state INITIALIZED
+2025-12-10 17:13:02.946 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Attempting to force open the camera.
+2025-12-10 17:13:02.946 22361-22566 CameraStateRegistry     com.rmst.biometrics                  D  tryOpenCamera(Camera@e1c4371[id=0]) [Available Cameras: 1, Already Open: false (Previous state: null)] --> SUCCESS
+2025-12-10 17:13:02.947 22361-22566 CameraStateRegistry     com.rmst.biometrics                  D  Recalculating open cameras:
+                                                                                                    Camera                                       State                 
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Camera@e1a0ccf[id=1]                         UNKNOWN               
+                                                                                                    Camera@e1c4371[id=0]                         OPENING               
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Open count: 1 (Max allowed: 1)
+2025-12-10 17:13:02.947 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Opening camera.
+2025-12-10 17:13:02.948 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Transitioning camera internal state: INITIALIZED --> OPENING
+2025-12-10 17:13:02.948 22361-22566 CameraStateMachine      com.rmst.biometrics                  D  New public camera state CameraState{type=OPENING, error=null} from OPENING and null
+2025-12-10 17:13:02.948 22361-22566 CameraStateMachine      com.rmst.biometrics                  D  Publishing new public camera state CameraState{type=OPENING, error=null}
+2025-12-10 17:13:02.949 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  All use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107] for camera: 0
+2025-12-10 17:13:02.951 22361-22562 libMEOW                 com.rmst.biometrics                  D  meow new tls: 0xb4000070b6e361b0
+2025-12-10 17:13:02.951 22361-22562 libMEOW                 com.rmst.biometrics                  D  applied 1 plugins for [com.rmst.biometrics]:
+2025-12-10 17:13:02.952 22361-22562 libMEOW                 com.rmst.biometrics                  D    plugin 1: [libMEOW_gift.so]: 0xb400007136c9f820
+2025-12-10 17:13:02.952 22361-22562 libMEOW                 com.rmst.biometrics                  D  rebuild call chain: 0xb4000070b6e16190
+2025-12-10 17:13:02.955 22361-22361 WhiteNavigationLice     com.rmst.biometrics                  I  add APPEARANCE_LIGHT_NAVIGATION_BARS for DecorView@813a43e[BiometricsActivity]
+2025-12-10 17:13:02.960 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [](id:575900000006,api:0,p:-1,c:22361) connect: controlledByApp=false
+2025-12-10 17:13:02.960 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3](f:0,a:0) constructor()
+2025-12-10 17:13:02.960 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3](f:0,a:0) update width=1600 height=1200 format=4 mTransformHint=0
+2025-12-10 17:13:02.961 22361-22361 SurfaceViewImpl         com.rmst.biometrics                  D  Surface created.
+2025-12-10 17:13:02.961 22361-22361 SurfaceViewImpl         com.rmst.biometrics                  D  Surface changed. Size: 1600x1200
+2025-12-10 17:13:02.963 22361-22361 SurfaceViewImpl         com.rmst.biometrics                  D  Surface set on Preview.
+2025-12-10 17:13:02.968 22361-22581 libMEOW                 com.rmst.biometrics                  D  meow new tls: 0xb4000070b6e561d0
+2025-12-10 17:13:02.968 22361-22581 libMEOW                 com.rmst.biometrics                  D  applied 1 plugins for [com.rmst.biometrics]:
+2025-12-10 17:13:02.968 22361-22581 libMEOW                 com.rmst.biometrics                  D    plugin 1: [libMEOW_gift.so]: 0xb400007136c9f820
+2025-12-10 17:13:02.969 22361-22581 libMEOW                 com.rmst.biometrics                  D  rebuild call chain: 0xb4000070b6e761f0
+2025-12-10 17:13:02.972 22361-22570 tflite                  com.rmst.biometrics                  I  Initialized TensorFlow Lite runtime.
+2025-12-10 17:13:02.975 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use case androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107 INACTIVE
+2025-12-10 17:13:02.975 22361-22570 libc                    com.rmst.biometrics                  W  Access denied finding property "ro.hardware.chipname"
+2025-12-10 17:13:02.975 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105] for camera: 0
+2025-12-10 17:13:02.978 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use case androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105 ACTIVE
+2025-12-10 17:13:02.979 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105] for camera: 0
+2025-12-10 17:13:02.981 22361-22570 tflite                  com.rmst.biometrics                  I  Created TensorFlow Lite XNNPACK delegate for CPU.
+2025-12-10 17:13:02.981 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use case androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551 ACTIVE
+2025-12-10 17:13:02.982 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105] for camera: 0
+2025-12-10 17:13:02.984 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105] for camera: 0
+2025-12-10 17:13:02.987 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use case androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107 ACTIVE
+2025-12-10 17:13:02.988 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107] for camera: 0
+2025-12-10 17:13:02.991 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} CameraDevice.onOpened()
+2025-12-10 17:13:02.991 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Transitioning camera internal state: OPENING --> OPENED
+2025-12-10 17:13:02.992 22361-22566 CameraStateRegistry     com.rmst.biometrics                  D  Recalculating open cameras:
+                                                                                                    Camera                                       State                 
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Camera@e1a0ccf[id=1]                         UNKNOWN               
+                                                                                                    Camera@e1c4371[id=0]                         OPEN                  
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Open count: 1 (Max allowed: 1)
+2025-12-10 17:13:02.992 22361-22566 CameraStateMachine      com.rmst.biometrics                  D  New public camera state CameraState{type=OPEN, error=null} from OPEN and null
+2025-12-10 17:13:02.992 22361-22566 CameraStateMachine      com.rmst.biometrics                  D  Publishing new public camera state CameraState{type=OPEN, error=null}
+2025-12-10 17:13:02.992 22361-22570 tflite                  com.rmst.biometrics                  I  Replacing 272 out of 272 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+2025-12-10 17:13:02.993 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  All use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107] for camera: 0
+2025-12-10 17:13:02.996 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107] for camera: 0
+2025-12-10 17:13:02.998 22361-22566 SyncCaptureSessionBase  com.rmst.biometrics                  D  [androidx.camera.camera2.internal.SynchronizedCaptureSessionBaseImpl@2cb5b7c] getSurface...done
+2025-12-10 17:13:02.999 22361-22566 CaptureSession          com.rmst.biometrics                  D  Opening capture session.
+2025-12-10 17:13:03.002 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  New surface in use[total_surfaces=3, used_surfaces=1](androidx.camera.core.SurfaceRequest$2@98a476d}
+2025-12-10 17:13:03.002 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  use count+1, useCount=1 androidx.camera.core.SurfaceRequest$2@98a476d
+2025-12-10 17:13:03.002 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  New surface in use[total_surfaces=3, used_surfaces=2](androidx.camera.core.impl.ImmediateSurface@90a08f}
+2025-12-10 17:13:03.002 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  use count+1, useCount=1 androidx.camera.core.impl.ImmediateSurface@90a08f
+2025-12-10 17:13:03.002 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  New surface in use[total_surfaces=3, used_surfaces=3](androidx.camera.core.impl.ImmediateSurface@275b3f0}
+2025-12-10 17:13:03.002 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  use count+1, useCount=1 androidx.camera.core.impl.ImmediateSurface@275b3f0
+2025-12-10 17:13:03.032 22361-22574 tflite                  com.rmst.biometrics                  I  Replacing 165 out of 165 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for the whole graph.
+2025-12-10 17:13:03.061 22361-22566 CaptureSession          com.rmst.biometrics                  D  Attempting to send capture request onConfigured
+2025-12-10 17:13:03.061 22361-22566 CaptureSession          com.rmst.biometrics                  D  Issuing request for session.
+2025-12-10 17:13:03.062 22361-22566 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 17:13:03.066 22361-22567 TransportR...EventStore com.rmst.biometrics                  D  Storing event with priority=DEFAULT, name=COREML_ON_DEVICE_SOLUTIONS for destination cct
+2025-12-10 17:13:03.068 22361-22566 CaptureSession          com.rmst.biometrics                  D  CameraCaptureSession.onConfigured() mState=OPENED
+2025-12-10 17:13:03.069 22361-22566 CaptureSession          com.rmst.biometrics                  D  CameraCaptureSession.onReady() OPENED
+2025-12-10 17:13:03.095 22361-22567 TransportR...oScheduler com.rmst.biometrics                  D  Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+2025-12-10 17:13:03.270 22361-22551 BLASTBufferQueue        com.rmst.biometrics                  D  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3](f:0,a:1) acquireNextBufferLocked size=1600x1200 mFrameNumber=1 applyTransaction=true mTimestamp=157730877184000 mPendingTransactions.size=0 graphicBufferId=96039763705874 transform=4
+2025-12-10 17:13:03.273 22361-22648 DMABUFHEAPS             com.rmst.biometrics                  I  Using DMA-BUF heap named: mtk_mm
+2025-12-10 17:13:03.273 22361-22648 DMABUFHEAPS             com.rmst.biometrics                  I  Using DMA-BUF heap named: mtk_mm-uncached
+2025-12-10 17:13:03.273 22361-22648 DMABUFHEAPS             com.rmst.biometrics                  I  Using DMA-BUF heap named: mtk_svp_region-aligned
+2025-12-10 17:13:03.273 22361-22648 DMABUFHEAPS             com.rmst.biometrics                  I  Using DMA-BUF heap named: mtk_prot_region
+2025-12-10 17:13:03.273 22361-22648 DMABUFHEAPS             com.rmst.biometrics                  I  Using DMA-BUF heap named: mtk_2d_fr_region
+2025-12-10 17:13:03.273 22361-22648 DMABUFHEAPS             com.rmst.biometrics                  I  Using DMA-BUF heap named: mtk_wfd_region-aligned
+2025-12-10 17:13:03.275 22361-22648 nativeloader            com.rmst.biometrics                  D  Load /data/app/~~e-s_eUUU0ObzHlcAnb0DXw==/com.rmst.biometrics-tpkas6IPNKh-DpndU6De7Q==/base.apk!/lib/arm64-v8a/libimage_processing_util_jni.so using ns clns-7 from class loader (caller=/data/app/~~e-s_eUUU0ObzHlcAnb0DXw==/com.rmst.biometrics-tpkas6IPNKh-DpndU6De7Q==/base.apk): ok
+2025-12-10 17:13:03.277 22361-22564 StreamStateObserver     com.rmst.biometrics                  D  Update Preview stream state to STREAMING
+2025-12-10 17:13:04.006 22361-22366 rmst.biometrics         com.rmst.biometrics                  I  NativeAlloc concurrent mark compact GC freed 684KB AllocSpace bytes, 9(10MB) LOS objects, 65% free, 6485KB/18MB, paused 407us,5.998ms total 48.121ms
+2025-12-10 17:13:04.823 22361-22361 CameraOrientationUtil   com.rmst.biometrics                  D  getRelativeImageRotation: destRotationDegrees=0, sourceRotationDegrees=90, isOppositeFacing=true, result=90
+2025-12-10 17:13:06.380 22361-22366 rmst.biometrics         com.rmst.biometrics                  I  Background concurrent mark compact GC freed 676KB AllocSpace bytes, 10(11MB) LOS objects, 65% free, 6489KB/18MB, paused 304us,7.608ms total 46.939ms
+2025-12-10 17:13:07.559 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 56.180256%
+2025-12-10 17:13:07.559 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 56.180256%
+2025-12-10 17:13:07.559 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 56.180256%
+2025-12-10 17:13:07.559 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 56.180256%
+2025-12-10 17:13:07.559 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 56.180256%
+2025-12-10 17:13:07.569 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107] for camera: 0
+2025-12-10 17:13:07.573 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 56.18025588989258 | Status: FAIR ===
+2025-12-10 17:13:07.580 22361-22566 CaptureSession          com.rmst.biometrics                  D  Attempting to submit CaptureRequest after setting
+2025-12-10 17:13:07.581 22361-22566 CaptureSession          com.rmst.biometrics                  D  Issuing request for session.
+2025-12-10 17:13:07.583 22361-22566 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 17:13:07.590 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Issue capture request
+2025-12-10 17:13:07.590 22361-22566 CaptureSession          com.rmst.biometrics                  D  Issuing capture request.
+2025-12-10 17:13:07.592 22361-22566 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 17:13:07.604 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107] for camera: 0
+2025-12-10 17:13:07.616 22361-22566 CaptureSession          com.rmst.biometrics                  D  Attempting to submit CaptureRequest after setting
+2025-12-10 17:13:07.616 22361-22566 CaptureSession          com.rmst.biometrics                  D  Issuing request for session.
+2025-12-10 17:13:07.619 22361-22566 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 17:13:07.626 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 82.54328%
+2025-12-10 17:13:07.626 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 82.54328%
+2025-12-10 17:13:07.626 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 82.54328%
+2025-12-10 17:13:07.626 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 82.54328%
+2025-12-10 17:13:07.626 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 82.54328%
+2025-12-10 17:13:07.630 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Issue capture request
+2025-12-10 17:13:07.631 22361-22566 CaptureSession          com.rmst.biometrics                  D  Issuing capture request.
+2025-12-10 17:13:07.644 22361-22566 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 17:13:07.645 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 82.54328155517578 | Status: GOOD ===
+2025-12-10 17:13:07.723 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 94.51944%
+2025-12-10 17:13:07.723 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 94.51944%
+2025-12-10 17:13:07.723 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 94.51944%
+2025-12-10 17:13:07.723 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 94.51944%
+2025-12-10 17:13:07.723 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 94.51944%
+2025-12-10 17:13:07.725 22361-22366 rmst.biometrics         com.rmst.biometrics                  I  Background concurrent mark compact GC freed 954KB AllocSpace bytes, 11(12MB) LOS objects, 61% free, 7769KB/19MB, paused 704us,9.345ms total 105.614ms
+2025-12-10 17:13:07.735 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 94.51943969726562 | Status: GOOD ===
+2025-12-10 17:13:07.764 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 68.76076%
+2025-12-10 17:13:07.765 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 68.76076%
+2025-12-10 17:13:07.765 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 68.76076%
+2025-12-10 17:13:07.765 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 68.76076%
+2025-12-10 17:13:07.765 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 68.76076%
+2025-12-10 17:13:07.768 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 68.76075744628906 | Status: FAIR ===
+2025-12-10 17:13:07.820 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 88.24281%
+2025-12-10 17:13:07.820 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 88.24281%
+2025-12-10 17:13:07.820 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 88.24281%
+2025-12-10 17:13:07.820 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 88.24281%
+2025-12-10 17:13:07.821 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 88.24281%
+2025-12-10 17:13:07.835 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 88.24281311035156 | Status: GOOD ===
+2025-12-10 17:13:07.860 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 93.68448%
+2025-12-10 17:13:07.860 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 93.68448%
+2025-12-10 17:13:07.860 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 93.68448%
+2025-12-10 17:13:07.860 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 93.68448%
+2025-12-10 17:13:07.860 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 93.68448%
+2025-12-10 17:13:07.868 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 93.68447875976562 | Status: GOOD ===
+2025-12-10 17:13:07.913 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 93.94232%
+2025-12-10 17:13:07.913 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 93.94232%
+2025-12-10 17:13:07.913 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 93.94232%
+2025-12-10 17:13:07.913 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 93.94232%
+2025-12-10 17:13:07.913 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 93.94232%
+2025-12-10 17:13:07.918 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 93.94232177734375 | Status: GOOD ===
+2025-12-10 17:13:07.963 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 92.21676%
+2025-12-10 17:13:07.964 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 92.21676%
+2025-12-10 17:13:07.964 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 92.21676%
+2025-12-10 17:13:07.964 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 92.21676%
+2025-12-10 17:13:07.964 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 92.21676%
+2025-12-10 17:13:07.967 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 92.21675872802734 | Status: GOOD ===
+2025-12-10 17:13:08.010 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 94.12413%
+2025-12-10 17:13:08.010 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 94.12413%
+2025-12-10 17:13:08.010 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 94.12413%
+2025-12-10 17:13:08.010 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 94.12413%
+2025-12-10 17:13:08.010 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 94.12413%
+2025-12-10 17:13:08.017 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 94.12413024902344 | Status: GOOD ===
+2025-12-10 17:13:08.049 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 94.248055%
+2025-12-10 17:13:08.049 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 94.248055%
+2025-12-10 17:13:08.050 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 94.248055%
+2025-12-10 17:13:08.050 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 94.248055%
+2025-12-10 17:13:08.050 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 94.248055%
+2025-12-10 17:13:08.050 22361-22361 OverlayView             com.rmst.biometrics                  D  Stable frames: 1/15 | Quality: 94.24805450439453
+2025-12-10 17:13:08.068 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 94.24805450439453 | Status: GOOD ===
+2025-12-10 17:13:08.090 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 94.152626%
+2025-12-10 17:13:08.090 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 94.152626%
+2025-12-10 17:13:08.090 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 94.152626%
+2025-12-10 17:13:08.090 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 94.152626%
+2025-12-10 17:13:08.091 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 94.152626%
+2025-12-10 17:13:08.091 22361-22361 OverlayView             com.rmst.biometrics                  D  Reset: Quality=true, Stable=false
+2025-12-10 17:13:08.101 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 94.15262603759766 | Status: GOOD ===
+2025-12-10 17:13:08.147 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 93.87571%
+2025-12-10 17:13:08.147 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 93.87571%
+2025-12-10 17:13:08.147 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 93.87571%
+2025-12-10 17:13:08.147 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 93.87571%
+2025-12-10 17:13:08.147 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 93.87571%
+2025-12-10 17:13:08.151 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 93.8757095336914 | Status: GOOD ===
+2025-12-10 17:13:08.209 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 93.743866%
+2025-12-10 17:13:08.209 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 93.743866%
+2025-12-10 17:13:08.209 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 93.743866%
+2025-12-10 17:13:08.209 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 93.743866%
+2025-12-10 17:13:08.209 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 93.743866%
+2025-12-10 17:13:08.209 22361-22361 OverlayView             com.rmst.biometrics                  D  Stable frames: 1/15 | Quality: 93.74386596679688
+2025-12-10 17:13:08.217 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 93.74386596679688 | Status: GOOD ===
+2025-12-10 17:13:08.264 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 93.58955%
+2025-12-10 17:13:08.265 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 93.58955%
+2025-12-10 17:13:08.265 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 93.58955%
+2025-12-10 17:13:08.265 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 93.58955%
+2025-12-10 17:13:08.265 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 93.58955%
+2025-12-10 17:13:08.265 22361-22361 OverlayView             com.rmst.biometrics                  D  Reset: Quality=true, Stable=false
+2025-12-10 17:13:08.284 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 93.58954620361328 | Status: GOOD ===
+2025-12-10 17:13:08.303 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 93.68905%
+2025-12-10 17:13:08.303 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 93.68905%
+2025-12-10 17:13:08.303 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 93.68905%
+2025-12-10 17:13:08.303 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 93.68905%
+2025-12-10 17:13:08.303 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 93.68905%
+2025-12-10 17:13:08.303 22361-22361 OverlayView             com.rmst.biometrics                  D  Stable frames: 1/15 | Quality: 93.68904876708984
+2025-12-10 17:13:08.317 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 93.68904876708984 | Status: GOOD ===
+2025-12-10 17:13:08.356 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 92.55139%
+2025-12-10 17:13:08.356 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 92.55139%
+2025-12-10 17:13:08.356 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 92.55139%
+2025-12-10 17:13:08.356 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 92.55139%
+2025-12-10 17:13:08.356 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 92.55139%
+2025-12-10 17:13:08.356 22361-22361 OverlayView             com.rmst.biometrics                  D  Stable frames: 2/15 | Quality: 92.5513916015625
+2025-12-10 17:13:08.368 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 92.5513916015625 | Status: GOOD ===
+2025-12-10 17:13:08.406 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 92.6754%
+2025-12-10 17:13:08.406 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 92.6754%
+2025-12-10 17:13:08.407 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 92.6754%
+2025-12-10 17:13:08.407 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 92.6754%
+2025-12-10 17:13:08.407 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 92.6754%
+2025-12-10 17:13:08.407 22361-22361 OverlayView             com.rmst.biometrics                  D  Stable frames: 3/15 | Quality: 92.67539978027344
+2025-12-10 17:13:08.418 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 92.67539978027344 | Status: GOOD ===
+2025-12-10 17:13:08.461 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 92.58517%
+2025-12-10 17:13:08.461 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 92.58517%
+2025-12-10 17:13:08.461 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 92.58517%
+2025-12-10 17:13:08.462 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 92.58517%
+2025-12-10 17:13:08.462 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 92.58517%
+2025-12-10 17:13:08.462 22361-22361 OverlayView             com.rmst.biometrics                  D  Stable frames: 4/15 | Quality: 92.58516693115234
+2025-12-10 17:13:08.467 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 92.58516693115234 | Status: GOOD ===
+2025-12-10 17:13:08.483 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Issue capture request
+2025-12-10 17:13:08.483 22361-22566 CaptureSession          com.rmst.biometrics                  D  Issuing capture request.
+2025-12-10 17:13:08.483 22361-22554 RMST Biomterics         com.rmst.biometrics                  D  Processing bitmap: 640x480, format: ARGB_8888
+2025-12-10 17:13:08.483 22361-22554 FingerprintExtractor    com.rmst.biometrics                  D  ROI too small: 121.97189x-21.440811 (minimum 30x30)
+2025-12-10 17:13:08.484 22361-22554 FingerprintExtractor    com.rmst.biometrics                  W  Invalid ROI for THUMB
+2025-12-10 17:13:08.484 22361-22554 FingerprintExtractor    com.rmst.biometrics                  D  ROI too small: 221.35405x-40.959915 (minimum 30x30)
+2025-12-10 17:13:08.484 22361-22554 FingerprintExtractor    com.rmst.biometrics                  W  Invalid ROI for INDEX
+2025-12-10 17:13:08.485 22361-22554 FingerprintExtractor    com.rmst.biometrics                  D  ROI too small: 240.53537x-43.436966 (minimum 30x30)
+2025-12-10 17:13:08.485 22361-22554 FingerprintExtractor    com.rmst.biometrics                  W  Invalid ROI for MIDDLE
+2025-12-10 17:13:08.485 22361-22554 FingerprintExtractor    com.rmst.biometrics                  D  ROI too small: 244.41238x-37.565933 (minimum 30x30)
+2025-12-10 17:13:08.485 22361-22566 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 17:13:08.485 22361-22554 FingerprintExtractor    com.rmst.biometrics                  W  Invalid ROI for RING
+2025-12-10 17:13:08.488 22361-22554 FingerprintExtractor    com.rmst.biometrics                  D  ROI too small: 236.37262x-42.789673 (minimum 30x30)
+2025-12-10 17:13:08.488 22361-22554 FingerprintExtractor    com.rmst.biometrics                  W  Invalid ROI for PINKY
+2025-12-10 17:13:08.489 22361-22554 RMST Biomterics         com.rmst.biometrics                  W  Fingerprint extraction failed: 0 fingerprints passed quality check
+2025-12-10 17:13:08.497 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107] for camera: 0
+2025-12-10 17:13:08.518 22361-22566 CaptureSession          com.rmst.biometrics                  D  Attempting to submit CaptureRequest after setting
+2025-12-10 17:13:08.518 22361-22566 CaptureSession          com.rmst.biometrics                  D  Issuing request for session.
+2025-12-10 17:13:08.524 22361-22566 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 17:13:08.551 22361-22361 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#3 r.window=com.android.internal.policy.PhoneWindow@f8a4d9fa.mFinished = falsewillBeVisible = true
+2025-12-10 17:13:08.562 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [](id:575900000007,api:0,p:-1,c:22361) connect: controlledByApp=false
+2025-12-10 17:13:08.562 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#4](f:0,a:0) constructor()
+2025-12-10 17:13:08.562 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#4](f:0,a:0) update width=1080 height=2400 format=-1 mTransformHint=0
+2025-12-10 17:13:08.580 22361-22381 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#4](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=157736265658323(auto) mPendingTransactions.size=0 graphicBufferId=96039763705892 transform=0
+2025-12-10 17:13:08.648 22361-22361 CameraOrientationUtil   com.rmst.biometrics                  D  getRelativeImageRotation: destRotationDegrees=0, sourceRotationDegrees=90, isOppositeFacing=true, result=90
+2025-12-10 17:13:08.664 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 93.17638%
+2025-12-10 17:13:08.665 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 93.17638%
+2025-12-10 17:13:08.665 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 93.17638%
+2025-12-10 17:13:08.665 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 93.17638%
+2025-12-10 17:13:08.665 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 93.17638%
+2025-12-10 17:13:08.665 22361-22361 OverlayView             com.rmst.biometrics                  D  Stable frames: 5/15 | Quality: 93.17637634277344
+2025-12-10 17:13:08.672 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 93.17637634277344 | Status: GOOD ===
+2025-12-10 17:13:08.679 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107] for camera: 0
+2025-12-10 17:13:08.687 22361-22566 CaptureSession          com.rmst.biometrics                  D  Attempting to submit CaptureRequest after setting
+2025-12-10 17:13:08.687 22361-22566 CaptureSession          com.rmst.biometrics                  D  Issuing request for session.
+2025-12-10 17:13:08.689 22361-22566 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 17:13:08.692 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Issue capture request
+2025-12-10 17:13:08.692 22361-22566 CaptureSession          com.rmst.biometrics                  D  Issuing capture request.
+2025-12-10 17:13:08.694 22361-22566 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 17:13:08.728 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 92.508545%
+2025-12-10 17:13:08.728 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 92.508545%
+2025-12-10 17:13:08.729 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 92.508545%
+2025-12-10 17:13:08.729 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 92.508545%
+2025-12-10 17:13:08.729 22361-22361 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 92.508545%
+2025-12-10 17:13:08.729 22361-22361 OverlayView             com.rmst.biometrics                  D  Reset: Quality=true, Stable=false
+2025-12-10 17:13:08.739 22361-22361 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 92.508544921875 | Status: GOOD ===
+2025-12-10 17:13:08.745 22361-22581 libMEOW                 com.rmst.biometrics                  D  meow delete tls: 0xb4000070b6e561d0
+2025-12-10 17:13:08.752 22361-22567 TransportR...EventStore com.rmst.biometrics                  D  Storing event with priority=DEFAULT, name=COREML_ON_DEVICE_SOLUTIONS for destination cct
+2025-12-10 17:13:08.755 22361-22567 TransportR...oScheduler com.rmst.biometrics                  D  Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+2025-12-10 17:13:08.967 22361-22361 VRI[BiometricsActivity] com.rmst.biometrics                  D  visibilityChanged oldVisibility=true newVisibility=false
+2025-12-10 17:13:08.972 22361-22361 SurfaceViewImpl         com.rmst.biometrics                  D  Surface destroyed.
+2025-12-10 17:13:08.972 22361-22361 SurfaceViewImpl         com.rmst.biometrics                  D  Surface invalidated androidx.camera.core.SurfaceRequest@35be384
+2025-12-10 17:13:08.972 22361-22361 DeferrableSurface       com.rmst.biometrics                  D  surface closed,  useCount=1 closed=true androidx.camera.core.SurfaceRequest$2@98a476d
+2025-12-10 17:13:08.972 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3](f:0,a:1) destructor()
+2025-12-10 17:13:08.972 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:575900000006,api:4,p:1369,c:22361) disconnect
+2025-12-10 17:13:08.981 22361-22551 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:575900000006,api:4,p:1369,c:22361) queueBuffer: BufferQueue has been abandoned
+2025-12-10 17:13:08.985 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[BiometricsActivity]#2](f:0,a:1) destructor()
+2025-12-10 17:13:08.985 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [VRI[BiometricsActivity]#2(BLAST Consumer)2](id:575900000002,api:0,p:-1,c:22361) disconnect
+2025-12-10 17:13:08.989 22361-22551 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:575900000006,api:4,p:1369,c:22361) dequeueBuffer: BufferQueue has been abandoned
+2025-12-10 17:13:08.991 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Use cases [androidx.camera.core.Preview-55d6bd05-8904-4208-bbbd-1591dd2eca3779745107, androidx.camera.core.ImageAnalysis-b8a99e9f-c546-4fba-b011-d11b29790a63248084105, androidx.camera.core.ImageCapture-4d589789-c211-444b-872d-69a1ecdca194176037551] now DETACHED for camera
+2025-12-10 17:13:08.991 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  All use case: [] for camera: 0
+2025-12-10 17:13:08.992 22361-22361 ActivityThread          com.rmst.biometrics                  D  mToDestroying.remove:ActivityRecord{d4926d6 token=android.os.BinderProxy@ae14e40 {com.rmst.biometrics/com.biometrics.BiometricsActivity}}
+2025-12-10 17:13:08.992 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Resetting Capture Session
+2025-12-10 17:13:08.995 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Releasing session in state OPENED
+2025-12-10 17:13:08.996 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 17:13:09.010 22361-22562 libMEOW                 com.rmst.biometrics                  D  meow delete tls: 0xb4000070b6e361b0
+2025-12-10 17:13:09.010 22361-22361 DeferrableSurface       com.rmst.biometrics                  D  surface closed,  useCount=1 closed=true androidx.camera.core.impl.ImmediateSurface@275b3f0
+2025-12-10 17:13:09.011 22361-22361 DeferrableSurface       com.rmst.biometrics                  D  surface closed,  useCount=1 closed=true androidx.camera.core.impl.ImmediateSurface@90a08f
+2025-12-10 17:13:09.013 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 17:13:09.015 22361-22361 WindowOnBackDispatcher  com.rmst.biometrics                  W  sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda12@bcacfb5
+2025-12-10 17:13:09.016 22361-22361 View                    com.rmst.biometrics                  D  [Warning] assignParent to null: this = DecorView@813a43e[BiometricsActivity]
+2025-12-10 17:13:09.017 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Closing camera.
+2025-12-10 17:13:09.020 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Transitioning camera internal state: OPENED --> CLOSING
+2025-12-10 17:13:09.022 22361-22566 CameraStateRegistry     com.rmst.biometrics                  D  Recalculating open cameras:
+                                                                                                    Camera                                       State                 
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Camera@e1a0ccf[id=1]                         UNKNOWN               
+                                                                                                    Camera@e1c4371[id=0]                         CLOSING               
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Open count: 1 (Max allowed: 1)
+2025-12-10 17:13:09.022 22361-22566 CameraStateMachine      com.rmst.biometrics                  D  New public camera state CameraState{type=CLOSING, error=null} from CLOSING and null
+2025-12-10 17:13:09.023 22361-22566 CameraStateMachine      com.rmst.biometrics                  D  Publishing new public camera state CameraState{type=CLOSING, error=null}
+2025-12-10 17:13:09.024 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Resetting Capture Session
+2025-12-10 17:13:09.024 22361-22361 StreamStateObserver     com.rmst.biometrics                  D  Update Preview stream state to IDLE
+2025-12-10 17:13:09.025 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Releasing session in state CLOSING
+2025-12-10 17:13:09.026 22361-22566 CaptureSession          com.rmst.biometrics                  D  onSessionFinished()
+2025-12-10 17:13:09.038 22361-22666 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:575900000006,api:4,p:1369,c:22361) queueBuffer: BufferQueue has been abandoned
+2025-12-10 17:13:09.061 22361-22666 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:575900000006,api:4,p:1369,c:22361) queueBuffer: BufferQueue has been abandoned
+2025-12-10 17:13:09.062 22361-22666 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:575900000006,api:4,p:1369,c:22361) cancelBuffer: BufferQueue has been abandoned
+2025-12-10 17:13:09.063 22361-22551 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:575900000006,api:4,p:1369,c:22361) cancelBuffer: BufferQueue has been abandoned
+2025-12-10 17:13:09.063 22361-22670 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:575900000006,api:4,p:1369,c:22361) cancelBuffer: BufferQueue has been abandoned
+2025-12-10 17:13:09.161 22361-22566 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 17:13:09.162 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  use count-1,  useCount=0 closed=true androidx.camera.core.SurfaceRequest$2@98a476d
+2025-12-10 17:13:09.162 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  Surface no longer in use[total_surfaces=3, used_surfaces=2](androidx.camera.core.SurfaceRequest$2@98a476d}
+2025-12-10 17:13:09.162 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  Surface terminated[total_surfaces=2, used_surfaces=2](androidx.camera.core.SurfaceRequest$2@98a476d}
+2025-12-10 17:13:09.163 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  use count-1,  useCount=0 closed=true androidx.camera.core.impl.ImmediateSurface@90a08f
+2025-12-10 17:13:09.163 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  Surface no longer in use[total_surfaces=2, used_surfaces=1](androidx.camera.core.impl.ImmediateSurface@90a08f}
+2025-12-10 17:13:09.163 22361-22361 SurfaceViewImpl         com.rmst.biometrics                  D  Safe to release surface.
+2025-12-10 17:13:09.163 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  Surface terminated[total_surfaces=1, used_surfaces=1](androidx.camera.core.impl.ImmediateSurface@90a08f}
+2025-12-10 17:13:09.163 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  use count-1,  useCount=0 closed=true androidx.camera.core.impl.ImmediateSurface@275b3f0
+2025-12-10 17:13:09.163 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  Surface no longer in use[total_surfaces=1, used_surfaces=0](androidx.camera.core.impl.ImmediateSurface@275b3f0}
+2025-12-10 17:13:09.163 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [ImageReader-4064x3048f21m2-22361-2](id:575900000005,api:0,p:-1,c:22361) disconnect
+2025-12-10 17:13:09.163 22361-22566 DeferrableSurface       com.rmst.biometrics                  D  Surface terminated[total_surfaces=0, used_surfaces=0](androidx.camera.core.impl.ImmediateSurface@275b3f0}
+2025-12-10 17:13:09.164 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [ImageReader-640x480f23m4-22361-0](id:575900000003,api:0,p:-1,c:22361) disconnect
+2025-12-10 17:13:09.164 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} CameraDevice.onClosed()
+2025-12-10 17:13:09.164 22361-22566 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@e1c4371[id=0]} Transitioning camera internal state: CLOSING --> INITIALIZED
+2025-12-10 17:13:09.164 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [ImageReader-640x480f1m4-22361-1](id:575900000004,api:0,p:-1,c:22361) disconnect
+2025-12-10 17:13:09.164 22361-22566 CameraStateRegistry     com.rmst.biometrics                  D  Recalculating open cameras:
+                                                                                                    Camera                                       State                 
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Camera@e1a0ccf[id=1]                         UNKNOWN               
+                                                                                                    Camera@e1c4371[id=0]                         CLOSED                
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Open count: 0 (Max allowed: 1)
+2025-12-10 17:13:09.164 22361-22566 CameraStateMachine      com.rmst.biometrics                  D  New public camera state CameraState{type=CLOSED, error=null} from CLOSED and null
+2025-12-10 17:13:09.164 22361-22566 CameraStateMachine      com.rmst.biometrics                  D  Publishing new public camera state CameraState{type=CLOSED, error=null}
+2025-12-10 17:13:17.264 22361-22361 TextSelection           com.rmst.biometrics                  D  onUseCache cache=false
+2025-12-10 17:13:17.337 22361-22361 os.SingleLice           com.rmst.biometrics                  D  instance successfully. com.transsion.dragdrop.v1.DragDropLice@984c836 from com.transsion.dragdrop.DragDropLiceFactory
+2025-12-10 17:13:17.337 22361-22361 os.SingleLiceFactory    com.rmst.biometrics                  D  instance successfully. com.transsion.dragdrop.v1.DragDropLice@984c836 from android.view.IViewLice
+2025-12-10 17:13:17.337 22361-22361 os.LiceInfo             com.rmst.biometrics                  D  instance successfully. com.transsion.view.ViewLice@24de337 from android.view.IViewLice
+2025-12-10 17:13:18.055 22361-22361 VRI[MainActivity]       com.rmst.biometrics                  D  visibilityChanged oldVisibility=true newVisibility=false
+2025-12-10 17:13:18.104 22361-22361 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#4](f:0,a:1) destructor()
+2025-12-10 17:13:18.104 22361-22361 BufferQueueConsumer     com.rmst.biometrics                  D  [VRI[MainActivity]#4(BLAST Consumer)4](id:575900000007,api:0,p:-1,c:22361) disconnect

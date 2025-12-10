@@ -35,8 +35,11 @@ class FingerprintExtractor {
         // Padding percentage around detected finger region
         private const val PADDING_PERCENT = 0.30f
 
-        // Minimum quality score (0-100)
-        private const val MIN_QUALITY_SCORE = 60
+        // Minimum quality score (0-100) - TEMPORARILY LOWERED FOR TESTING
+        private const val MIN_QUALITY_SCORE = 30  // Was 60
+
+        // Minimum ROI size - TEMPORARILY LOWERED FOR TESTING
+        private const val MIN_ROI_SIZE = 30  // Was 50
     }
 
     enum class FingerType {
@@ -126,6 +129,7 @@ class FingerprintExtractor {
 
     /**
      * Calculate ROI for fingerprint area (fingertip to first joint)
+     * Uses simple bounding box approach for reliability
      */
     private fun calculateFingerprintROI(
         landmarks: List<com.google.mediapipe.tasks.components.containers.NormalizedLandmark>,
@@ -134,49 +138,36 @@ class FingerprintExtractor {
         imageHeight: Int
     ): RectF {
 
-        // Get landmark positions
+        // Get landmark positions in pixel coordinates
         val points = landmarkIndices.map { idx ->
             val lm = landmarks[idx]
             PointF(lm.x() * imageWidth, lm.y() * imageHeight)
         }
 
-        // For fingerprint, we want from tip (last index) to second joint (second index)
-        // This gives us the distal phalanx where the fingerprint is
-        val tip = points.last()
-        val dip = points[points.size - 2] // Distal interphalangeal joint
-        val pip = points[points.size - 3] // Proximal interphalangeal joint
+        // For fingerprint, use tip and 2 joints (distal phalanx area)
+        // Take last 3 landmarks: tip, DIP joint, PIP joint
+        val fingerPoints = points.takeLast(3)
 
-        // Calculate finger direction vector
-        val dx = tip.x - dip.x
-        val dy = tip.y - dip.y
-        val length = sqrt(dx * dx + dy * dy)
+        // Calculate bounding box around these points
+        val minX = fingerPoints.minOf { it.x }
+        val maxX = fingerPoints.maxOf { it.x }
+        val minY = fingerPoints.minOf { it.y }
+        val maxY = fingerPoints.maxOf { it.y }
 
-        // Calculate perpendicular vector for width
-        val perpX = -dy / length
-        val perpY = dx / length
+        // Calculate current width and height
+        val width = maxX - minX
+        val height = maxY - minY
 
-        // Estimate finger width (typically 60-70% of segment length)
-        val fingerWidth = length * 0.65f
+        // Add padding (expand the box)
+        val paddingX = width * PADDING_PERCENT
+        val paddingY = height * PADDING_PERCENT
 
-        // Create ROI from tip to PIP joint (covers full fingerprint area)
-        val roiLength = sqrt((tip.x - pip.x) * (tip.x - pip.x) + (tip.y - pip.y) * (tip.y - pip.y))
-
-        // Calculate corners of rectangle
-        val halfWidth = fingerWidth / 2
-        val left = min(tip.x + perpX * halfWidth, pip.x + perpX * halfWidth)
-        val right = max(tip.x - perpX * halfWidth, pip.x - perpX * halfWidth)
-        val top = min(tip.y + perpY * halfWidth, pip.y + perpY * halfWidth)
-        val bottom = max(tip.y - perpY * halfWidth, pip.y - perpY * halfWidth)
-
-        // Add padding
-        val paddingX = (right - left) * PADDING_PERCENT
-        val paddingY = (bottom - top) * PADDING_PERCENT
-
+        // Create ROI with padding, clamped to image bounds
         return RectF(
-            max(0f, left - paddingX),
-            max(0f, top - paddingY),
-            min(imageWidth.toFloat(), right + paddingX),
-            min(imageHeight.toFloat(), bottom + paddingY)
+            max(0f, minX - paddingX),
+            max(0f, minY - paddingY),
+            min(imageWidth.toFloat(), maxX + paddingX),
+            min(imageHeight.toFloat(), maxY + paddingY)
         )
     }
 
@@ -189,20 +180,24 @@ class FingerprintExtractor {
 
         // Check if ROI is within image bounds
         if (roi.left < 0 || roi.top < 0 || roi.right > imageWidth || roi.bottom > imageHeight) {
+            Log.d(TAG, "ROI out of bounds: left=${roi.left}, top=${roi.top}, right=${roi.right}, bottom=${roi.bottom}, imageSize=${imageWidth}x${imageHeight}")
             return false
         }
 
-        // Check minimum size (at least 50x50 pixels for fingerprint)
-        if (width < 50 || height < 50) {
+        // Check minimum size
+        if (width < MIN_ROI_SIZE || height < MIN_ROI_SIZE) {
+            Log.d(TAG, "ROI too small: ${width}x${height} (minimum ${MIN_ROI_SIZE}x${MIN_ROI_SIZE})")
             return false
         }
 
         // Check aspect ratio (fingerprint should be roughly 0.5 to 2.0)
         val aspectRatio = width / height
         if (aspectRatio < 0.3 || aspectRatio > 3.0) {
+            Log.d(TAG, "ROI bad aspect ratio: $aspectRatio (acceptable: 0.3-3.0)")
             return false
         }
 
+        Log.d(TAG, "ROI valid: ${width}x${height} at (${roi.left}, ${roi.top})")
         return true
     }
 

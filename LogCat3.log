@@ -1,0 +1,108 @@
+=== Overall Quality: 92.27296447753906 | Status: GOOD ===
+2025-12-10 16:54:59.271 13496-13588 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} Issue capture request
+2025-12-10 16:54:59.272 13496-13588 CaptureSession          com.rmst.biometrics                  D  Issuing capture request.
+2025-12-10 16:54:59.278 13496-13588 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 16:54:59.286 13496-13588 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [androidx.camera.core.ImageCapture-99fd400a-7101-4a19-9527-cff2abe8762d204168602, androidx.camera.core.ImageAnalysis-5e161765-ed17-4ed4-951e-25cb2558a39581487502, androidx.camera.core.Preview-751b3667-8389-4e10-a278-a0b1baebeb5579745107] for camera: 0
+2025-12-10 16:54:59.290 13496-13588 CaptureSession          com.rmst.biometrics                  D  Attempting to submit CaptureRequest after setting
+2025-12-10 16:54:59.290 13496-13588 CaptureSession          com.rmst.biometrics                  D  Issuing request for session.
+2025-12-10 16:54:59.306 13496-13588 Camera2Cap...estBuilder com.rmst.biometrics                  D  createCaptureRequest
+2025-12-10 16:54:59.326 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 91.775826%
+2025-12-10 16:54:59.326 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 91.775826%
+2025-12-10 16:54:59.326 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 91.775826%
+2025-12-10 16:54:59.326 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 91.775826%
+2025-12-10 16:54:59.327 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 91.775826%
+2025-12-10 16:54:59.331 13496-13496 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 91.77582550048828 | Status: GOOD ===
+2025-12-10 16:54:59.351 13496-13575 RMST Biomterics         com.rmst.biometrics                  D  Saved hand + 0 fingerprints. Overall quality: NaN
+2025-12-10 16:54:59.389 13496-13496 ActivityThread          com.rmst.biometrics                  D  handleResumeActivity#3 r.window=com.android.internal.policy.PhoneWindow@c7feb56a.mFinished = falsewillBeVisible = true
+2025-12-10 16:54:59.406 13496-13496 BufferQueueConsumer     com.rmst.biometrics                  D  [](id:34b800000007,api:0,p:-1,c:13496) connect: controlledByApp=false
+2025-12-10 16:54:59.407 13496-13496 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#4](f:0,a:0) constructor()
+2025-12-10 16:54:59.407 13496-13496 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#4](f:0,a:0) update width=1080 height=2400 format=-1 mTransformHint=0
+2025-12-10 16:54:59.424 13496-13515 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#4](f:0,a:1) acquireNextBufferLocked size=1080x2400 mFrameNumber=1 applyTransaction=true mTimestamp=156875562731502(auto) mPendingTransactions.size=0 graphicBufferId=57964878626851 transform=0
+2025-12-10 16:54:59.446 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 90.70237%
+2025-12-10 16:54:59.446 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 90.70237%
+2025-12-10 16:54:59.446 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 90.70237%
+2025-12-10 16:54:59.446 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 90.70237%
+2025-12-10 16:54:59.446 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 90.70237%
+2025-12-10 16:54:59.464 13496-13496 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 90.7023696899414 | Status: GOOD ===
+2025-12-10 16:54:59.538 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: THUMB | Hand Confidence: 90.09507%
+2025-12-10 16:54:59.538 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: INDEX | Hand Confidence: 90.09507%
+2025-12-10 16:54:59.538 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: MIDDLE | Hand Confidence: 90.09507%
+2025-12-10 16:54:59.538 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: RING | Hand Confidence: 90.09507%
+2025-12-10 16:54:59.538 13496-13496 OverlayView             com.rmst.biometrics                  D  Finger: PINKY | Hand Confidence: 90.09507%
+2025-12-10 16:54:59.548 13496-13496 OverlayView             com.rmst.biometrics                  D  === Overall Quality: 90.0950698852539 | Status: GOOD ===
+2025-12-10 16:54:59.548 13496-13598 libMEOW                 com.rmst.biometrics                  D  meow delete tls: 0xb4000070b6e16190
+2025-12-10 16:54:59.560 13496-13589 TransportR...EventStore com.rmst.biometrics                  D  Storing event with priority=DEFAULT, name=COREML_ON_DEVICE_SOLUTIONS for destination cct
+2025-12-10 16:54:59.567 13496-13589 TransportR...oScheduler com.rmst.biometrics                  D  Upload for context TransportContext(cct, DEFAULT, MSRodHRwczovL2ZpcmViYXNlbG9nZ2luZy5nb29nbGVhcGlzLmNvbS92MGNjL2xvZy9iYXRjaD9mb3JtYXQ9anNvbl9wcm90bzNc) is already scheduled. Returning...
+2025-12-10 16:54:59.834 13496-13496 VRI[BiometricsActivity] com.rmst.biometrics                  D  visibilityChanged oldVisibility=true newVisibility=false
+2025-12-10 16:54:59.846 13496-13496 SurfaceViewImpl         com.rmst.biometrics                  D  Surface destroyed.
+2025-12-10 16:54:59.846 13496-13496 SurfaceViewImpl         com.rmst.biometrics                  D  Surface invalidated androidx.camera.core.SurfaceRequest@3461ac0
+2025-12-10 16:54:59.846 13496-13496 DeferrableSurface       com.rmst.biometrics                  D  surface closed,  useCount=1 closed=true androidx.camera.core.SurfaceRequest$2@18013f9
+2025-12-10 16:54:59.846 13496-13496 BLASTBufferQueue        com.rmst.biometrics                  D  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3](f:0,a:1) destructor()
+2025-12-10 16:54:59.846 13496-13496 BufferQueueConsumer     com.rmst.biometrics                  D  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:34b800000006,api:4,p:1369,c:13496) disconnect
+2025-12-10 16:54:59.858 13496-13496 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[BiometricsActivity]#2](f:0,a:3) destructor()
+2025-12-10 16:54:59.858 13496-13496 BufferQueueConsumer     com.rmst.biometrics                  D  [VRI[BiometricsActivity]#2(BLAST Consumer)2](id:34b800000002,api:0,p:-1,c:13496) disconnect
+2025-12-10 16:54:59.859 13496-13514 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:34b800000006,api:4,p:1369,c:13496) dequeueBuffer: BufferQueue has been abandoned
+2025-12-10 16:54:59.863 13496-13586 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} Use cases [androidx.camera.core.Preview-751b3667-8389-4e10-a278-a0b1baebeb5579745107, androidx.camera.core.ImageAnalysis-5e161765-ed17-4ed4-951e-25cb2558a39581487502, androidx.camera.core.ImageCapture-99fd400a-7101-4a19-9527-cff2abe8762d204168602] now DETACHED for camera
+2025-12-10 16:54:59.863 13496-13586 UseCaseAttachState      com.rmst.biometrics                  D  All use case: [] for camera: 0
+2025-12-10 16:54:59.864 13496-13496 ActivityThread          com.rmst.biometrics                  D  mToDestroying.remove:ActivityRecord{eef6984 token=android.os.BinderProxy@67045c3 {com.rmst.biometrics/com.biometrics.BiometricsActivity}}
+2025-12-10 16:54:59.864 13496-13586 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} Resetting Capture Session
+2025-12-10 16:54:59.866 13496-13586 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} Releasing session in state OPENED
+2025-12-10 16:54:59.866 13496-13586 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 16:54:59.872 13496-13496 DeferrableSurface       com.rmst.biometrics                  D  surface closed,  useCount=1 closed=true androidx.camera.core.impl.ImmediateSurface@5d222ec
+2025-12-10 16:54:59.872 13496-13496 DeferrableSurface       com.rmst.biometrics                  D  surface closed,  useCount=1 closed=true androidx.camera.core.impl.ImmediateSurface@37828bb
+2025-12-10 16:54:59.874 13496-13586 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 16:54:59.875 13496-13496 WindowOnBackDispatcher  com.rmst.biometrics                  W  sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda12@16a96c1
+2025-12-10 16:54:59.876 13496-13496 View                    com.rmst.biometrics                  D  [Warning] assignParent to null: this = DecorView@5d78b45[BiometricsActivity]
+2025-12-10 16:54:59.878 13496-13584 libMEOW                 com.rmst.biometrics                  D  meow delete tls: 0xb4000070b6e261a0
+2025-12-10 16:54:59.882 13496-13509 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:34b800000006,api:4,p:1369,c:13496) queueBuffer: BufferQueue has been abandoned
+2025-12-10 16:54:59.886 13496-13586 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} Closing camera.
+2025-12-10 16:54:59.890 13496-13586 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} Transitioning camera internal state: OPENED --> CLOSING
+2025-12-10 16:54:59.893 13496-13586 CameraStateRegistry     com.rmst.biometrics                  D  Recalculating open cameras:
+                                                                                                    Camera                                       State                 
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Camera@51388fb[id=1]                         UNKNOWN               
+                                                                                                    Camera@447733d[id=0]                         CLOSING               
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Open count: 1 (Max allowed: 1)
+2025-12-10 16:54:59.895 13496-13586 CameraStateMachine      com.rmst.biometrics                  D  New public camera state CameraState{type=CLOSING, error=null} from CLOSING and null
+2025-12-10 16:54:59.895 13496-13496 StreamStateObserver     com.rmst.biometrics                  D  Update Preview stream state to IDLE
+2025-12-10 16:54:59.895 13496-13586 CameraStateMachine      com.rmst.biometrics                  D  Publishing new public camera state CameraState{type=CLOSING, error=null}
+2025-12-10 16:54:59.897 13496-13586 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} Resetting Capture Session
+2025-12-10 16:54:59.898 13496-13586 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} Releasing session in state CLOSING
+2025-12-10 16:54:59.900 13496-13586 CaptureSession          com.rmst.biometrics                  D  onSessionFinished()
+2025-12-10 16:54:59.932 13496-13702 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:34b800000006,api:4,p:1369,c:13496) queueBuffer: BufferQueue has been abandoned
+2025-12-10 16:54:59.940 13496-13702 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:34b800000006,api:4,p:1369,c:13496) cancelBuffer: BufferQueue has been abandoned
+2025-12-10 16:54:59.941 13496-13509 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:34b800000006,api:4,p:1369,c:13496) cancelBuffer: BufferQueue has been abandoned
+2025-12-10 16:54:59.942 13496-13509 BufferQueueProducer     com.rmst.biometrics                  E  [SurfaceView[com.rmst.biometrics/com.biometrics.BiometricsActivity]#3(BLAST Consumer)3](id:34b800000006,api:4,p:1369,c:13496) cancelBuffer: BufferQueue has been abandoned
+2025-12-10 16:55:00.083 13496-13586 UseCaseAttachState      com.rmst.biometrics                  D  Active and attached use case: [] for camera: 0
+2025-12-10 16:55:00.085 13496-13586 DeferrableSurface       com.rmst.biometrics                  D  use count-1,  useCount=0 closed=true androidx.camera.core.SurfaceRequest$2@18013f9
+2025-12-10 16:55:00.085 13496-13586 DeferrableSurface       com.rmst.biometrics                  D  Surface no longer in use[total_surfaces=3, used_surfaces=2](androidx.camera.core.SurfaceRequest$2@18013f9}
+2025-12-10 16:55:00.086 13496-13586 DeferrableSurface       com.rmst.biometrics                  D  Surface terminated[total_surfaces=2, used_surfaces=2](androidx.camera.core.SurfaceRequest$2@18013f9}
+2025-12-10 16:55:00.086 13496-13586 DeferrableSurface       com.rmst.biometrics                  D  use count-1,  useCount=0 closed=true androidx.camera.core.impl.ImmediateSurface@37828bb
+2025-12-10 16:55:00.087 13496-13586 DeferrableSurface       com.rmst.biometrics                  D  Surface no longer in use[total_surfaces=2, used_surfaces=1](androidx.camera.core.impl.ImmediateSurface@37828bb}
+2025-12-10 16:55:00.087 13496-13496 SurfaceViewImpl         com.rmst.biometrics                  D  Safe to release surface.
+2025-12-10 16:55:00.087 13496-13586 DeferrableSurface       com.rmst.biometrics                  D  Surface terminated[total_surfaces=1, used_surfaces=1](androidx.camera.core.impl.ImmediateSurface@37828bb}
+2025-12-10 16:55:00.087 13496-13586 DeferrableSurface       com.rmst.biometrics                  D  use count-1,  useCount=0 closed=true androidx.camera.core.impl.ImmediateSurface@5d222ec
+2025-12-10 16:55:00.087 13496-13496 BufferQueueConsumer     com.rmst.biometrics                  D  [ImageReader-4064x3048f21m2-13496-2](id:34b800000005,api:0,p:-1,c:13496) disconnect
+2025-12-10 16:55:00.087 13496-13586 DeferrableSurface       com.rmst.biometrics                  D  Surface no longer in use[total_surfaces=1, used_surfaces=0](androidx.camera.core.impl.ImmediateSurface@5d222ec}
+2025-12-10 16:55:00.087 13496-13586 DeferrableSurface       com.rmst.biometrics                  D  Surface terminated[total_surfaces=0, used_surfaces=0](androidx.camera.core.impl.ImmediateSurface@5d222ec}
+2025-12-10 16:55:00.088 13496-13496 BufferQueueConsumer     com.rmst.biometrics                  D  [ImageReader-640x480f23m4-13496-0](id:34b800000003,api:0,p:-1,c:13496) disconnect
+2025-12-10 16:55:00.088 13496-13586 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} CameraDevice.onClosed()
+2025-12-10 16:55:00.088 13496-13496 BufferQueueConsumer     com.rmst.biometrics                  D  [ImageReader-640x480f1m4-13496-1](id:34b800000004,api:0,p:-1,c:13496) disconnect
+2025-12-10 16:55:00.089 13496-13586 Camera2CameraImpl       com.rmst.biometrics                  D  {Camera@447733d[id=0]} Transitioning camera internal state: CLOSING --> INITIALIZED
+2025-12-10 16:55:00.090 13496-13586 CameraStateRegistry     com.rmst.biometrics                  D  Recalculating open cameras:
+                                                                                                    Camera                                       State                 
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Camera@51388fb[id=1]                         UNKNOWN               
+                                                                                                    Camera@447733d[id=0]                         CLOSED                
+                                                                                                    -------------------------------------------------------------------
+                                                                                                    Open count: 0 (Max allowed: 1)
+2025-12-10 16:55:00.091 13496-13586 CameraStateMachine      com.rmst.biometrics                  D  New public camera state CameraState{type=CLOSED, error=null} from CLOSED and null
+2025-12-10 16:55:00.091 13496-13586 CameraStateMachine      com.rmst.biometrics                  D  Publishing new public camera state CameraState{type=CLOSED, error=null}
+2025-12-10 16:55:10.415 13496-13496 TextSelection           com.rmst.biometrics                  D  onUseCache cache=false
+2025-12-10 16:55:10.547 13496-13496 os.SingleLice           com.rmst.biometrics                  D  instance successfully. com.transsion.dragdrop.v1.DragDropLice@4bb8977 from com.transsion.dragdrop.DragDropLiceFactory
+2025-12-10 16:55:10.547 13496-13496 os.SingleLiceFactory    com.rmst.biometrics                  D  instance successfully. com.transsion.dragdrop.v1.DragDropLice@4bb8977 from android.view.IViewLice
+2025-12-10 16:55:10.547 13496-13496 os.LiceInfo             com.rmst.biometrics                  D  instance successfully. com.transsion.view.ViewLice@c5f9e4 from android.view.IViewLice
+2025-12-10 16:55:11.363 13496-13496 VRI[MainActivity]       com.rmst.biometrics                  D  visibilityChanged oldVisibility=true newVisibility=false
+2025-12-10 16:55:11.411 13496-13496 BLASTBufferQueue        com.rmst.biometrics                  D  [VRI[MainActivity]#4](f:0,a:1) destructor()
+2025-12-10 16:55:11.411 13496-13496 BufferQueueConsumer     com.rmst.biometrics                  D  [VRI[MainActivity]#4(BLAST Consumer)4](id:34b800000007,api:0,p:-1,c:13496) disconnect
