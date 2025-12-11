@@ -504,39 +504,13 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         imageWidth: Int,
         imageHeight: Int
     ): RectF {
-
-        val points = landmarkIndices.map { idx ->
-            val lm = landmarks[idx]
-            PointF(lm.x() * imageWidth, lm.y() * imageHeight)
-        }
-
-        val tip = points.last()
-        val dip = points[points.size - 2]
-        val pip = points[points.size - 3]
-
-        val dx = tip.x - dip.x
-        val dy = tip.y - dip.y
-        val length = sqrt(dx * dx + dy * dy)
-
-        val perpX = -dy / length
-        val perpY = dx / length
-        val fingerWidth = length * 0.65f
-
-        val halfWidth = fingerWidth / 2
-        val left = min(tip.x + perpX * halfWidth, pip.x + perpX * halfWidth)
-        val right = max(tip.x - perpX * halfWidth, pip.x - perpX * halfWidth)
-        val top = min(tip.y + perpY * halfWidth, pip.y + perpY * halfWidth)
-        val bottom = max(tip.y - perpY * halfWidth, pip.y - perpY * halfWidth)
-
-        val padding = 0.30f  // Increased from 0.15f to 0.30f (30% padding)
-        val paddingX = (right - left) * padding
-        val paddingY = (bottom - top) * padding
-
-        return RectF(
-            max(0f, left - paddingX),
-            max(0f, top - paddingY),
-            min(imageWidth.toFloat(), right + paddingX),
-            min(imageHeight.toFloat(), bottom + paddingY)
+        // Use shared calculator - write once, use everywhere! 🎯
+        return com.biometrics.utils.FingerprintROICalculator.calculateFingerROI(
+            landmarks,
+            landmarkIndices,
+            imageWidth,
+            imageHeight,
+            paddingPercent = 0.30f
         )
     }
 

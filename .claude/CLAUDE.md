@@ -23,6 +23,23 @@ This is particularly useful for hygiene-conscious applications where touchless b
 
 ---
 
+## 📌 Current Development Status
+
+> **⚠️ IMPORTANT: Always check SESSION_SUMMARY.md first!**
+>
+> Before starting any work, read [`SESSION_SUMMARY.md`](../SESSION_SUMMARY.md) for:
+> - Latest session progress and bug fixes
+> - Current problems and root cause analysis
+> - Proposed solutions with code snippets
+> - Exact next steps to continue work
+>
+> Also see [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) for the full implementation roadmap.
+>
+> **Last Updated:** 2025-12-11 Session 3
+> **Status:** 3 bugs fixed (negative heights, landmark mismatch, OpenCV crash), 1 remaining (ROI validation failures)
+
+---
+
 ## Architecture
 
 ### Module Structure

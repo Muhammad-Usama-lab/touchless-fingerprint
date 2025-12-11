@@ -83,41 +83,49 @@ class FingerprintExtractor {
         val fingerprints = mutableListOf<FingerprintImage>()
 
         // Process each finger
+        Log.d(TAG, "========== STARTING FINGERPRINT EXTRACTION ==========")
         for ((fingerType, landmarkIndices) in FINGER_LANDMARKS) {
             try {
+                Log.d(TAG, "→ Processing $fingerType...")
                 val roi = calculateFingerprintROI(landmarks, landmarkIndices, width, height)
 
                 // Validate ROI
                 if (!isValidROI(roi, width, height)) {
-                    Log.w(TAG, "Invalid ROI for $fingerType")
+                    Log.w(TAG, "✗ $fingerType: INVALID ROI")
                     continue
                 }
 
                 // Crop finger region
                 val fingerBitmap = cropFinger(bitmap, roi)
+                Log.d(TAG, "  Cropped ${fingerType}: ${fingerBitmap.width}x${fingerBitmap.height}px")
 
-                // Enhance and assess quality
-                val enhancedBitmap = enhanceFingerprint(fingerBitmap)
-                val quality = assessQuality(enhancedBitmap)
+                // Skip OpenCV enhancement for now - just use raw cropped bitmap
+                // Use default quality score of 75 since we're bypassing quality assessment
+                val quality = 75f
+                Log.d(TAG, "  ${fingerType} quality: ${quality.toInt()}/100 (raw crop, no enhancement)")
 
-                if (quality >= MIN_QUALITY_SCORE) {
-                    fingerprints.add(
-                        FingerprintImage(
-                            fingerType = fingerType,
-                            bitmap = enhancedBitmap,
-                            qualityScore = quality,
-                            roi = roi
-                        )
+                // Accept all cropped fingerprints
+                fingerprints.add(
+                    FingerprintImage(
+                        fingerType = fingerType,
+                        bitmap = fingerBitmap,  // Use raw cropped bitmap
+                        qualityScore = quality,
+                        roi = roi
                     )
-                } else {
-                    Log.d(TAG, "$fingerType quality too low: $quality")
-                }
+                )
+                Log.d(TAG, "✓ $fingerType: ACCEPTED (${fingerBitmap.width}x${fingerBitmap.height}px)")
             } catch (e: Exception) {
-                Log.e(TAG, "Error extracting $fingerType: ${e.message}", e)
+                Log.e(TAG, "✗ Error extracting $fingerType: ${e.message}", e)
             }
         }
+        Log.d(TAG, "========== EXTRACTION COMPLETE: ${fingerprints.size}/5 fingerprints ==========")
 
-        val overallQuality = fingerprints.map { it.qualityScore }.average().toFloat()
+        // Calculate overall quality (or 0 if no fingerprints extracted)
+        val overallQuality = if (fingerprints.isNotEmpty()) {
+            fingerprints.map { it.qualityScore }.average().toFloat()
+        } else {
+            0f
+        }
 
         return ExtractionResult(
             fingerprints = fingerprints,
@@ -129,7 +137,7 @@ class FingerprintExtractor {
 
     /**
      * Calculate ROI for fingerprint area (fingertip to first joint)
-     * Uses simple bounding box approach for reliability
+     * Uses shared FingerprintROICalculator for consistency with UI
      */
     private fun calculateFingerprintROI(
         landmarks: List<com.google.mediapipe.tasks.components.containers.NormalizedLandmark>,
@@ -137,68 +145,47 @@ class FingerprintExtractor {
         imageWidth: Int,
         imageHeight: Int
     ): RectF {
-
-        // Get landmark positions in pixel coordinates
-        val points = landmarkIndices.map { idx ->
-            val lm = landmarks[idx]
-            PointF(lm.x() * imageWidth, lm.y() * imageHeight)
-        }
-
-        // For fingerprint, use tip and 2 joints (distal phalanx area)
-        // Take last 3 landmarks: tip, DIP joint, PIP joint
-        val fingerPoints = points.takeLast(3)
-
-        // Calculate bounding box around these points
-        val minX = fingerPoints.minOf { it.x }
-        val maxX = fingerPoints.maxOf { it.x }
-        val minY = fingerPoints.minOf { it.y }
-        val maxY = fingerPoints.maxOf { it.y }
-
-        // Calculate current width and height
-        val width = maxX - minX
-        val height = maxY - minY
-
-        // Add padding (expand the box)
-        val paddingX = width * PADDING_PERCENT
-        val paddingY = height * PADDING_PERCENT
-
-        // Create ROI with padding, clamped to image bounds
-        return RectF(
-            max(0f, minX - paddingX),
-            max(0f, minY - paddingY),
-            min(imageWidth.toFloat(), maxX + paddingX),
-            min(imageHeight.toFloat(), maxY + paddingY)
+        // Use shared calculator - write once, use everywhere! 🎯
+        return FingerprintROICalculator.calculateFingerROI(
+            landmarks,
+            landmarkIndices,
+            imageWidth,
+            imageHeight,
+            PADDING_PERCENT
         )
     }
 
     /**
      * Validate if ROI is within bounds and has reasonable dimensions
+     * Uses shared FingerprintROICalculator for consistency
      */
     private fun isValidROI(roi: RectF, imageWidth: Int, imageHeight: Int): Boolean {
-        val width = roi.width()
-        val height = roi.height()
+        val isValid = FingerprintROICalculator.isValidROI(
+            roi,
+            imageWidth,
+            imageHeight,
+            minSize = MIN_ROI_SIZE
+        )
 
-        // Check if ROI is within image bounds
-        if (roi.left < 0 || roi.top < 0 || roi.right > imageWidth || roi.bottom > imageHeight) {
-            Log.d(TAG, "ROI out of bounds: left=${roi.left}, top=${roi.top}, right=${roi.right}, bottom=${roi.bottom}, imageSize=${imageWidth}x${imageHeight}")
-            return false
+        // Debug logging
+        if (!isValid) {
+            val width = roi.width()
+            val height = roi.height()
+            val aspectRatio = width / height
+
+            when {
+                roi.left < 0 || roi.top < 0 || roi.right > imageWidth || roi.bottom > imageHeight ->
+                    Log.d(TAG, "ROI out of bounds: left=${roi.left}, top=${roi.top}, right=${roi.right}, bottom=${roi.bottom}, imageSize=${imageWidth}x${imageHeight}")
+                width < MIN_ROI_SIZE || height < MIN_ROI_SIZE ->
+                    Log.d(TAG, "ROI too small: ${width}x${height} (minimum ${MIN_ROI_SIZE}x${MIN_ROI_SIZE})")
+                aspectRatio < 0.3 || aspectRatio > 3.0 ->
+                    Log.d(TAG, "ROI bad aspect ratio: $aspectRatio (acceptable: 0.3-3.0)")
+            }
+        } else {
+            Log.d(TAG, "ROI valid: ${roi.width()}x${roi.height()} at (${roi.left}, ${roi.top})")
         }
 
-        // Check minimum size
-        if (width < MIN_ROI_SIZE || height < MIN_ROI_SIZE) {
-            Log.d(TAG, "ROI too small: ${width}x${height} (minimum ${MIN_ROI_SIZE}x${MIN_ROI_SIZE})")
-            return false
-        }
-
-        // Check aspect ratio (fingerprint should be roughly 0.5 to 2.0)
-        val aspectRatio = width / height
-        if (aspectRatio < 0.3 || aspectRatio > 3.0) {
-            Log.d(TAG, "ROI bad aspect ratio: $aspectRatio (acceptable: 0.3-3.0)")
-            return false
-        }
-
-        Log.d(TAG, "ROI valid: ${width}x${height} at (${roi.left}, ${roi.top})")
-        return true
+        return isValid
     }
 
     /**

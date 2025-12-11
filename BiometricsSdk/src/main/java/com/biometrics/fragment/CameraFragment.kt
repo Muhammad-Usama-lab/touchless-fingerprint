@@ -541,9 +541,13 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     }
 
     /**
-     * Convert ImageProxy to Bitmap
+     * Convert ImageProxy to Bitmap with proper orientation
      * ImageAnalysis is configured with OUTPUT_IMAGE_FORMAT_RGBA_8888
      * IMPORTANT: Rewinds buffer after reading so HandLandmarkerHelper can use it
+     *
+     * NOTE: Camera sensor captures in LANDSCAPE (640x480)
+     *       but preview shows PORTRAIT (480x640) due to rotation.
+     *       We must rotate the bitmap to match preview orientation!
      */
     private fun imageProxyToBitmap(imageProxy: ImageProxy): Bitmap {
         val planeProxy = imageProxy.planes[0]
@@ -572,11 +576,37 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
         buffer.position(originalPosition)
 
         // Crop to actual size if there's row padding
-        return if (rowPadding == 0) {
+        val croppedBitmap = if (rowPadding == 0) {
             bitmap
         } else {
             Bitmap.createBitmap(bitmap, 0, 0, imageProxy.width, imageProxy.height)
         }
+
+        Log.d(TAG, "Original bitmap from sensor: ${croppedBitmap.width}x${croppedBitmap.height}")
+
+        // Rotate 90° clockwise to match preview orientation
+        // Camera sensor: 640x480 (landscape) → Preview: 480x640 (portrait)
+        val matrix = android.graphics.Matrix()
+        matrix.postRotate(90f)
+
+        val rotatedBitmap = Bitmap.createBitmap(
+            croppedBitmap,
+            0,
+            0,
+            croppedBitmap.width,
+            croppedBitmap.height,
+            matrix,
+            true
+        )
+
+        // Recycle original to save memory
+        if (croppedBitmap != rotatedBitmap) {
+            croppedBitmap.recycle()
+        }
+
+        Log.d(TAG, "Rotated bitmap to match preview: ${rotatedBitmap.width}x${rotatedBitmap.height}")
+
+        return rotatedBitmap
     }
 
     /**
@@ -589,13 +619,50 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                 camera?.cameraControl?.enableTorch(false)
             }
 
+            Log.d(TAG, "====================================================")
+            Log.d(TAG, "🎯 CAPTURE TRIGGERED")
             Log.d(TAG, "Processing bitmap: ${bitmap.width}x${bitmap.height}, format: ${bitmap.config}")
 
-            // Extract fingerprints using the FingerprintExtractor
-            val extraction = fingerprintExtractor.extractFingerprints(bitmap, landmarks, 0)
+            // CRITICAL: Detect hand on the CAPTURED bitmap, not using old stored landmarks!
+            // Create a temporary IMAGE-mode helper to get fresh landmarks from this exact bitmap
+            val imageHelper = HandLandmarkerHelper(
+                context = requireContext(),
+                runningMode = RunningMode.IMAGE,
+                minHandDetectionConfidence = handLandmarkerHelper.minHandDetectionConfidence,
+                minHandTrackingConfidence = handLandmarkerHelper.minHandTrackingConfidence,
+                minHandPresenceConfidence = handLandmarkerHelper.minHandPresenceConfidence,
+                maxNumHands = 1,
+                currentDelegate = handLandmarkerHelper.currentDelegate
+            )
+
+            // Detect hand landmarks directly on captured bitmap
+            val resultBundle = imageHelper.detectImage(bitmap)
+
+            if (resultBundle == null || resultBundle.results.first().landmarks().isEmpty()) {
+                Log.e(TAG, "❌ FAILURE: No hand detected on captured bitmap")
+                activity?.runOnUiThread {
+                    Toast.makeText(requireContext(), "No hand detected in captured image", Toast.LENGTH_SHORT).show()
+                    fragmentCameraBinding.progressBar.visibility = View.GONE
+                    isProcessingCapture = false
+                }
+                return
+            }
+
+            val freshLandmarks = resultBundle.results.first()
+            Log.d(TAG, "✓ Detected hands on captured bitmap: ${freshLandmarks.landmarks().size}")
+            Log.d(TAG, "====================================================")
+
+            // Extract fingerprints using the FingerprintExtractor with FRESH landmarks
+            val extraction = fingerprintExtractor.extractFingerprints(bitmap, freshLandmarks, 0)
 
             if (extraction != null && extraction.fingerprints.isNotEmpty()) {
-                Log.d(TAG, "Extracted ${extraction.fingerprints.size} fingerprints, quality: ${extraction.overallQuality}")
+                Log.d(TAG, "====================================================")
+                Log.d(TAG, "✅ SUCCESS: Extracted ${extraction.fingerprints.size}/5 fingerprints")
+                Log.d(TAG, "Overall quality: ${extraction.overallQuality.toInt()}/100")
+                extraction.fingerprints.forEach { fp ->
+                    Log.d(TAG, "  ${fp.fingerType}: ${fp.qualityScore.toInt()}/100")
+                }
+                Log.d(TAG, "====================================================")
 
                 // Save hand image + fingerprints
                 saveHandAndFingerprints(bitmap, extraction)
@@ -604,7 +671,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     val fingerprintCount = extraction.fingerprints.size
                     Toast.makeText(
                         requireContext(),
-                        "Saved: Hand + $fingerprintCount fingerprints",
+                        "✓ Saved: Hand + $fingerprintCount fingerprints",
                         Toast.LENGTH_LONG
                     ).show()
 
@@ -613,7 +680,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                 }
             } else {
                 val reason = if (extraction == null) "extraction returned null" else "0 fingerprints passed quality check"
-                Log.w(TAG, "Fingerprint extraction failed: $reason")
+                Log.e(TAG, "====================================================")
+                Log.e(TAG, "❌ FAILURE: $reason")
+                Log.e(TAG, "====================================================")
 
                 activity?.runOnUiThread {
                     Toast.makeText(requireContext(), "No quality fingerprints extracted", Toast.LENGTH_SHORT).show()
@@ -642,18 +711,21 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     ) {
         val timestamp = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US).format(System.currentTimeMillis())
 
+        Log.d(TAG, "💾 Saving images to gallery...")
+
         // Save hand image
         val handName = "${timestamp}_HAND"
         saveImageToGallery(handBitmap, handName)
+        Log.d(TAG, "  ✓ Saved hand image: $handName")
 
         // Save each fingerprint
         for (fingerprint in extraction.fingerprints) {
             val fingerprintName = "${timestamp}_${fingerprint.fingerType.name}"
             saveImageToGallery(fingerprint.bitmap, fingerprintName)
-            Log.d(TAG, "Saved ${fingerprint.fingerType.name} with quality: ${fingerprint.qualityScore}")
+            Log.d(TAG, "  ✓ Saved ${fingerprint.fingerType.name}: ${fingerprint.bitmap.width}x${fingerprint.bitmap.height}px (quality: ${fingerprint.qualityScore.toInt()})")
         }
 
-        Log.d(TAG, "Saved hand + ${extraction.fingerprints.size} fingerprints. Overall quality: ${extraction.overallQuality}")
+        Log.d(TAG, "💾 All images saved to Pictures/HandLandmarker/")
     }
 
     /**
