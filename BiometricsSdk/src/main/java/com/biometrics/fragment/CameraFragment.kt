@@ -641,9 +641,12 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
             if (resultBundle == null || resultBundle.results.first().landmarks().isEmpty()) {
                 Log.e(TAG, "❌ FAILURE: No hand detected on captured bitmap")
                 activity?.runOnUiThread {
-                    Toast.makeText(requireContext(), "No hand detected in captured image", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "No hand detected. Please try again.", Toast.LENGTH_SHORT).show()
                     fragmentCameraBinding.progressBar.visibility = View.GONE
                     isProcessingCapture = false
+
+                    // Reset overlay to allow another capture attempt
+                    fragmentCameraBinding.overlay.resetCapture()
                 }
                 return
             }
@@ -657,7 +660,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 
             if (extraction != null && extraction.fingerprints.isNotEmpty()) {
                 Log.d(TAG, "====================================================")
-                Log.d(TAG, "✅ SUCCESS: Extracted ${extraction.fingerprints.size}/5 fingerprints")
+                Log.d(TAG, "✅ SUCCESS: Extracted ${extraction.fingerprints.size}/4 fingerprints (thumb excluded)")
                 Log.d(TAG, "Overall quality: ${extraction.overallQuality.toInt()}/100")
                 extraction.fingerprints.forEach { fp ->
                     Log.d(TAG, "  ${fp.fingerType}: ${fp.qualityScore.toInt()}/100")
@@ -685,17 +688,23 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                 Log.e(TAG, "====================================================")
 
                 activity?.runOnUiThread {
-                    Toast.makeText(requireContext(), "No quality fingerprints extracted", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Poor quality. Try again with steady hand.", Toast.LENGTH_LONG).show()
                     fragmentCameraBinding.progressBar.visibility = View.GONE
-                    sharedViewModel.postResult(BiometricsResult.Error("No fingerprints extracted"))
+                    isProcessingCapture = false
+
+                    // Reset overlay to allow another capture attempt
+                    fragmentCameraBinding.overlay.resetCapture()
                 }
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error processing capture: ${e.message}", e)
             activity?.runOnUiThread {
-                Toast.makeText(requireContext(), "Capture error: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Capture error. Please try again.", Toast.LENGTH_SHORT).show()
                 fragmentCameraBinding.progressBar.visibility = View.GONE
-                sharedViewModel.postResult(BiometricsResult.Error("Capture error: ${e.message}"))
+                isProcessingCapture = false
+
+                // Reset overlay to allow another capture attempt
+                fragmentCameraBinding.overlay.resetCapture()
             }
         } finally {
             isProcessingCapture = false
@@ -729,12 +738,21 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     }
 
     /**
-     * Save a bitmap to gallery
+     * Save a bitmap to gallery with maximum quality
+     * Uses PNG for fingerprints (lossless) to preserve all detail for matching
      */
     private fun saveImageToGallery(bitmap: Bitmap, displayName: String): Uri? {
+        // Ensure bitmap is in highest quality format
+        val highQualityBitmap = if (bitmap.config != Bitmap.Config.ARGB_8888) {
+            bitmap.copy(Bitmap.Config.ARGB_8888, false)
+        } else {
+            bitmap
+        }
+
+        // Use PNG for lossless compression (critical for fingerprint matching)
         val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, displayName)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            put(MediaStore.MediaColumns.DISPLAY_NAME, "$displayName.png")
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
             put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/HandLandmarker")
         }
 
@@ -745,7 +763,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 
         uri?.let {
             requireContext().contentResolver.openOutputStream(it)?.use { outputStream ->
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 95, outputStream)
+                // PNG is lossless - quality parameter is ignored but set to 100 for clarity
+                highQualityBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             }
         }
 

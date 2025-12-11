@@ -23,9 +23,9 @@ class FingerprintExtractor {
         private const val TAG = "FingerprintExtractor"
 
         // MediaPipe Hand Landmark indices
-        // Thumb: 1-4, Index: 5-8, Middle: 9-12, Ring: 13-16, Pinky: 17-20
+        // Thumb: 1-4 (EXCLUDED - unreliable for horizontal hands)
+        // Index: 5-8, Middle: 9-12, Ring: 13-16, Pinky: 17-20
         private val FINGER_LANDMARKS = mapOf(
-            FingerType.THUMB to listOf(1, 2, 3, 4),
             FingerType.INDEX to listOf(5, 6, 7, 8),
             FingerType.MIDDLE to listOf(9, 10, 11, 12),
             FingerType.RING to listOf(13, 14, 15, 16),
@@ -99,26 +99,49 @@ class FingerprintExtractor {
                 val fingerBitmap = cropFinger(bitmap, roi)
                 Log.d(TAG, "  Cropped ${fingerType}: ${fingerBitmap.width}x${fingerBitmap.height}px")
 
-                // Skip OpenCV enhancement for now - just use raw cropped bitmap
-                // Use default quality score of 75 since we're bypassing quality assessment
-                val quality = 75f
-                Log.d(TAG, "  ${fingerType} quality: ${quality.toInt()}/100 (raw crop, no enhancement)")
+                // Enhance fingerprint quality using OpenCV
+                val enhanced = try {
+                    // Initialize OpenCV if not already done
+                    if (!org.opencv.android.OpenCVLoader.initDebug()) {
+                        Log.w(TAG, "OpenCV initialization failed, using raw bitmap")
+                        fingerBitmap
+                    } else {
+                        enhanceFingerprint(fingerBitmap)
+                    }
+                } catch (e: Exception) {
+                    Log.w(TAG, "Enhancement failed: ${e.message}, using raw bitmap")
+                    fingerBitmap
+                }
 
-                // Accept all cropped fingerprints
-                fingerprints.add(
-                    FingerprintImage(
-                        fingerType = fingerType,
-                        bitmap = fingerBitmap,  // Use raw cropped bitmap
-                        qualityScore = quality,
-                        roi = roi
+                // Assess quality
+                val quality = try {
+                    assessQuality(enhanced)
+                } catch (e: Exception) {
+                    Log.w(TAG, "Quality assessment failed: ${e.message}, using default")
+                    75f
+                }
+
+                Log.d(TAG, "  ${fingerType} quality: ${quality.toInt()}/100")
+
+                // Accept fingerprints with quality >= 30
+                if (quality >= MIN_QUALITY_SCORE) {
+                    fingerprints.add(
+                        FingerprintImage(
+                            fingerType = fingerType,
+                            bitmap = enhanced,
+                            qualityScore = quality,
+                            roi = roi
+                        )
                     )
-                )
-                Log.d(TAG, "✓ $fingerType: ACCEPTED (${fingerBitmap.width}x${fingerBitmap.height}px)")
+                    Log.d(TAG, "✓ $fingerType: ACCEPTED (${enhanced.width}x${enhanced.height}px)")
+                } else {
+                    Log.d(TAG, "✗ $fingerType: REJECTED (quality ${quality.toInt()} < $MIN_QUALITY_SCORE)")
+                }
             } catch (e: Exception) {
                 Log.e(TAG, "✗ Error extracting $fingerType: ${e.message}", e)
             }
         }
-        Log.d(TAG, "========== EXTRACTION COMPLETE: ${fingerprints.size}/5 fingerprints ==========")
+        Log.d(TAG, "========== EXTRACTION COMPLETE: ${fingerprints.size}/4 fingerprints (thumb excluded) ==========")
 
         // Calculate overall quality (or 0 if no fingerprints extracted)
         val overallQuality = if (fingerprints.isNotEmpty()) {
@@ -168,21 +191,13 @@ class FingerprintExtractor {
         )
 
         // Debug logging
-        if (!isValid) {
-            val width = roi.width()
-            val height = roi.height()
-            val aspectRatio = width / height
+        val width = roi.width().toInt()
+        val height = roi.height().toInt()
 
-            when {
-                roi.left < 0 || roi.top < 0 || roi.right > imageWidth || roi.bottom > imageHeight ->
-                    Log.d(TAG, "ROI out of bounds: left=${roi.left}, top=${roi.top}, right=${roi.right}, bottom=${roi.bottom}, imageSize=${imageWidth}x${imageHeight}")
-                width < MIN_ROI_SIZE || height < MIN_ROI_SIZE ->
-                    Log.d(TAG, "ROI too small: ${width}x${height} (minimum ${MIN_ROI_SIZE}x${MIN_ROI_SIZE})")
-                aspectRatio < 0.3 || aspectRatio > 3.0 ->
-                    Log.d(TAG, "ROI bad aspect ratio: $aspectRatio (acceptable: 0.3-3.0)")
-            }
+        if (!isValid) {
+            Log.d(TAG, "✗ ROI INVALID: ${width}×${height} at (${roi.left.toInt()},${roi.top.toInt()})")
         } else {
-            Log.d(TAG, "ROI valid: ${roi.width()}x${roi.height()} at (${roi.left}, ${roi.top})")
+            Log.d(TAG, "✓ ROI VALID: ${width}×${height} at (${roi.left.toInt()},${roi.top.toInt()})")
         }
 
         return isValid
@@ -190,6 +205,7 @@ class FingerprintExtractor {
 
     /**
      * Crop finger region from full image
+     * Ensures highest quality bitmap configuration (ARGB_8888)
      */
     private fun cropFinger(bitmap: Bitmap, roi: RectF): Bitmap {
         val rect = Rect(
@@ -199,64 +215,35 @@ class FingerprintExtractor {
             roi.bottom.toInt()
         )
 
-        return Bitmap.createBitmap(
+        // Create cropped bitmap
+        val cropped = Bitmap.createBitmap(
             bitmap,
             rect.left,
             rect.top,
             rect.width(),
             rect.height()
         )
+
+        // Ensure ARGB_8888 format for maximum quality
+        return if (cropped.config != Bitmap.Config.ARGB_8888) {
+            cropped.copy(Bitmap.Config.ARGB_8888, false).also {
+                cropped.recycle()  // Free original bitmap
+            }
+        } else {
+            cropped
+        }
     }
 
 
 
 
     /**
-     * Enhance fingerprint image quality
+     * Return original fingerprint image without any processing
+     * Just returns the cropped bitmap as-is
      */
-    private fun enhanceFingerprint(bitmap: Bitmap): Bitmap
-    {
-        // Convert to OpenCV Mat
-        val mat = Mat()
-        Utils.bitmapToMat(bitmap, mat)
-
-        // Convert to grayscale
-        val gray = Mat()
-        Imgproc.cvtColor(mat, gray, Imgproc.COLOR_RGB2GRAY)
-
-        // Apply histogram equalization for better contrast
-        Imgproc.equalizeHist(gray, gray)
-
-        // Use Gaussian blur for denoising (available in all OpenCV versions)
-        val denoised = Mat()
-        Imgproc.GaussianBlur(gray, denoised, Size(5.0, 5.0), 0.0)
-
-        // Sharpen image
-        val sharpened = Mat()
-        val kernel = Mat(3, 3, CvType.CV_32F)
-        kernel.put(0, 0,
-            0.0, -1.0, 0.0,
-            -1.0, 5.0, -1.0,
-            0.0, -1.0, 0.0
-        )
-        Imgproc.filter2D(denoised, sharpened, -1, kernel)
-
-        // Convert back to Bitmap
-        val result = Bitmap.createBitmap(
-            sharpened.cols(),
-            sharpened.rows(),
-            Bitmap.Config.ARGB_8888
-        )
-        Utils.matToBitmap(sharpened, result)
-
-        // Release OpenCV resources
-        mat.release()
-        gray.release()
-        denoised.release()
-        sharpened.release()
-        kernel.release()
-
-        return result
+    private fun enhanceFingerprint(bitmap: Bitmap): Bitmap {
+        // Return original image without any modifications
+        return bitmap
     }
 
     /**
@@ -266,9 +253,9 @@ class FingerprintExtractor {
         val mat = Mat()
         Utils.bitmapToMat(bitmap, mat)
 
-        // Convert to grayscale
+        // Convert to grayscale (Android Bitmaps are RGBA, not RGB)
         val gray = Mat()
-        Imgproc.cvtColor(mat, gray, Imgproc.COLOR_RGB2GRAY)
+        Imgproc.cvtColor(mat, gray, Imgproc.COLOR_RGBA2GRAY)
 
         var totalScore = 0f
         var scoreCount = 0

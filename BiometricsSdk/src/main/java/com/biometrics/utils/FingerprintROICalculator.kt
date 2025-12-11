@@ -16,19 +16,28 @@ import kotlin.math.sqrt
 object FingerprintROICalculator {
 
     /**
-     * Default padding percentage around detected finger region
+     * Fixed ROI dimensions for consistent fingerprint capture
+     * These dimensions are optimized for horizontal hand orientation
+     * (fingers pointing left-to-right)
+     *
+     * CRITICAL: Height must be small enough to isolate individual fingers
+     * and avoid capturing adjacent fingers above/below
      */
-    const val DEFAULT_PADDING_PERCENT = 0.30f
+    private const val ROI_WIDTH = 120   // Width in pixels (capture fingertip area only)
+    private const val ROI_HEIGHT = 60   // Height in pixels (reduced to avoid adjacent fingers)
 
     /**
-     * Calculate ROI for a finger using perpendicular vector approach.
-     * Creates a properly oriented rectangle around the finger tip area.
+     * Calculate ROI for a finger using FIXED-SIZE BOUNDING BOX approach.
+     * Creates a consistent rectangle centered on the fingertip area.
+     *
+     * This replaces the old perpendicular vector approach which created
+     * horizontal slices instead of proper vertical rectangles.
      *
      * @param landmarks All hand landmarks from MediaPipe
      * @param landmarkIndices Indices for the specific finger (e.g., [1,2,3,4] for thumb)
      * @param imageWidth Width of the source image in pixels
      * @param imageHeight Height of the source image in pixels
-     * @param paddingPercent Padding to add around the ROI (default: 30%)
+     * @param paddingPercent Not used anymore (kept for API compatibility)
      * @return RectF representing the finger ROI in pixel coordinates
      */
     fun calculateFingerROI(
@@ -36,7 +45,7 @@ object FingerprintROICalculator {
         landmarkIndices: List<Int>,
         imageWidth: Int,
         imageHeight: Int,
-        paddingPercent: Float = DEFAULT_PADDING_PERCENT
+        paddingPercent: Float = 0f  // Not used, kept for compatibility
     ): RectF {
 
         // Convert normalized landmarks to pixel coordinates
@@ -50,57 +59,38 @@ object FingerprintROICalculator {
         val dip = points[points.size - 2]
         val pip = points[points.size - 3]
 
-        // Calculate finger direction vector (from DIP to tip)
-        val dx = tip.x - dip.x
-        val dy = tip.y - dip.y
-        val length = sqrt(dx * dx + dy * dy)
+        // Calculate CENTER POINT focused on fingertip pad (between TIP and DIP)
+        // This is where the clearest fingerprint ridges are visible
+        // Weight heavily towards TIP-DIP area, less towards PIP
+        val centerX = (tip.x * 0.5f + dip.x * 0.5f)  // 50% tip, 50% DIP (midpoint)
+        val centerY = (tip.y * 0.5f + dip.y * 0.5f)  // Focus on fingertip pad area
 
-        // Calculate perpendicular vector (across the finger width)
-        // This creates the "width" dimension of our rectangle
-        val perpX = -dy / length
-        val perpY = dx / length
+        // Create FIXED-SIZE rectangle centered on this point
+        val halfWidth = ROI_WIDTH / 2f
+        val halfHeight = ROI_HEIGHT / 2f
 
-        // Estimate finger width as 65% of the segment length
-        // This ratio works well for typical finger proportions
-        val fingerWidth = length * 0.65f
+        val left = centerX - halfWidth
+        val right = centerX + halfWidth
+        val top = centerY - halfHeight
+        val bottom = centerY + halfHeight
 
-        // Create rectangle from tip to PIP joint (covers fingerprint area)
-        val halfWidth = fingerWidth / 2
-
-        // Calculate the four corners by extending perpendicular to finger axis
-        val left = min(tip.x + perpX * halfWidth, pip.x + perpX * halfWidth)
-        val right = max(tip.x - perpX * halfWidth, pip.x - perpX * halfWidth)
-        val top = min(tip.y + perpY * halfWidth, pip.y + perpY * halfWidth)
-        val bottom = max(tip.y - perpY * halfWidth, pip.y - perpY * halfWidth)
-
-        // Normalize coordinates to ensure left < right and top < bottom
-        // This prevents negative widths/heights when fingers are horizontal
-        val normalizedLeft = min(left, right)
-        val normalizedRight = max(left, right)
-        val normalizedTop = min(top, bottom)
-        val normalizedBottom = max(top, bottom)
-
-        // Calculate dimensions from normalized coordinates
-        val width = normalizedRight - normalizedLeft
-        val height = normalizedBottom - normalizedTop
-
-        // Add padding to expand the rectangle
-        val paddingX = width * paddingPercent
-        val paddingY = height * paddingPercent
-
-        // Return ROI clamped to image bounds
+        // Clamp to image bounds
         val roi = RectF(
-            max(0f, normalizedLeft - paddingX),
-            max(0f, normalizedTop - paddingY),
-            min(imageWidth.toFloat(), normalizedRight + paddingX),
-            min(imageHeight.toFloat(), normalizedBottom + paddingY)
+            max(0f, left),
+            max(0f, top),
+            min(imageWidth.toFloat(), right),
+            min(imageHeight.toFloat(), bottom)
         )
 
-        // Debug log - track ROI calculation
+        // Calculate finger length for logging
+        val fingerLength = sqrt((tip.x - pip.x) * (tip.x - pip.x) + (tip.y - pip.y) * (tip.y - pip.y))
+
+        // Debug log
         android.util.Log.d(
             "ROICalculator",
-            "✓ Calculated ROI: ${roi.width().toInt()}x${roi.height().toInt()}px | " +
-            "FingerLength: ${length.toInt()}px | Image: ${imageWidth}x${imageHeight}"
+            "✓ Fixed ROI: ${roi.width().toInt()}×${roi.height().toInt()}px | " +
+            "Center: (${centerX.toInt()},${centerY.toInt()}) | " +
+            "FingerLength: ${fingerLength.toInt()}px | Image: ${imageWidth}×${imageHeight}"
         )
 
         return roi
@@ -109,41 +99,43 @@ object FingerprintROICalculator {
     /**
      * Validate if an ROI meets minimum quality requirements
      *
+     * With fixed-size ROIs, validation is much simpler - we just check:
+     * 1. ROI is within image bounds
+     * 2. ROI has reasonable dimensions (close to target size)
+     *
      * @param roi The region of interest to validate
      * @param imageWidth Width of the source image
      * @param imageHeight Height of the source image
-     * @param minSize Minimum width/height in pixels (default: 30)
-     * @param minAspectRatio Minimum acceptable aspect ratio (default: 0.3)
-     * @param maxAspectRatio Maximum acceptable aspect ratio (default: 3.0)
+     * @param minSize Minimum width/height in pixels
+     * @param minAspectRatio Not used (kept for compatibility)
+     * @param maxAspectRatio Not used (kept for compatibility)
      * @return true if ROI is valid, false otherwise
      */
     fun isValidROI(
         roi: RectF,
         imageWidth: Int,
         imageHeight: Int,
-        minSize: Int = 15,  // Relaxed from 30 to allow horizontal hand ROIs
-        minAspectRatio: Float = 0.3f,
-        maxAspectRatio: Float = 8.0f  // Relaxed from 3.0 to allow horizontal hand ROIs
+        minSize: Int = 60,  // Minimum size for fingerprint detail
+        minAspectRatio: Float = 0.3f,  // Not used anymore
+        maxAspectRatio: Float = 3.0f   // Not used anymore
     ): Boolean {
         val width = roi.width()
         val height = roi.height()
 
-        // Check if ROI is within image bounds
-        if (roi.left < 0 || roi.top < 0 || roi.right > imageWidth || roi.bottom > imageHeight) {
+        // Check if ROI is within image bounds (allow small margin for edge cases)
+        if (roi.left < -5 || roi.top < -5 || roi.right > imageWidth + 5 || roi.bottom > imageHeight + 5) {
+            android.util.Log.d("ROICalculator", "ROI out of bounds: $roi (image: ${imageWidth}×${imageHeight})")
             return false
         }
 
-        // Check minimum size
-        if (width < minSize || height < minSize) {
+        // Check minimum size - ROI should be at least 60% of target size
+        // Target is 180×60, so minimum is 108×36
+        if (width < 108 || height < 36) {
+            android.util.Log.d("ROICalculator", "ROI too small: ${width.toInt()}×${height.toInt()} (min: 108×36)")
             return false
         }
 
-        // Check aspect ratio (fingerprint should be roughly rectangular)
-        val aspectRatio = width / height
-        if (aspectRatio < minAspectRatio || aspectRatio > maxAspectRatio) {
-            return false
-        }
-
+        // All checks passed
         return true
     }
 }

@@ -44,7 +44,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
 
     private var stableFrameCount = 0
-    private val REQUIRED_STABLE_FRAMES = 30  // ~1 second at 30fps (increased for better stability)
+    private val REQUIRED_STABLE_FRAMES = 90  // ~3 seconds at 30fps (strict stability requirement)
     private var isCapturing = false
 
 
@@ -95,7 +95,6 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         TOO_FAR("Move hand CLOSER to camera", Color.RED),
         TOO_CLOSE("Move hand BACK from camera", Color.RED),
         FINGERS_SPREAD("Keep fingers close together", Color.RED),
-        HORIZONTAL_HAND("Point fingers upward ↑", Color.RED),
         OUTSIDE_BOX("Move hand into guide box", Color.YELLOW),
         PERFECT("✓ Hold steady!", Color.GREEN)
     }
@@ -167,8 +166,8 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         drawGuideRectangle(canvas)
 
         results?.let { handLandmarkerResult ->
+            // Finger names for reference (thumb excluded)
             val fingerNames = mapOf(
-                4 to "Thumb",
                 8 to "Index Finger",
                 12 to "Middle Finger",
                 16 to "Ring Finger",
@@ -330,10 +329,8 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
             return HandPositionStatus.FINGERS_SPREAD
         }
 
-        // 3. Check if hand is horizontal (fingers pointing sideways)
-        if (isHandHorizontal(landmarks)) {
-            return HandPositionStatus.HORIZONTAL_HAND
-        }
+        // 3. REMOVED: isHandHorizontal check - we WANT horizontal hands for fingerprint capture
+        // Horizontal orientation (fingers pointing left/right) is correct for this use case
 
         // 4. Check if hand is inside guide box
         if (!isHandInsideGuideBox(landmarks)) {
@@ -434,8 +431,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         val avgFingerWidth = fingerWidths.average().toFloat()
 
         // Also check if ROIs are large enough (additional validation)
+        // ROIs should be at least 108×36 for horizontal fingerprints
         val hasSmallROIs = fingerprintROIs.values.any { roi ->
-            roi.width() < 60 || roi.height() < 80
+            roi.width() < 108 || roi.height() < 36
         }
 
         Log.d(TAG, "Camera distance check: avgFingerWidth=$avgFingerWidth, hasSmallROIs=$hasSmallROIs")
@@ -746,8 +744,8 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         fingerprintROIs.clear()
 
         // Define finger landmark indices (same as in FingerprintExtractor)
+        // Thumb excluded - unreliable for horizontal hands
         val fingerLandmarks = mapOf(
-            FingerprintExtractor.FingerType.THUMB to listOf(1, 2, 3, 4),
             FingerprintExtractor.FingerType.INDEX to listOf(5, 6, 7, 8),
             FingerprintExtractor.FingerType.MIDDLE to listOf(9, 10, 11, 12),
             FingerprintExtractor.FingerType.RING to listOf(13, 14, 15, 16),
