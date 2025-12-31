@@ -95,8 +95,8 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
     enum class HandPositionStatus(val message: String, val color: Int) {
         NO_HAND("Place hand in frame", Color.WHITE),
-        TOO_FAR("Move hand closer to camera", Color.RED),
-        TOO_CLOSE("Move hand back from camera", Color.RED),
+        TOO_FAR("Move hand CLOSER to camera", Color.RED),
+        TOO_CLOSE("Move hand BACK from camera", Color.RED),
         FINGERS_SPREAD("Keep fingers close together", Color.RED),
         OUTSIDE_BOX("Move hand into guide box", Color.YELLOW),
         PERFECT("✓ Hold steady!", Color.GREEN)
@@ -128,20 +128,19 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
 
     /**
-     * Adaptive Stability: Calculate required stable frames based on finger size
-     * LOWERED THRESHOLDS: Closer hand = better quality = capture MUCH faster
-     * Farther hand = need more stability to avoid blur
+     * Phase 1: Adaptive Stability
+     * Calculate required stable frames based on finger size
+     * Larger fingers = closer to camera = better quality = capture faster
      */
     private fun getRequiredStableFrames(fingerWidth: Float): Int {
         val requiredFrames = when {
-            fingerWidth > 100 -> 15  // Very close (0.5s) - FAST capture for high quality
-            fingerWidth > 80 -> 25   // Close (0.83s) - Quick capture
-            fingerWidth > 60 -> 35   // Medium (1.17s) - Balanced
-            fingerWidth > 50 -> 45   // Acceptable (1.5s) - Normal capture
-            else -> 60               // Too far (2.0s) - Need more stability
+            fingerWidth > 110 -> 10  // Very close (0.33s) - capture IMMEDIATELY
+            fingerWidth > 90 -> 20   // Close (0.67s) - capture quickly
+            fingerWidth > 70 -> 45   // Medium (1.5s) - normal capture
+            else -> 90               // Far (3s) - wait for stability
         }
 
-        Log.d(TAG, "[ADAPTIVE FAST] fingerWidth=$fingerWidth -> requiredFrames=$requiredFrames (lower threshold for close hands)")
+        Log.d(TAG, "[ADAPTIVE] fingerWidth=$fingerWidth -> requiredFrames=$requiredFrames")
         return requiredFrames
     }
 
@@ -324,13 +323,8 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
             return HandPositionStatus.FINGERS_SPREAD
         }
 
-        // 3. Check if hand is horizontal (REQUIRED for 120×60 ROI to work properly)
-        // Fingers must point left-to-right for correct fingerprint capture
-        if (!isHandHorizontal(landmarks)) {
-            // Hand is vertical - return OUTSIDE_BOX (no new message needed)
-            Log.d(TAG, "[ORIENTATION] Hand is VERTICAL - need horizontal orientation for ROI")
-            return HandPositionStatus.OUTSIDE_BOX
-        }
+        // 3. REMOVED: isHandHorizontal check - we WANT horizontal hands for fingerprint capture
+        // Horizontal orientation (fingers pointing left/right) is correct for this use case
 
         // 4. Check if hand is inside guide box
         if (!isHandInsideGuideBox(landmarks)) {
@@ -377,34 +371,25 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
     }
 
     private fun isHandInsideGuideBox(landmarks: List<NormalizedLandmark>): Boolean {
-        // UPDATED: Only check FINGERTIPS instead of entire hand
-        // We only need fingertips for fingerprint capture - wrist/palm can be outside
-
-        // Fingertip landmark indices: Thumb(4), Index(8), Middle(12), Ring(16), Pinky(20)
-        val fingertipIndices = listOf(4, 8, 12, 16, 20)
-
-        val fingertips = fingertipIndices.map { idx ->
-            PointF(
-                landmarks[idx].x() * imageWidth * scaleFactor,
-                landmarks[idx].y() * imageHeight * scaleFactor
-            )
+        // Calculate hand bounding box
+        val handPoints = landmarks.map {
+            PointF(it.x() * imageWidth * scaleFactor, it.y() * imageHeight * scaleFactor)
         }
 
-        // Calculate fingertips bounding box (min/max of only the 5 fingertips)
-        val fingertipsLeft = fingertips.minOf { it.x }
-        val fingertipsRight = fingertips.maxOf { it.x }
-        val fingertipsTop = fingertips.minOf { it.y }
-        val fingertipsBottom = fingertips.maxOf { it.y }
+        val handLeft = handPoints.minOf { it.x }
+        val handRight = handPoints.maxOf { it.x }
+        val handTop = handPoints.minOf { it.y }
+        val handBottom = handPoints.maxOf { it.y }
 
-        // Check if fingertips are inside guide box (allow small 10% margin)
-        val margin = 0.10f
+        // Check if hand bounding box is mostly inside guide box (allow 15% margin for larger box)
+        val margin = 0.15f  // Increased from 0.1 to be more forgiving with larger box
         val isInside =
-            fingertipsLeft >= guideRect.left - (guideRect.width() * margin) &&
-            fingertipsRight <= guideRect.right + (guideRect.width() * margin) &&
-            fingertipsTop >= guideRect.top - (guideRect.height() * margin) &&
-            fingertipsBottom <= guideRect.bottom + (guideRect.height() * margin)
+            handLeft >= guideRect.left - (guideRect.width() * margin) &&
+            handRight <= guideRect.right + (guideRect.width() * margin) &&
+            handTop >= guideRect.top - (guideRect.height() * margin) &&
+            handBottom <= guideRect.bottom + (guideRect.height() * margin)
 
-        Log.d(TAG, "[FINGERTIPS] Inside box: $isInside | BBox: L:${fingertipsLeft.toInt()} R:${fingertipsRight.toInt()} T:${fingertipsTop.toInt()} B:${fingertipsBottom.toInt()} | GuideBox: L:${guideRect.left.toInt()} R:${guideRect.right.toInt()} T:${guideRect.top.toInt()} B:${guideRect.bottom.toInt()}")
+        Log.d(TAG, "Hand inside box: $isInside (L:$handLeft R:$handRight T:$handTop B:$handBottom)")
         return isInside
     }
 
@@ -442,42 +427,28 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         val avgFingerWidth = fingerWidths.average().toFloat()
         Log.d(TAG, "[FINGER WIDTHS] Individual: ${fingerWidths.joinToString(", ") { "%.1f".format(it) }} | Average: ${"%.1f".format(avgFingerWidth)}")
 
-        // Store current finger width for adaptive frame calculation
+        // Phase 1: Store current finger width for adaptive frame calculation
         currentFingerWidth = avgFingerWidth
 
-        // Check if ROIs are large enough for fingerprint capture
-        // ROIs should be at least 72×36 (60% of target 120×60)
+        // Also check if ROIs are large enough (additional validation)
+        // ROIs should be at least 108×36 for horizontal fingerprints
         val hasSmallROIs = fingerprintROIs.values.any { roi ->
-            roi.width() < 72 || roi.height() < 36
+            roi.width() < 108 || roi.height() < 36
         }
 
         Log.d(TAG, "[DISTANCE] avgFingerWidth=$avgFingerWidth, hasSmallROIs=$hasSmallROIs, currentFingerWidth stored=$currentFingerWidth")
 
-        // COMMENTED OUT: Too strict distance requirement (100px minimum)
-        // return when {
-        //     avgFingerWidth < 100f || hasSmallROIs -> {
-        //         Log.d(TAG, "Hand TOO_FAR for WSQ quality: avgWidth=$avgFingerWidth (need ≥100px for high resolution)")
-        //         HandPositionStatus.TOO_FAR
-        //     }
-        //     else -> {
-        //         Log.d(TAG, "Distance PERFECT for WSQ: avgWidth=$avgFingerWidth (≥100px)")
-        //         null
-        //     }
-        // }
-
-        // NEW: More lenient distance - allow capture at medium range
-        // Server will handle enhancement, so we don't need extreme closeness
         return when {
-            avgFingerWidth < 50f || hasSmallROIs -> {
-                Log.d(TAG, "Hand TOO_FAR: avgWidth=$avgFingerWidth (need ≥50px)")
+            avgFingerWidth < 40f || hasSmallROIs -> {
+                Log.d(TAG, "Hand TOO_FAR: avgWidth=$avgFingerWidth (min 40)")
                 HandPositionStatus.TOO_FAR
             }
-            avgFingerWidth > 140f -> {
-                Log.d(TAG, "Hand TOO_CLOSE: avgWidth=$avgFingerWidth (max 140px)")
+            avgFingerWidth > 130f -> {
+                Log.d(TAG, "Hand TOO_CLOSE: avgWidth=$avgFingerWidth (max 130)")
                 HandPositionStatus.TOO_CLOSE
             }
             else -> {
-                Log.d(TAG, "Distance GOOD: avgWidth=$avgFingerWidth (50-140px range)")
+                Log.d(TAG, "Distance GOOD: avgWidth=$avgFingerWidth")
                 null  // Distance is good, check other conditions
             }
         }
@@ -725,46 +696,29 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
             val isStable = checkStability()
             val isPerfectPosition = positionStatus == HandPositionStatus.PERFECT
 
-            // ═══════════════════════════════════════════════════════════════
-            // TESTING MODE: INSTANT CAPTURE when "Hold steady!" appears
-            // ═══════════════════════════════════════════════════════════════
-            // Capture IMMEDIATELY when:
-            // - Position is PERFECT (green box showing)
-            // - "✓ Hold steady!" message displayed
-            // Skip stability frames and quality checks for fast testing
+            // Phase 1: Use adaptive frame requirement based on finger width
+            val requiredFrames = getRequiredStableFrames(currentFingerWidth)
 
-            Log.d(TAG, "[TEST MODE] Position: $positionStatus | FingerWidth: $currentFingerWidth | Quality: ${avgQuality.toInt()}%")
+            // Log current status every frame for debugging
+            Log.d(TAG, "[STATUS] Quality: ${avgQuality.toInt()}% (need ≥85) | Stable: $isStable | Position: $positionStatus | FingerWidth: $currentFingerWidth")
 
-            if (isPerfectPosition && !isCapturing && !captureTriggered) {
-                // INSTANT CAPTURE - no waiting for stability frames!
-                isCapturing = true
-                captureTriggered = true
-                // Call the actual capture listener with hand landmarks
-                captureListener?.onCapture(handLandmarkerResult)
-                Log.d(TAG, "✓✓✓ INSTANT CAPTURE TRIGGERED (TEST MODE)! ✓✓✓ Position: PERFECT | Width: $currentFingerWidth | Quality: ${avgQuality.toInt()}%")
+            if (isGoodQuality && isStable && isPerfectPosition && !isCapturing) {
+                stableFrameCount++
+                Log.d(TAG, "[CAPTURE CHECK] ✓ Stable frame added: $stableFrameCount/$requiredFrames | Quality: ${avgQuality.toInt()}% | Position: PERFECT | FingerWidth: $currentFingerWidth")
+
+                if (stableFrameCount >= requiredFrames) {
+                    // Hand is stable, quality is good, and position is perfect!
+                    isCapturing = true
+                    onReadyToCapture?.invoke()
+                    Log.d(TAG, "✓✓✓ CAPTURE TRIGGERED! ✓✓✓ Frames: $stableFrameCount/$requiredFrames | Width: $currentFingerWidth | Quality: ${avgQuality.toInt()}%")
+                }
+            } else {
+                // Reset if quality drops, hand moves, or position is not perfect
+                if (stableFrameCount > 0) {
+                    Log.d(TAG, "[RESET] Quality=$isGoodQuality (${avgQuality.toInt()}%), Stable=$isStable, Position=$positionStatus | Lost $stableFrameCount stable frames")
+                }
+                stableFrameCount = 0
             }
-
-            // ═══════════════════════════════════════════════════════════════
-            // COMMENTED OUT: Original stability-based capture logic
-            // ═══════════════════════════════════════════════════════════════
-            // val requiredFrames = getRequiredStableFrames(currentFingerWidth)
-            // Log.d(TAG, "[STATUS] Quality: ${avgQuality.toInt()}% (need ≥85) | Stable: $isStable | Position: $positionStatus | FingerWidth: $currentFingerWidth")
-            //
-            // if (isGoodQuality && isStable && isPerfectPosition && !isCapturing) {
-            //     stableFrameCount++
-            //     Log.d(TAG, "[CAPTURE CHECK] ✓ Stable frame added: $stableFrameCount/$requiredFrames | Quality: ${avgQuality.toInt()}% | Position: PERFECT | FingerWidth: $currentFingerWidth")
-            //
-            //     if (stableFrameCount >= requiredFrames) {
-            //         isCapturing = true
-            //         onReadyToCapture?.invoke()
-            //         Log.d(TAG, "✓✓✓ CAPTURE TRIGGERED! ✓✓✓ Frames: $stableFrameCount/$requiredFrames | Width: $currentFingerWidth | Quality: ${avgQuality.toInt()}%")
-            //     }
-            // } else {
-            //     if (stableFrameCount > 0) {
-            //         Log.d(TAG, "[RESET] Quality=$isGoodQuality (${avgQuality.toInt()}%), Stable=$isStable, Position=$positionStatus | Lost $stableFrameCount stable frames")
-            //     }
-            //     stableFrameCount = 0
-            // }
 
         } else {
             fingerprintROIs.clear()

@@ -129,9 +129,9 @@ object FingerprintROICalculator {
         }
 
         // Check minimum size - ROI should be at least 60% of target size
-        // Target is 180×60, so minimum is 108×36
-        if (width < 108 || height < 36) {
-            android.util.Log.d("ROICalculator", "ROI too small: ${width.toInt()}×${height.toInt()} (min: 108×36)")
+        // Target is 120×60, so minimum is 72×36
+        if (width < 72 || height < 36) {
+            android.util.Log.d("ROICalculator", "ROI too small: ${width.toInt()}×${height.toInt()} (min: 72×36)")
             return false
         }
 

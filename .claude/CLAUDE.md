@@ -1,4 +1,10 @@
-# CLAUDE.md - RMSTBiometrics Project Guide
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+---
+
+# RMSTBiometrics Project Guide
 
 ## Project Overview
 
@@ -35,8 +41,8 @@ This is particularly useful for hygiene-conscious applications where touchless b
 >
 > Also see [`IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) for the full implementation roadmap.
 >
-> **Last Updated:** 2025-12-11 Session 3
-> **Status:** 3 bugs fixed (negative heights, landmark mismatch, OpenCV crash), 1 remaining (ROI validation failures)
+> **Last Updated:** 2025-12-29 Session 6
+> **Status:** All issues resolved ✓ ROI optimized (120×60px), image processing removed, working as expected. Awaiting additional requirements.
 
 ---
 
@@ -1094,8 +1100,8 @@ val BASE_URL = "https://demo.rmstservices.com/biometrics/"
 
 ## Document Maintenance
 
-**Last Updated:** 2025-12-10
-**Project Version:** Based on commit d07b2cd (27-oct branch)
+**Last Updated:** 2025-12-29
+**Project Version:** Session 6 - ROI optimization and image processing removal complete
 **Maintained By:** Development Team
 
 **Update Triggers:**

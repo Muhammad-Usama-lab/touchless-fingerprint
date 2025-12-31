@@ -450,12 +450,15 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     }
 
     private fun detectHand(imageProxy: ImageProxy) {
-        // Capture bitmap BEFORE detectLiveStream (which closes the ImageProxy)
+        // Convert frame to bitmap for capture when triggered
+        val currentFrameBitmap = imageProxyToBitmap(imageProxy)
+
+        // Capture bitmap if triggered
         val capturedBitmap = if (shouldCaptureNextFrame && !isProcessingCapture && latestHandLandmarkerResult != null) {
             shouldCaptureNextFrame = false
             isProcessingCapture = true
-            // Convert NOW while ImageProxy is still open
-            imageProxyToBitmap(imageProxy)
+            // Re-use the frame we already converted
+            currentFrameBitmap
         } else {
             null
         }
