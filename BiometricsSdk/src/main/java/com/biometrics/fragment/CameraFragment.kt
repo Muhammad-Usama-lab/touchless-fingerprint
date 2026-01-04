@@ -74,7 +74,7 @@ import com.biometrics.viewmodel.BiometricsSharedViewModel
 import org.opencv.android.Utils
 import org.opencv.imgproc.Imgproc
 
-class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener, ConfirmationDialogFragment.ConfirmationListener {
+class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, ConfirmationDialogFragment.ConfirmationListener {
 
     companion object {
         private const val TAG = "RMST Biomterics"
@@ -241,7 +241,17 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
             takePhoto()
         }
 
-        fragmentCameraBinding.overlay.setCaptureListener(this)
+        // REMOVED: Old capture listener (was bypassing quality checks)
+        // fragmentCameraBinding.overlay.setCaptureListener(this)
+
+        // NEW: Quality-based capture trigger
+        fragmentCameraBinding.overlay.onReadyToCapture = {
+            // All quality checks passed - trigger capture!
+            Log.d(TAG, "✓ Quality-based capture triggered")
+            if (!isProcessingCapture) {
+                shouldCaptureNextFrame = true
+            }
+        }
 
         // Initialize progress bar
         fragmentCameraBinding.progressBar.visibility = View.GONE
@@ -494,7 +504,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
         activity?.runOnUiThread {
             if (_fragmentCameraBinding != null) {
 
-
+                // Store latest result for capture
+                latestHandLandmarkerResult = resultBundle.results.first()
 
 //                fragmentCameraBinding.bottomSheetLayout.inferenceTimeVal.text =
 //                    String.format("%d ms", resultBundle.inferenceTime)
@@ -1039,34 +1050,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     */
     // ========================================================================
 
-    
-
-    override fun onCapture(result: HandLandmarkerResult) {
-        if (isProcessingCapture) {
-            return // Already processing, ignore
-        }
-
-        latestHandLandmarkerResult = result
-
-        activity?.runOnUiThread {
-            Toast.makeText(requireContext(), "Capturing fingerprints...", Toast.LENGTH_SHORT).show()
-
-            val landmarks = result.landmarks().first()
-            val centerX = landmarks.map { it.x() }.average().toFloat()
-            val centerY = landmarks.map { it.y() }.average().toFloat()
-
-            val viewWidth = fragmentCameraBinding.viewFinder.width
-            val viewHeight = fragmentCameraBinding.viewFinder.height
-
-            val point = fragmentCameraBinding.viewFinder.meteringPointFactory.createPoint(centerX * viewWidth, centerY * viewHeight)
-            val action = FocusMeteringAction.Builder(point).build()
-            val future = camera?.cameraControl?.startFocusAndMetering(action)
-            future?.addListener({
-                // Set flag to capture next frame from ImageAnalysis
-                shouldCaptureNextFrame = true
-            }, ContextCompat.getMainExecutor(requireContext()))
-        }
-    }
-
+    // OLD onCapture METHOD REMOVED
+    // Now using quality-based trigger: fragmentCameraBinding.overlay.onReadyToCapture
+    // This ensures ALL quality checks pass before capture!
 
 }

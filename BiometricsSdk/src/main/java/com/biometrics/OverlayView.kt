@@ -44,8 +44,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
 
     private var stableFrameCount = 0
-    private val REQUIRED_STABLE_FRAMES = 90  // ~3 seconds at 30fps (strict stability requirement)
+    private val REQUIRED_STABLE_FRAMES = 30  // ~1 second at 30fps (reduced from 90 for faster capture)
     private var isCapturing = false
+    private var framesSinceLastReset = 0  // Track frames since last reset to be more forgiving
 
 
     // Callback for when stable and ready to capture
@@ -94,9 +95,10 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         NO_HAND("Place hand in frame", Color.WHITE),
         TOO_FAR("Move hand CLOSER to camera", Color.RED),
         TOO_CLOSE("Move hand BACK from camera", Color.RED),
-        FINGERS_SPREAD("Keep fingers close together", Color.RED),
         OUTSIDE_BOX("Move hand into guide box", Color.YELLOW),
+        NOT_STABLE("Hold hand STEADY", Color.YELLOW),
         PERFECT("✓ Hold steady!", Color.GREEN)
+        // REMOVED: LOW_QUALITY, TOO_BLURRY (quality check disabled)
     }
 
     interface CaptureListener {
@@ -175,38 +177,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
             )
 
             for ((handIndex, landmark) in handLandmarkerResult.landmarks().withIndex()) {
-                var handNearRightEdge = false
-                for (normalizedLandmark in landmark) {
-                    val x = normalizedLandmark.x() * imageWidth * scaleFactor
-                    if (x > width * 0.8) {
-                        handNearRightEdge = true
-                        break
-                    }
-                }
-
-                var isStable = false
-                previousResults?.let { prevResult ->
-                    if (prevResult.landmarks().size > handIndex) {
-                        val prevLandmark = prevResult.landmarks()[handIndex]
-                        var totalDistance = 0f
-                        for (i in landmark.indices) {
-                            val dx = landmark[i].x() - prevLandmark[i].x()
-                            val dy = landmark[i].y() - prevLandmark[i].y()
-                            totalDistance += sqrt(dx * dx + dy * dy)
-                        }
-                        val averageDistance = totalDistance / landmark.size
-                        if (averageDistance < 0.003) { // Stability threshold (stricter: was 0.008)
-                            isStable = true
-                        }
-                    }
-                }
-
-                if (handNearRightEdge && isStable) {
-                    if (!captureTriggered) {
-                        captureListener?.onCapture(handLandmarkerResult)
-                        captureTriggered = true
-                    }
-                }
+                // OLD AUTO-CAPTURE TRIGGER REMOVED!
+                // Was checking handNearRightEdge - this bypassed quality checks
+                // Now using ONLY the quality-based trigger in setResults()
 
                 for (normalizedLandmark in landmark) {
                     canvas.drawPoint(
@@ -324,20 +297,35 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
             return distanceStatus
         }
 
-        // 2. Check if fingers are spread apart
-        if (areFingersSpread(landmarks)) {
-            return HandPositionStatus.FINGERS_SPREAD
-        }
+        // 2. REMOVED: Finger spacing check (user doesn't want this constraint)
+        // Users can have fingers naturally positioned without strict spacing requirements
 
-        // 3. REMOVED: isHandHorizontal check - we WANT horizontal hands for fingerprint capture
-        // Horizontal orientation (fingers pointing left/right) is correct for this use case
-
-        // 4. Check if hand is inside guide box
+        // 3. Check if hand is inside guide box
         if (!isHandInsideGuideBox(landmarks)) {
             return HandPositionStatus.OUTSIDE_BOX
         }
 
-        // All checks passed!
+        // 4. Check stability (must be stable to capture good fingerprints)
+        if (!checkStability()) {
+            return HandPositionStatus.NOT_STABLE
+        }
+
+        // 5. DISABLED: Quality check (user doesn't want lighting/quality constraints)
+        // Users can capture regardless of lighting conditions
+        /*
+        val avgQuality = if (fingerQualityScores.isNotEmpty()) {
+            fingerQualityScores.values.average()
+        } else {
+            0.0
+        }
+
+        // Require VERY HIGH quality for fingerprint matching (85%+)
+        if (avgQuality < 85.0) {
+            return HandPositionStatus.LOW_QUALITY
+        }
+        */
+
+        // All checks passed! Ready for capture
         return HandPositionStatus.PERFECT
     }
 
@@ -376,25 +364,32 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
     }
 
     private fun isHandInsideGuideBox(landmarks: List<NormalizedLandmark>): Boolean {
-        // Calculate hand bounding box
-        val handPoints = landmarks.map {
-            PointF(it.x() * imageWidth * scaleFactor, it.y() * imageHeight * scaleFactor)
+        // ONLY check FINGERTIPS, not entire hand!
+        // Index (8), Middle (12), Ring (16), Pinky (20)
+        val fingertipIndices = listOf(8, 12, 16, 20)
+
+        val fingertipPoints = fingertipIndices.map { index ->
+            PointF(
+                landmarks[index].x() * imageWidth * scaleFactor,
+                landmarks[index].y() * imageHeight * scaleFactor
+            )
         }
 
-        val handLeft = handPoints.minOf { it.x }
-        val handRight = handPoints.maxOf { it.x }
-        val handTop = handPoints.minOf { it.y }
-        val handBottom = handPoints.maxOf { it.y }
+        // Calculate fingertips bounding box
+        val fingertipsLeft = fingertipPoints.minOf { it.x }
+        val fingertipsRight = fingertipPoints.maxOf { it.x }
+        val fingertipsTop = fingertipPoints.minOf { it.y }
+        val fingertipsBottom = fingertipPoints.maxOf { it.y }
 
-        // Check if hand bounding box is mostly inside guide box (allow 15% margin for larger box)
-        val margin = 0.15f  // Increased from 0.1 to be more forgiving with larger box
+        // Check if ALL fingertips are inside guide box (with small margin)
+        val margin = 0.05f  // Small margin for edge tolerance
         val isInside =
-            handLeft >= guideRect.left - (guideRect.width() * margin) &&
-            handRight <= guideRect.right + (guideRect.width() * margin) &&
-            handTop >= guideRect.top - (guideRect.height() * margin) &&
-            handBottom <= guideRect.bottom + (guideRect.height() * margin)
+            fingertipsLeft >= guideRect.left - (guideRect.width() * margin) &&
+            fingertipsRight <= guideRect.right + (guideRect.width() * margin) &&
+            fingertipsTop >= guideRect.top - (guideRect.height() * margin) &&
+            fingertipsBottom <= guideRect.bottom + (guideRect.height() * margin)
 
-        Log.d(TAG, "Hand inside box: $isInside (L:$handLeft R:$handRight T:$handTop B:$handBottom)")
+        Log.d(TAG, "Fingertips inside box: $isInside (L:$fingertipsLeft R:$fingertipsRight T:$fingertipsTop B:$fingertipsBottom)")
         return isInside
     }
 
@@ -431,9 +426,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         val avgFingerWidth = fingerWidths.average().toFloat()
 
         // Also check if ROIs are large enough (additional validation)
-        // ROIs should be at least 120×60 for horizontal fingerprints (60% of 200×100 target)
+        // ROIs should be at least 84×60 for horizontal fingerprints (60% of 140×100 target)
         val hasSmallROIs = fingerprintROIs.values.any { roi ->
-            roi.width() < 120 || roi.height() < 60
+            roi.width() < 84 || roi.height() < 60
         }
 
         Log.d(TAG, "Camera distance check: avgFingerWidth=$avgFingerWidth, hasSmallROIs=$hasSmallROIs")
@@ -565,15 +560,24 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                 roi.bottom * scaleFactor
             )
 
-            // Choose paint based on quality
-            val quality = fingerQualityScores[fingerType] ?: 0f
-            val paint = if (quality >= 60) roiPaint else roiPaintLowQuality
+            // Choose paint based on overall hand status, not just quality
+            // GREEN boxes = PERFECT (ready to capture)
+            // RED boxes = Problems detected (show user what's wrong)
+            val paint = if (handPositionStatus == HandPositionStatus.PERFECT) {
+                roiPaint  // Green - all conditions met!
+            } else {
+                roiPaintLowQuality  // Red dashed - problems detected
+            }
+
+            // Make boxes thicker when PERFECT to show confidence
+            paint.strokeWidth = if (handPositionStatus == HandPositionStatus.PERFECT) 6f else 4f
 
             // Draw rectangle
             canvas.drawRect(scaledRect, paint)
 
-            // Draw finger label
-            val label = fingerType.name
+            // Draw finger label with quality score
+            val quality = fingerQualityScores[fingerType] ?: 0f
+            val label = "${fingerType.name} ${quality.toInt()}%"
             val textX = scaledRect.left + 5
             val textY = scaledRect.top - 5
 
@@ -588,8 +592,11 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                 textBackgroundPaint
             )
 
-            // Draw text
-            canvas.drawText(label, textX, textY, textPaint)
+            // Draw text with color matching box
+            val labelPaint = Paint(textPaint).apply {
+                color = if (handPositionStatus == HandPositionStatus.PERFECT) Color.GREEN else Color.RED
+            }
+            canvas.drawText(label, textX, textY, labelPaint)
         }
     }
 
@@ -686,28 +693,31 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                 0.0
             }
 
-            // Check hand position status
+            // Check hand position status (includes ALL checks: distance, stability, quality, position)
             val landmarks = handLandmarkerResult.landmarks()[0]
             val positionStatus = checkHandPositionStatus(landmarks)
 
-            val isGoodQuality = avgQuality >= 85  // Increased from 70 for better quality
-            val isStable = checkStability()
-            val isPerfectPosition = positionStatus == HandPositionStatus.PERFECT
-
-            if (isGoodQuality && isStable && isPerfectPosition && !isCapturing) {
+            // CRITICAL: Only capture when status is PERFECT!
+            // This means ALL conditions are met:
+            // ✓ Hand close enough to camera
+            // ✓ Fingers together (not spread)
+            // ✓ Hand inside guide box
+            // ✓ Hand completely stable
+            // ✓ Quality score >= 85%
+            if (positionStatus == HandPositionStatus.PERFECT && !isCapturing) {
                 stableFrameCount++
-                Log.d(TAG, "Stable frames: $stableFrameCount/$REQUIRED_STABLE_FRAMES | Quality: $avgQuality | Position: PERFECT")
+                Log.d(TAG, "✓ PERFECT! Stable frames: $stableFrameCount/$REQUIRED_STABLE_FRAMES | Quality: $avgQuality")
 
                 if (stableFrameCount >= REQUIRED_STABLE_FRAMES) {
-                    // Hand is stable, quality is good, and position is perfect!
+                    // All conditions perfect for sufficient time - CAPTURE NOW!
                     isCapturing = true
                     onReadyToCapture?.invoke()
-                    Log.d(TAG, "✓ READY TO CAPTURE!")
+                    Log.d(TAG, "🎯 CAPTURING - All quality checks passed!")
                 }
             } else {
-                // Reset if quality drops, hand moves, or position is not perfect
+                // Reset if ANY condition fails
                 if (stableFrameCount > 0) {
-                    Log.d(TAG, "Reset: Quality=$isGoodQuality, Stable=$isStable, Position=$positionStatus")
+                    Log.d(TAG, "Reset: Status=$positionStatus (need PERFECT)")
                 }
                 stableFrameCount = 0
             }
