@@ -44,7 +44,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
 
     private var stableFrameCount = 0
-    private val REQUIRED_STABLE_FRAMES = 30  // ~1 second at 30fps (reduced from 90 for faster capture)
+    private val REQUIRED_STABLE_FRAMES = 2  // ~66ms at 30fps - VERY FAST capture (was 30)
     private var isCapturing = false
     private var framesSinceLastReset = 0  // Track frames since last reset to be more forgiving
 
@@ -485,6 +485,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
     fun resetCapture() {
         isCapturing = false
         stableFrameCount = 0
+        framesSinceLastReset = 0
         Log.d(TAG, "Capture reset")
     }
 
@@ -700,13 +701,12 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
             // CRITICAL: Only capture when status is PERFECT!
             // This means ALL conditions are met:
             // ✓ Hand close enough to camera
-            // ✓ Fingers together (not spread)
-            // ✓ Hand inside guide box
+            // ✓ Fingertips inside guide box
             // ✓ Hand completely stable
-            // ✓ Quality score >= 85%
             if (positionStatus == HandPositionStatus.PERFECT && !isCapturing) {
                 stableFrameCount++
-                Log.d(TAG, "✓ PERFECT! Stable frames: $stableFrameCount/$REQUIRED_STABLE_FRAMES | Quality: $avgQuality")
+                framesSinceLastReset = 0  // Reset grace period
+                Log.d(TAG, "✓ PERFECT! Stable frames: $stableFrameCount/$REQUIRED_STABLE_FRAMES")
 
                 if (stableFrameCount >= REQUIRED_STABLE_FRAMES) {
                     // All conditions perfect for sufficient time - CAPTURE NOW!
@@ -715,17 +715,26 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                     Log.d(TAG, "🎯 CAPTURING - All quality checks passed!")
                 }
             } else {
-                // Reset if ANY condition fails
-                if (stableFrameCount > 0) {
-                    Log.d(TAG, "Reset: Status=$positionStatus (need PERFECT)")
+                // More forgiving reset - allow brief detection loss
+                framesSinceLastReset++
+
+                // Only reset if conditions bad for more than 5 frames (~166ms)
+                if (framesSinceLastReset > 5) {
+                    if (stableFrameCount > 0) {
+                        Log.d(TAG, "Reset after ${framesSinceLastReset} frames: Status=$positionStatus (need PERFECT)")
+                    }
+                    stableFrameCount = 0
+                } else {
+                    // Grace period - keep existing count
+                    Log.d(TAG, "Grace period: ${framesSinceLastReset}/5 frames, keeping count: $stableFrameCount")
                 }
-                stableFrameCount = 0
             }
 
         } else {
             fingerprintROIs.clear()
             fingerQualityScores.clear()
             stableFrameCount = 0
+            framesSinceLastReset = 0
         }
 
         // Store for next frame comparison
