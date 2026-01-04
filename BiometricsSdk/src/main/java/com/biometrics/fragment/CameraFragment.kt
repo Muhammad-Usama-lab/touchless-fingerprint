@@ -98,10 +98,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
     private var latestHandLandmarkerResult: HandLandmarkerResult? = null
     private var isFocusing = false
     private var lastFocusTime = 0L
-    private var shouldCaptureNextFrame = false
     private var isProcessingCapture = false
 
-    // Store current ROIs from OverlayView for direct capture
+    // Store current ROIs from OverlayView for direct capture (in preview coordinates!)
     private var currentFingerROIs = mutableMapOf<FingerprintExtractor.FingerType, android.graphics.RectF>()
 
 
@@ -244,12 +243,29 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
         // REMOVED: Old capture listener (was bypassing quality checks)
         // fragmentCameraBinding.overlay.setCaptureListener(this)
 
-        // NEW: Quality-based capture trigger
+        // NEW: Quality-based capture trigger (using screenshot, not camera frame!)
         fragmentCameraBinding.overlay.onReadyToCapture = {
-            // All quality checks passed - trigger capture!
-            Log.d(TAG, "✓ Quality-based capture triggered")
+            // All quality checks passed - capture screenshot NOW!
+            Log.d(TAG, "✓ Quality-based capture triggered - capturing preview screenshot via PixelCopy")
             if (!isProcessingCapture) {
-                shouldCaptureNextFrame = true
+                isProcessingCapture = true
+
+                // Capture screenshot of preview surface using PixelCopy (async callback)
+                capturePreviewScreenshot { screenshotBitmap ->
+                    if (screenshotBitmap != null && latestHandLandmarkerResult != null) {
+                        // Process screenshot in background
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            captureAndProcessFrame(screenshotBitmap, latestHandLandmarkerResult!!)
+                        }
+                    } else {
+                        Log.e(TAG, "Failed to capture screenshot or no landmarks available")
+                        isProcessingCapture = false
+                        activity?.runOnUiThread {
+                            Toast.makeText(requireContext(), "Screenshot capture failed. Try again.", Toast.LENGTH_SHORT).show()
+                            fragmentCameraBinding.overlay.resetCapture()
+                        }
+                    }
+                }
             }
         }
 
@@ -450,6 +466,12 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
         cameraProvider.unbindAll()
 
         try {
+            // CRITICAL: Use TextureView instead of SurfaceView for PreviewView
+            // This allows PixelCopy to capture the camera preview content
+            // SurfaceView renders on separate layer and appears black in screenshots
+            fragmentCameraBinding.viewFinder.implementationMode =
+                androidx.camera.view.PreviewView.ImplementationMode.COMPATIBLE  // Uses TextureView
+
             // A variable number of use-cases can be passed here -
             // camera provides access to CameraControl & CameraInfo
             camera = cameraProvider.bindToLifecycle(
@@ -465,28 +487,17 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
     }
 
     private fun detectHand(imageProxy: ImageProxy) {
-        // Capture bitmap BEFORE detectLiveStream (which closes the ImageProxy)
-        val capturedBitmap = if (shouldCaptureNextFrame && !isProcessingCapture && latestHandLandmarkerResult != null) {
-            shouldCaptureNextFrame = false
-            isProcessingCapture = true
-            // Convert NOW while ImageProxy is still open
-            imageProxyToBitmap(imageProxy)
-        } else {
-            null
-        }
+        // OLD LOGIC REMOVED: No longer capturing from ImageProxy
+        // Now using preview screenshot capture (triggered by overlay.onReadyToCapture)
 
-        // Now run hand detection (this will close the ImageProxy)
+        // Run hand detection on full camera frame (needed for MediaPipe)
         handLandmarkerHelper.detectLiveStream(
             imageProxy = imageProxy,
             isFrontCamera = cameraFacing == CameraSelector.LENS_FACING_FRONT
         )
 
-        // Process captured bitmap in background if we have one
-        if (capturedBitmap != null && latestHandLandmarkerResult != null) {
-            lifecycleScope.launch(Dispatchers.IO) {
-                captureAndProcessFrame(capturedBitmap, latestHandLandmarkerResult!!)
-            }
-        }
+        // Screenshot capture is now handled by overlay.onReadyToCapture callback
+        // which takes screenshot of preview surface (zoomed view)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -560,7 +571,61 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
     }
 
     /**
-     * Convert ImageProxy to Bitmap with proper orientation
+     * NEW: Capture screenshot of preview surface using PixelCopy (what user sees on screen)
+     * This captures the ZOOMED view, not the full camera frame!
+     * Uses PixelCopy API because PreviewView uses SurfaceView which can't be captured with draw()
+     */
+    private fun capturePreviewScreenshot(callback: (Bitmap?) -> Unit) {
+        try {
+            val viewFinder = fragmentCameraBinding.viewFinder
+
+            // Create bitmap matching preview dimensions
+            val bitmap = Bitmap.createBitmap(
+                viewFinder.width,
+                viewFinder.height,
+                Bitmap.Config.ARGB_8888
+            )
+
+            // Use PixelCopy to capture SurfaceView content
+            val locationInWindow = IntArray(2)
+            viewFinder.getLocationInWindow(locationInWindow)
+
+            val rect = android.graphics.Rect(
+                locationInWindow[0],
+                locationInWindow[1],
+                locationInWindow[0] + viewFinder.width,
+                locationInWindow[1] + viewFinder.height
+            )
+
+            // PixelCopy from window surface
+            activity?.window?.let { window ->
+                android.view.PixelCopy.request(
+                    window,
+                    rect,
+                    bitmap,
+                    { copyResult ->
+                        if (copyResult == android.view.PixelCopy.SUCCESS) {
+                            Log.d(TAG, "📸 Screenshot captured successfully: ${bitmap.width}x${bitmap.height}px (preview surface)")
+                            callback(bitmap)
+                        } else {
+                            Log.e(TAG, "PixelCopy failed with result: $copyResult")
+                            callback(null)
+                        }
+                    },
+                    android.os.Handler(android.os.Looper.getMainLooper())
+                )
+            } ?: run {
+                Log.e(TAG, "Window not available for PixelCopy")
+                callback(null)
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to capture preview screenshot: ${e.message}", e)
+            callback(null)
+        }
+    }
+
+    /**
+     * OLD: Convert ImageProxy to Bitmap with proper orientation
      * ImageAnalysis is configured with OUTPUT_IMAGE_FORMAT_RGBA_8888
      * IMPORTANT: Rewinds buffer after reading so HandLandmarkerHelper can use it
      *
@@ -640,9 +705,10 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
             }
 
             Log.d(TAG, "====================================================")
-            Log.d(TAG, "🎯 DIRECT ROI CAPTURE (No MediaPipe re-run!)")
-            Log.d(TAG, "Source bitmap: ${bitmap.width}x${bitmap.height}, format: ${bitmap.config}")
-            Log.d(TAG, "Green boxes to capture: ${currentFingerROIs.size}")
+            Log.d(TAG, "🎯 SCREENSHOT-BASED CAPTURE (What you see = What you get!)")
+            Log.d(TAG, "📸 Screenshot bitmap: ${bitmap.width}x${bitmap.height}, format: ${bitmap.config}")
+            Log.d(TAG, "📦 Green boxes to capture: ${currentFingerROIs.size}")
+            Log.d(TAG, "✅ ROIs are in preview coordinates (perfect match!)")
 
             // Check if we have valid ROIs
             if (currentFingerROIs.isEmpty()) {
@@ -724,7 +790,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
             if (fingerprints.isNotEmpty()) {
                 val avgQuality = fingerprints.map { it.qualityScore }.average()
                 Log.d(TAG, "====================================================")
-                Log.d(TAG, "✅ SUCCESS: Captured ${fingerprints.size}/4 fingerprints directly from green boxes!")
+                Log.d(TAG, "✅ SUCCESS: Captured ${fingerprints.size}/4 fingerprints from SCREENSHOT!")
+                Log.d(TAG, "📸 Source: Preview surface (zoomed view - high quality!)")
                 Log.d(TAG, "Average quality: ${avgQuality.toInt()}/100")
                 fingerprints.forEach { fp ->
                     Log.d(TAG, "  ${fp.fingerType}: ${fp.bitmap.width}x${fp.bitmap.height}px @ ${fp.qualityScore.toInt()}%")
@@ -836,6 +903,54 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
     }
 
     /**
+     * DEBUG: Save 3x3 grid of screenshot to see where hand actually appears
+     */
+    private fun saveDebugGrid(screenshot: Bitmap) {
+        val timestamp = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US).format(System.currentTimeMillis())
+
+        Log.d(TAG, "🔍 DEBUG: Saving 3x3 grid of screenshot...")
+
+        // Save full screenshot first
+        saveImageToGallery(screenshot, "${timestamp}_00_FULL_SCREENSHOT")
+        Log.d(TAG, "  ✓ Saved full screenshot: ${screenshot.width}x${screenshot.height}px")
+
+        // Calculate grid dimensions
+        val pieceWidth = screenshot.width / 3
+        val pieceHeight = screenshot.height / 3
+
+        val rows = listOf("TOP", "MIDDLE", "BOTTOM")
+        val cols = listOf("LEFT", "CENTER", "RIGHT")
+
+        var pieceNumber = 1
+        for (row in 0..2) {
+            for (col in 0..2) {
+                try {
+                    val x = col * pieceWidth
+                    val y = row * pieceHeight
+
+                    val piece = Bitmap.createBitmap(
+                        screenshot,
+                        x,
+                        y,
+                        pieceWidth,
+                        pieceHeight
+                    )
+
+                    val pieceName = "${timestamp}_${String.format("%02d", pieceNumber)}_${rows[row]}_${cols[col]}"
+                    saveImageToGallery(piece, pieceName)
+                    Log.d(TAG, "  ✓ Saved piece $pieceNumber: ${rows[row]}_${cols[col]} (${pieceWidth}x${pieceHeight}px)")
+
+                    pieceNumber++
+                } catch (e: Exception) {
+                    Log.e(TAG, "  ✗ Failed to save grid piece [${row},${col}]: ${e.message}")
+                }
+            }
+        }
+
+        Log.d(TAG, "🔍 DEBUG: Saved 9 grid pieces + full screenshot to Pictures/HandLandmarker/")
+    }
+
+    /**
      * NEW: Save fingerprints directly (no hand image needed)
      */
     private fun saveFingerprints(
@@ -846,11 +961,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
 
         Log.d(TAG, "💾 Saving ${fingerprints.size} fingerprint images to gallery...")
 
-        // Optionally save the full hand image for reference
+        // DEBUG MODE: Save 3x3 grid to see where hand appears
         if (handBitmap != null) {
-            val handName = "${timestamp}_HAND_REFERENCE"
-            saveImageToGallery(handBitmap, handName)
-            Log.d(TAG, "  ✓ Saved reference hand image: $handName")
+            saveDebugGrid(handBitmap)
         }
 
         // Save each fingerprint with high quality
