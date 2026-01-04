@@ -431,9 +431,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         val avgFingerWidth = fingerWidths.average().toFloat()
 
         // Also check if ROIs are large enough (additional validation)
-        // ROIs should be at least 108×36 for horizontal fingerprints
+        // ROIs should be at least 120×60 for horizontal fingerprints (60% of 200×100 target)
         val hasSmallROIs = fingerprintROIs.values.any { roi ->
-            roi.width() < 108 || roi.height() < 36
+            roi.width() < 120 || roi.height() < 60
         }
 
         Log.d(TAG, "Camera distance check: avgFingerWidth=$avgFingerWidth, hasSmallROIs=$hasSmallROIs")

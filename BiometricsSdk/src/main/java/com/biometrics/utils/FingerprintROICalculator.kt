@@ -20,11 +20,14 @@ object FingerprintROICalculator {
      * These dimensions are optimized for horizontal hand orientation
      * (fingers pointing left-to-right)
      *
+     * INCREASED SIZE for better fingerprint matching quality!
+     * Larger ROIs capture more ridge detail for accurate biometric matching.
+     *
      * CRITICAL: Height must be small enough to isolate individual fingers
      * and avoid capturing adjacent fingers above/below
      */
-    private const val ROI_WIDTH = 120   // Width in pixels (capture fingertip area only)
-    private const val ROI_HEIGHT = 60   // Height in pixels (reduced to avoid adjacent fingers)
+    private const val ROI_WIDTH = 200   // Increased from 120 for better detail
+    private const val ROI_HEIGHT = 100  // Increased from 60 for more ridge patterns
 
     /**
      * Calculate ROI for a finger using FIXED-SIZE BOUNDING BOX approach.
@@ -129,9 +132,9 @@ object FingerprintROICalculator {
         }
 
         // Check minimum size - ROI should be at least 60% of target size
-        // Target is 180×60, so minimum is 108×36
-        if (width < 108 || height < 36) {
-            android.util.Log.d("ROICalculator", "ROI too small: ${width.toInt()}×${height.toInt()} (min: 108×36)")
+        // Target is 200×100, so minimum is 120×60
+        if (width < 120 || height < 60) {
+            android.util.Log.d("ROICalculator", "ROI too small: ${width.toInt()}×${height.toInt()} (min: 120×60)")
             return false
         }
 

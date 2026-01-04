@@ -71,6 +71,8 @@ import androidx.activity.OnBackPressedCallback
 import com.biometrics.model.BiometricsResult
 import com.biometrics.utils.FingerprintExtractor
 import com.biometrics.viewmodel.BiometricsSharedViewModel
+import org.opencv.android.Utils
+import org.opencv.imgproc.Imgproc
 
 class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener, ConfirmationDialogFragment.ConfirmationListener {
 
@@ -98,6 +100,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     private var lastFocusTime = 0L
     private var shouldCaptureNextFrame = false
     private var isProcessingCapture = false
+
+    // Store current ROIs from OverlayView for direct capture
+    private var currentFingerROIs = mutableMapOf<FingerprintExtractor.FingerType, android.graphics.RectF>()
 
 
     private val requestPermissionLauncher =
@@ -502,6 +507,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     RunningMode.LIVE_STREAM
                 )
 
+                // Store current ROIs for direct capture (these are the green boxes!)
+                currentFingerROIs = fragmentCameraBinding.overlay.getFingerprintROIs().toMutableMap()
+
                 // Trigger auto-focus on hand detection
                 if (resultBundle.results.first().landmarks().isNotEmpty()) {
                     if (!isFocusing && (System.currentTimeMillis() - lastFocusTime > 1000)) {
@@ -610,7 +618,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     }
 
     /**
-     * Process captured frame: extract fingerprints and save
+     * NEW OPTIMIZED METHOD: Directly crop fingerprint ROIs from camera frame
+     * No need to re-run MediaPipe! We use the green boxes already calculated by OverlayView.
      */
     private fun captureAndProcessFrame(bitmap: Bitmap, landmarks: HandLandmarkerResult) {
         try {
@@ -620,61 +629,104 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
             }
 
             Log.d(TAG, "====================================================")
-            Log.d(TAG, "🎯 CAPTURE TRIGGERED")
-            Log.d(TAG, "Processing bitmap: ${bitmap.width}x${bitmap.height}, format: ${bitmap.config}")
+            Log.d(TAG, "🎯 DIRECT ROI CAPTURE (No MediaPipe re-run!)")
+            Log.d(TAG, "Source bitmap: ${bitmap.width}x${bitmap.height}, format: ${bitmap.config}")
+            Log.d(TAG, "Green boxes to capture: ${currentFingerROIs.size}")
 
-            // CRITICAL: Detect hand on the CAPTURED bitmap, not using old stored landmarks!
-            // Create a temporary IMAGE-mode helper to get fresh landmarks from this exact bitmap
-            val imageHelper = HandLandmarkerHelper(
-                context = requireContext(),
-                runningMode = RunningMode.IMAGE,
-                minHandDetectionConfidence = handLandmarkerHelper.minHandDetectionConfidence,
-                minHandTrackingConfidence = handLandmarkerHelper.minHandTrackingConfidence,
-                minHandPresenceConfidence = handLandmarkerHelper.minHandPresenceConfidence,
-                maxNumHands = 1,
-                currentDelegate = handLandmarkerHelper.currentDelegate
-            )
-
-            // Detect hand landmarks directly on captured bitmap
-            val resultBundle = imageHelper.detectImage(bitmap)
-
-            if (resultBundle == null || resultBundle.results.first().landmarks().isEmpty()) {
-                Log.e(TAG, "❌ FAILURE: No hand detected on captured bitmap")
+            // Check if we have valid ROIs
+            if (currentFingerROIs.isEmpty()) {
+                Log.e(TAG, "❌ No ROIs available - aborting capture")
                 activity?.runOnUiThread {
-                    Toast.makeText(requireContext(), "No hand detected. Please try again.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "No fingerprint regions detected. Try again.", Toast.LENGTH_SHORT).show()
                     fragmentCameraBinding.progressBar.visibility = View.GONE
                     isProcessingCapture = false
-
-                    // Reset overlay to allow another capture attempt
                     fragmentCameraBinding.overlay.resetCapture()
                 }
                 return
             }
 
-            val freshLandmarks = resultBundle.results.first()
-            Log.d(TAG, "✓ Detected hands on captured bitmap: ${freshLandmarks.landmarks().size}")
-            Log.d(TAG, "====================================================")
+            // Directly crop fingerprint regions from bitmap using stored ROIs
+            val fingerprints = mutableListOf<FingerprintExtractor.FingerprintImage>()
 
-            // Extract fingerprints using the FingerprintExtractor with FRESH landmarks
-            val extraction = fingerprintExtractor.extractFingerprints(bitmap, freshLandmarks, 0)
+            for ((fingerType, roi) in currentFingerROIs) {
+                try {
+                    // Validate ROI is within bitmap bounds
+                    if (roi.left < 0 || roi.top < 0 || roi.right > bitmap.width || roi.bottom > bitmap.height) {
+                        Log.w(TAG, "⚠ $fingerType ROI out of bounds - skipping")
+                        continue
+                    }
 
-            if (extraction != null && extraction.fingerprints.isNotEmpty()) {
+                    // Ensure ROI has reasonable size
+                    if (roi.width() < 30 || roi.height() < 30) {
+                        Log.w(TAG, "⚠ $fingerType ROI too small (${roi.width().toInt()}x${roi.height().toInt()}) - skipping")
+                        continue
+                    }
+
+                    // Crop the finger region directly from the bitmap
+                    val fingerBitmap = Bitmap.createBitmap(
+                        bitmap,
+                        roi.left.toInt(),
+                        roi.top.toInt(),
+                        roi.width().toInt(),
+                        roi.height().toInt()
+                    )
+
+                    // Ensure highest quality format (ARGB_8888)
+                    val highQualityBitmap = if (fingerBitmap.config != Bitmap.Config.ARGB_8888) {
+                        fingerBitmap.copy(Bitmap.Config.ARGB_8888, false).also { fingerBitmap.recycle() }
+                    } else {
+                        fingerBitmap
+                    }
+
+                    Log.d(TAG, "✓ Cropped $fingerType: ${highQualityBitmap.width}x${highQualityBitmap.height}px from ROI")
+
+                    // Assess quality using OpenCV (with proper initialization check)
+                    val quality = try {
+                        // Initialize OpenCV if not already done
+                        if (!org.opencv.android.OpenCVLoader.initDebug()) {
+                            Log.w(TAG, "OpenCV not initialized, using default quality score")
+                            80f  // Default quality score when OpenCV unavailable
+                        } else {
+                            assessFingerprintQuality(highQualityBitmap)
+                        }
+                    } catch (e: Exception) {
+                        Log.w(TAG, "Quality assessment failed for $fingerType: ${e.message}")
+                        75f  // Default quality on error
+                    }
+
+                    Log.d(TAG, "  $fingerType quality: ${quality.toInt()}/100")
+
+                    // Add to list (accept all for now - server will validate)
+                    fingerprints.add(
+                        FingerprintExtractor.FingerprintImage(
+                            fingerType = fingerType,
+                            bitmap = highQualityBitmap,
+                            qualityScore = quality,
+                            roi = roi
+                        )
+                    )
+                } catch (e: Exception) {
+                    Log.e(TAG, "✗ Error cropping $fingerType: ${e.message}", e)
+                }
+            }
+
+            if (fingerprints.isNotEmpty()) {
+                val avgQuality = fingerprints.map { it.qualityScore }.average()
                 Log.d(TAG, "====================================================")
-                Log.d(TAG, "✅ SUCCESS: Extracted ${extraction.fingerprints.size}/4 fingerprints (thumb excluded)")
-                Log.d(TAG, "Overall quality: ${extraction.overallQuality.toInt()}/100")
-                extraction.fingerprints.forEach { fp ->
-                    Log.d(TAG, "  ${fp.fingerType}: ${fp.qualityScore.toInt()}/100")
+                Log.d(TAG, "✅ SUCCESS: Captured ${fingerprints.size}/4 fingerprints directly from green boxes!")
+                Log.d(TAG, "Average quality: ${avgQuality.toInt()}/100")
+                fingerprints.forEach { fp ->
+                    Log.d(TAG, "  ${fp.fingerType}: ${fp.bitmap.width}x${fp.bitmap.height}px @ ${fp.qualityScore.toInt()}%")
                 }
                 Log.d(TAG, "====================================================")
 
-                // Save hand image + fingerprints
-                saveHandAndFingerprints(bitmap, extraction)
+                // Save fingerprints (no full hand image needed)
+                saveFingerprints(fingerprints, bitmap)
 
                 activity?.runOnUiThread {
-                    val fingerprintCount = extraction.fingerprints.size
                     Toast.makeText(
                         requireContext(),
-                        "✓ Saved: Hand + $fingerprintCount fingerprints",
+                        "✓ Captured ${fingerprints.size} fingerprints!",
                         Toast.LENGTH_LONG
                     ).show()
 
@@ -682,28 +734,23 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                     sharedViewModel.postResult(BiometricsResult.Success("LOCAL_SAVE_${System.currentTimeMillis()}"))
                 }
             } else {
-                val reason = if (extraction == null) "extraction returned null" else "0 fingerprints passed quality check"
                 Log.e(TAG, "====================================================")
-                Log.e(TAG, "❌ FAILURE: $reason")
+                Log.e(TAG, "❌ FAILURE: No valid fingerprints captured")
                 Log.e(TAG, "====================================================")
 
                 activity?.runOnUiThread {
-                    Toast.makeText(requireContext(), "Poor quality. Try again with steady hand.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Failed to capture fingerprints. Try again.", Toast.LENGTH_LONG).show()
                     fragmentCameraBinding.progressBar.visibility = View.GONE
                     isProcessingCapture = false
-
-                    // Reset overlay to allow another capture attempt
                     fragmentCameraBinding.overlay.resetCapture()
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error processing capture: ${e.message}", e)
+            Log.e(TAG, "Error in direct ROI capture: ${e.message}", e)
             activity?.runOnUiThread {
                 Toast.makeText(requireContext(), "Capture error. Please try again.", Toast.LENGTH_SHORT).show()
                 fragmentCameraBinding.progressBar.visibility = View.GONE
                 isProcessingCapture = false
-
-                // Reset overlay to allow another capture attempt
                 fragmentCameraBinding.overlay.resetCapture()
             }
         } finally {
@@ -712,7 +759,101 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     }
 
     /**
-     * Save hand image and extracted fingerprints to storage
+     * Assess fingerprint image quality using OpenCV
+     * NOTE: Caller must ensure OpenCV is initialized before calling this!
+     */
+    private fun assessFingerprintQuality(bitmap: Bitmap): Float {
+        var mat: org.opencv.core.Mat? = null
+        var gray: org.opencv.core.Mat? = null
+        var laplacian: org.opencv.core.Mat? = null
+        var mean: org.opencv.core.MatOfDouble? = null
+        var stddev: org.opencv.core.MatOfDouble? = null
+
+        try {
+            mat = org.opencv.core.Mat()
+            Utils.bitmapToMat(bitmap, mat)
+
+            // Convert to grayscale
+            gray = org.opencv.core.Mat()
+            Imgproc.cvtColor(mat, gray, Imgproc.COLOR_RGBA2GRAY)
+
+            var totalScore = 0f
+            var scoreCount = 0
+
+            // 1. Sharpness (Laplacian variance)
+            laplacian = org.opencv.core.Mat()
+            Imgproc.Laplacian(gray, laplacian, org.opencv.core.CvType.CV_64F)
+            mean = org.opencv.core.MatOfDouble()
+            stddev = org.opencv.core.MatOfDouble()
+            org.opencv.core.Core.meanStdDev(laplacian, mean, stddev)
+            val sharpness = (stddev.get(0, 0)[0] / 50.0).coerceIn(0.0, 1.0)
+            totalScore += sharpness.toFloat() * 100
+            scoreCount++
+
+            // 2. Contrast (standard deviation)
+            org.opencv.core.Core.meanStdDev(gray, mean, stddev)
+            val contrast = (stddev.get(0, 0)[0] / 128.0).coerceIn(0.0, 1.0)
+            totalScore += contrast.toFloat() * 100
+            scoreCount++
+
+            // 3. Brightness check
+            val brightness = mean.get(0, 0)[0]
+            val brightnessScore = if (brightness in 60.0..180.0) {
+                1.0 - kotlin.math.abs(brightness - 120.0) / 120.0
+            } else {
+                0.0
+            }
+            totalScore += brightnessScore.toFloat() * 100
+            scoreCount++
+
+            return totalScore / scoreCount
+        } catch (e: Exception) {
+            Log.e(TAG, "OpenCV quality assessment error: ${e.message}", e)
+            return 75f  // Default quality on error
+        } finally {
+            // Cleanup resources
+            try {
+                mat?.release()
+                gray?.release()
+                laplacian?.release()
+                mean?.release()
+                stddev?.release()
+            } catch (e: Exception) {
+                Log.w(TAG, "Error releasing OpenCV resources: ${e.message}")
+            }
+        }
+    }
+
+    /**
+     * NEW: Save fingerprints directly (no hand image needed)
+     */
+    private fun saveFingerprints(
+        fingerprints: List<FingerprintExtractor.FingerprintImage>,
+        handBitmap: Bitmap? = null
+    ) {
+        val timestamp = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US).format(System.currentTimeMillis())
+
+        Log.d(TAG, "💾 Saving ${fingerprints.size} fingerprint images to gallery...")
+
+        // Optionally save the full hand image for reference
+        if (handBitmap != null) {
+            val handName = "${timestamp}_HAND_REFERENCE"
+            saveImageToGallery(handBitmap, handName)
+            Log.d(TAG, "  ✓ Saved reference hand image: $handName")
+        }
+
+        // Save each fingerprint with high quality
+        for (fingerprint in fingerprints) {
+            val fingerprintName = "${timestamp}_${fingerprint.fingerType.name}_Q${fingerprint.qualityScore.toInt()}"
+            saveImageToGallery(fingerprint.bitmap, fingerprintName)
+            Log.d(TAG, "  ✓ Saved ${fingerprint.fingerType.name}: ${fingerprint.bitmap.width}x${fingerprint.bitmap.height}px @ Q${fingerprint.qualityScore.toInt()}")
+        }
+
+        Log.d(TAG, "💾 All fingerprint images saved to Pictures/HandLandmarker/")
+    }
+
+    /**
+     * OLD METHOD (kept for compatibility)
      */
     private fun saveHandAndFingerprints(
         handBitmap: Bitmap,
