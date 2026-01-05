@@ -672,7 +672,16 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
     // Get current fingerprint ROIs for capture
     fun getFingerprintROIs(): Map<FingerprintExtractor.FingerType, RectF> {
-        return fingerprintROIs.toMap()
+        // Return SCALED ROIs (preview/screenshot coordinates)
+        // NOT MediaPipe frame coordinates!
+        return fingerprintROIs.mapValues { (_, roi) ->
+            RectF(
+                roi.left * scaleFactor,
+                roi.top * scaleFactor,
+                roi.right * scaleFactor,
+                roi.bottom * scaleFactor
+            )
+        }
     }
 
     fun setResults(

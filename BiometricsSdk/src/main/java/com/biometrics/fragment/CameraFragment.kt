@@ -574,10 +574,18 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
      * NEW: Capture screenshot of preview surface using PixelCopy (what user sees on screen)
      * This captures the ZOOMED view, not the full camera frame!
      * Uses PixelCopy API because PreviewView uses SurfaceView which can't be captured with draw()
+     *
+     * CLEAN CAPTURE: Temporarily hides overlay (green boxes, labels) for clean fingerprint images
      */
     private fun capturePreviewScreenshot(callback: (Bitmap?) -> Unit) {
         try {
             val viewFinder = fragmentCameraBinding.viewFinder
+            val overlay = fragmentCameraBinding.overlay
+
+            // HIDE overlay before capture (no green boxes, labels, etc. in screenshot!)
+            val originalVisibility = overlay.visibility
+            overlay.visibility = View.INVISIBLE
+            Log.d(TAG, "🙈 Overlay hidden for clean capture")
 
             // Create bitmap matching preview dimensions
             val bitmap = Bitmap.createBitmap(
@@ -604,8 +612,12 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                     rect,
                     bitmap,
                     { copyResult ->
+                        // RESTORE overlay visibility immediately after capture
+                        overlay.visibility = originalVisibility
+                        Log.d(TAG, "👁️ Overlay restored")
+
                         if (copyResult == android.view.PixelCopy.SUCCESS) {
-                            Log.d(TAG, "📸 Screenshot captured successfully: ${bitmap.width}x${bitmap.height}px (preview surface)")
+                            Log.d(TAG, "📸 Clean screenshot captured: ${bitmap.width}x${bitmap.height}px (no UI overlay!)")
                             callback(bitmap)
                         } else {
                             Log.e(TAG, "PixelCopy failed with result: $copyResult")
@@ -615,10 +627,14 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                     android.os.Handler(android.os.Looper.getMainLooper())
                 )
             } ?: run {
+                // Restore overlay even if window not available
+                overlay.visibility = originalVisibility
                 Log.e(TAG, "Window not available for PixelCopy")
                 callback(null)
             }
         } catch (e: Exception) {
+            // Restore overlay even on exception
+            fragmentCameraBinding.overlay.visibility = View.VISIBLE
             Log.e(TAG, "Failed to capture preview screenshot: ${e.message}", e)
             callback(null)
         }
@@ -727,9 +743,16 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
 
             for ((fingerType, roi) in currentFingerROIs) {
                 try {
+                    // Debug: Log ROI coordinates
+                    Log.d(TAG, "🔲 $fingerType ROI: " +
+                        "L=${roi.left.toInt()}, T=${roi.top.toInt()}, " +
+                        "R=${roi.right.toInt()}, B=${roi.bottom.toInt()}, " +
+                        "W=${roi.width().toInt()}, H=${roi.height().toInt()}")
+
                     // Validate ROI is within bitmap bounds
                     if (roi.left < 0 || roi.top < 0 || roi.right > bitmap.width || roi.bottom > bitmap.height) {
-                        Log.w(TAG, "⚠ $fingerType ROI out of bounds - skipping")
+                        Log.w(TAG, "⚠ $fingerType ROI out of bounds - skipping " +
+                            "(Screenshot: ${bitmap.width}x${bitmap.height})")
                         continue
                     }
 
