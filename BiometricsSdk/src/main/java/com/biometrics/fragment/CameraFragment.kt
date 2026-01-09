@@ -576,6 +576,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
      * Uses PixelCopy API because PreviewView uses SurfaceView which can't be captured with draw()
      *
      * CLEAN CAPTURE: Temporarily hides overlay (green boxes, labels) for clean fingerprint images
+     * IMPORTANT: Must wait for the view to re-render after hiding overlay before capturing!
      */
     private fun capturePreviewScreenshot(callback: (Bitmap?) -> Unit) {
         try {
@@ -587,51 +588,62 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
             overlay.visibility = View.INVISIBLE
             Log.d(TAG, "🙈 Overlay hidden for clean capture")
 
-            // Create bitmap matching preview dimensions
-            val bitmap = Bitmap.createBitmap(
-                viewFinder.width,
-                viewFinder.height,
-                Bitmap.Config.ARGB_8888
-            )
+            // CRITICAL: Wait for the view hierarchy to actually render without the overlay
+            // Using postDelayed to ensure at least one frame is drawn without the overlay
+            viewFinder.postDelayed({
+                try {
+                    // Create bitmap matching preview dimensions
+                    val bitmap = Bitmap.createBitmap(
+                        viewFinder.width,
+                        viewFinder.height,
+                        Bitmap.Config.ARGB_8888
+                    )
 
-            // Use PixelCopy to capture SurfaceView content
-            val locationInWindow = IntArray(2)
-            viewFinder.getLocationInWindow(locationInWindow)
+                    // Use PixelCopy to capture SurfaceView content
+                    val locationInWindow = IntArray(2)
+                    viewFinder.getLocationInWindow(locationInWindow)
 
-            val rect = android.graphics.Rect(
-                locationInWindow[0],
-                locationInWindow[1],
-                locationInWindow[0] + viewFinder.width,
-                locationInWindow[1] + viewFinder.height
-            )
+                    val rect = android.graphics.Rect(
+                        locationInWindow[0],
+                        locationInWindow[1],
+                        locationInWindow[0] + viewFinder.width,
+                        locationInWindow[1] + viewFinder.height
+                    )
 
-            // PixelCopy from window surface
-            activity?.window?.let { window ->
-                android.view.PixelCopy.request(
-                    window,
-                    rect,
-                    bitmap,
-                    { copyResult ->
-                        // RESTORE overlay visibility immediately after capture
+                    // PixelCopy from window surface
+                    activity?.window?.let { window ->
+                        android.view.PixelCopy.request(
+                            window,
+                            rect,
+                            bitmap,
+                            { copyResult ->
+                                // RESTORE overlay visibility immediately after capture
+                                overlay.visibility = originalVisibility
+                                Log.d(TAG, "👁️ Overlay restored")
+
+                                if (copyResult == android.view.PixelCopy.SUCCESS) {
+                                    Log.d(TAG, "📸 Clean screenshot captured: ${bitmap.width}x${bitmap.height}px (no UI overlay!)")
+                                    callback(bitmap)
+                                } else {
+                                    Log.e(TAG, "PixelCopy failed with result: $copyResult")
+                                    callback(null)
+                                }
+                            },
+                            android.os.Handler(android.os.Looper.getMainLooper())
+                        )
+                    } ?: run {
+                        // Restore overlay even if window not available
                         overlay.visibility = originalVisibility
-                        Log.d(TAG, "👁️ Overlay restored")
-
-                        if (copyResult == android.view.PixelCopy.SUCCESS) {
-                            Log.d(TAG, "📸 Clean screenshot captured: ${bitmap.width}x${bitmap.height}px (no UI overlay!)")
-                            callback(bitmap)
-                        } else {
-                            Log.e(TAG, "PixelCopy failed with result: $copyResult")
-                            callback(null)
-                        }
-                    },
-                    android.os.Handler(android.os.Looper.getMainLooper())
-                )
-            } ?: run {
-                // Restore overlay even if window not available
-                overlay.visibility = originalVisibility
-                Log.e(TAG, "Window not available for PixelCopy")
-                callback(null)
-            }
+                        Log.e(TAG, "Window not available for PixelCopy")
+                        callback(null)
+                    }
+                } catch (e: Exception) {
+                    // Restore overlay even on exception
+                    overlay.visibility = originalVisibility
+                    Log.e(TAG, "Failed during PixelCopy: ${e.message}", e)
+                    callback(null)
+                }
+            }, 50) // Wait 50ms (~3 frames at 60fps) to ensure overlay is hidden in render
         } catch (e: Exception) {
             // Restore overlay even on exception
             fragmentCameraBinding.overlay.visibility = View.VISIBLE
@@ -974,7 +986,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
     }
 
     /**
-     * NEW: Save fingerprints directly (no hand image needed)
+     * Save fingerprints directly (only 4 finger images, no debug images)
      */
     private fun saveFingerprints(
         fingerprints: List<FingerprintExtractor.FingerprintImage>,
@@ -983,11 +995,6 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
         val timestamp = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US).format(System.currentTimeMillis())
 
         Log.d(TAG, "💾 Saving ${fingerprints.size} fingerprint images to gallery...")
-
-        // DEBUG MODE: Save 3x3 grid to see where hand appears
-        if (handBitmap != null) {
-            saveDebugGrid(handBitmap)
-        }
 
         // Save each fingerprint with high quality
         for (fingerprint in fingerprints) {
