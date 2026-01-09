@@ -24,12 +24,12 @@ class FingerprintExtractor {
 
         // MediaPipe Hand Landmark indices
         // Thumb: 1-4 (EXCLUDED - unreliable for horizontal hands)
-        // Index: 5-8, Middle: 9-12, Ring: 13-16, Pinky: 17-20
+        // Index: 5-8, Middle: 9-12, Ring: 13-16, Little: 17-20
         private val FINGER_LANDMARKS = mapOf(
-            FingerType.INDEX to listOf(5, 6, 7, 8),
-            FingerType.MIDDLE to listOf(9, 10, 11, 12),
-            FingerType.RING to listOf(13, 14, 15, 16),
-            FingerType.PINKY to listOf(17, 18, 19, 20)
+            BaseFinger.INDEX to listOf(5, 6, 7, 8),
+            BaseFinger.MIDDLE to listOf(9, 10, 11, 12),
+            BaseFinger.RING to listOf(13, 14, 15, 16),
+            BaseFinger.LITTLE to listOf(17, 18, 19, 20)
         )
 
         // Padding percentage around detected finger region
@@ -42,8 +42,45 @@ class FingerprintExtractor {
         private const val MIN_ROI_SIZE = 30  // Was 50
     }
 
-    enum class FingerType {
-        THUMB, INDEX, MIDDLE, RING, PINKY
+    /**
+     * Standard finger type codes as per biometric standards
+     * Supports both LEFT and RIGHT hand fingers
+     */
+    enum class FingerType(val standardName: String) {
+        // Right hand
+        RIGHT_THUMB("RIGHT_THUMB"),
+        RIGHT_INDEX("RIGHT_INDEX"),
+        RIGHT_MIDDLE("RIGHT_MIDDLE"),
+        RIGHT_RING("RIGHT_RING"),
+        RIGHT_LITTLE("RIGHT_LITTLE"),
+        // Left hand
+        LEFT_THUMB("LEFT_THUMB"),
+        LEFT_INDEX("LEFT_INDEX"),
+        LEFT_MIDDLE("LEFT_MIDDLE"),
+        LEFT_RING("LEFT_RING"),
+        LEFT_LITTLE("LEFT_LITTLE");
+
+        companion object {
+            /**
+             * Get the correct FingerType based on base finger and handedness
+             */
+            fun fromBaseAndHand(baseFinger: BaseFinger, isRightHand: Boolean): FingerType {
+                return when (baseFinger) {
+                    BaseFinger.THUMB -> if (isRightHand) RIGHT_THUMB else LEFT_THUMB
+                    BaseFinger.INDEX -> if (isRightHand) RIGHT_INDEX else LEFT_INDEX
+                    BaseFinger.MIDDLE -> if (isRightHand) RIGHT_MIDDLE else LEFT_MIDDLE
+                    BaseFinger.RING -> if (isRightHand) RIGHT_RING else LEFT_RING
+                    BaseFinger.LITTLE -> if (isRightHand) RIGHT_LITTLE else LEFT_LITTLE
+                }
+            }
+        }
+    }
+
+    /**
+     * Base finger types (without hand specification) - used internally for landmark mapping
+     */
+    enum class BaseFinger {
+        THUMB, INDEX, MIDDLE, RING, LITTLE
     }
 
     data class FingerprintImage(
@@ -83,10 +120,14 @@ class FingerprintExtractor {
         val fingerprints = mutableListOf<FingerprintImage>()
 
         // Process each finger
-        Log.d(TAG, "========== STARTING FINGERPRINT EXTRACTION ==========")
-        for ((fingerType, landmarkIndices) in FINGER_LANDMARKS) {
+        val handName = if (isRightHand) "RIGHT" else "LEFT"
+        Log.d(TAG, "========== STARTING FINGERPRINT EXTRACTION ($handName HAND) ==========")
+        for ((baseFinger, landmarkIndices) in FINGER_LANDMARKS) {
             try {
+                // Convert base finger to proper FingerType with handedness
+                val fingerType = FingerType.fromBaseAndHand(baseFinger, isRightHand)
                 Log.d(TAG, "→ Processing $fingerType...")
+
                 val roi = calculateFingerprintROI(landmarks, landmarkIndices, width, height)
 
                 // Validate ROI
@@ -138,10 +179,10 @@ class FingerprintExtractor {
                     Log.d(TAG, "✗ $fingerType: REJECTED (quality ${quality.toInt()} < $MIN_QUALITY_SCORE)")
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "✗ Error extracting $fingerType: ${e.message}", e)
+                Log.e(TAG, "✗ Error extracting $baseFinger: ${e.message}", e)
             }
         }
-        Log.d(TAG, "========== EXTRACTION COMPLETE: ${fingerprints.size}/4 fingerprints (thumb excluded) ==========")
+        Log.d(TAG, "========== EXTRACTION COMPLETE: ${fingerprints.size}/4 fingerprints ($handName HAND) ==========")
 
         // Calculate overall quality (or 0 if no fingerprints extracted)
         val overallQuality = if (fingerprints.isNotEmpty()) {

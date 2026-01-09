@@ -24,7 +24,8 @@
         android:id="@+id/start_biometrics_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Biometrics"/>
+        android:text="Start Biometrics"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/launch_sdk_button"

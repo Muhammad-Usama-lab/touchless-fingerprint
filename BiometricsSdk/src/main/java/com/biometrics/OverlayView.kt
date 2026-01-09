@@ -6,17 +6,13 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.google.mediapipe.tasks.vision.core.RunningMode
-import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarker
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
-import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
 
 import android.graphics.Color
-import android.graphics.DashPathEffect
 import android.graphics.PointF
 import android.graphics.RectF
 import com.biometrics.utils.FingerprintExtractor
@@ -27,104 +23,96 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
     private var results: HandLandmarkerResult? = null
     private var previousResults: HandLandmarkerResult? = null
-    private var linePaint = Paint()
-    private var pointPaint = Paint()
 
     private var scaleFactor: Float = 1f
     private var imageWidth: Int = 1
     private var imageHeight: Int = 1
-
-    private var captureListener: CaptureListener? = null
-    private var captureTriggered = false
 
     // Fingerprint detection
     private val fingerprintExtractor = FingerprintExtractor()
     private var fingerprintROIs = mutableMapOf<FingerprintExtractor.FingerType, RectF>()
     private var fingerQualityScores = mutableMapOf<FingerprintExtractor.FingerType, Float>()
 
-
-    private var stableFrameCount = 0
-    private val REQUIRED_STABLE_FRAMES = 2  // ~66ms at 30fps - VERY FAST capture (was 30)
     private var isCapturing = false
-    private var framesSinceLastReset = 0  // Track frames since last reset to be more forgiving
 
+    // Focus state - must be focused before capture
+    private var isFocused = false
+    private var isFocusing = false
 
-    // Callback for when stable and ready to capture
+    // Callback for when stable and ready to capture - triggers INSTANTLY when conditions met
     var onReadyToCapture: (() -> Unit)? = null
 
-
-    // Paint for fingerprint ROI boxes
-    private val roiPaint = Paint().apply {
-        color = Color.GREEN
-        style = Paint.Style.STROKE
-        strokeWidth = 4f
+    // Called by CameraFragment to update focus state
+    fun setFocusState(focused: Boolean, focusing: Boolean) {
+        isFocused = focused
+        isFocusing = focusing
     }
 
-    private val roiPaintLowQuality = Paint().apply {
-        color = Color.RED
-        style = Paint.Style.STROKE
-        strokeWidth = 4f
-        pathEffect = DashPathEffect(floatArrayOf(10f, 10f), 0f)
-    }
-
-    private val textPaint = Paint().apply {
-        color = Color.WHITE
-        textSize = 30f
-        style = Paint.Style.FILL
-        textAlign = Paint.Align.LEFT
-    }
-
-    private val textBackgroundPaint = Paint().apply {
-        color = Color.argb(180, 0, 0, 0)
-        style = Paint.Style.FILL
-    }
-
-    // Guide rectangle for hand placement
+    // Guide rectangle for hand placement (rounded corners)
     private val guidePaint = Paint().apply {
         style = Paint.Style.STROKE
-        strokeWidth = 8f
-        pathEffect = DashPathEffect(floatArrayOf(20f, 20f), 0f)
+        strokeWidth = 4f
+        color = Color.WHITE
+        isAntiAlias = true
     }
 
     private val guideRect = RectF()
+    private val cornerRadius = 40f  // Rounded corners
+
+    // Distance level (0.0 = too far, 0.5 = perfect, 1.0 = too close)
+    private var distanceLevel = 0f
+
+    // Crosshair paint
+    private val crosshairPaint = Paint().apply {
+        style = Paint.Style.STROKE
+        strokeWidth = 2f
+        color = Color.WHITE
+        isAntiAlias = true
+    }
+
+    // Distance indicator paints
+    private val distanceBarPaint = Paint().apply {
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
+
+    private val distanceTextPaint = Paint().apply {
+        color = Color.WHITE
+        textSize = 24f
+        isAntiAlias = true
+        textAlign = Paint.Align.CENTER
+    }
+
+    // Status text paint
+    private val statusTextPaint = Paint().apply {
+        color = Color.parseColor("#FFEB3B")  // Yellow
+        textSize = 36f
+        isAntiAlias = true
+        textAlign = Paint.Align.CENTER
+        isFakeBoldText = true
+    }
 
     // Hand position status
     private var handPositionStatus: HandPositionStatus = HandPositionStatus.NO_HAND
 
     enum class HandPositionStatus(val message: String, val color: Int) {
-        NO_HAND("Place hand in frame", Color.WHITE),
-        TOO_FAR("Move hand CLOSER to camera", Color.RED),
-        TOO_CLOSE("Move hand BACK from camera", Color.RED),
-        OUTSIDE_BOX("Move hand into guide box", Color.YELLOW),
-        NOT_STABLE("Hold hand STEADY", Color.YELLOW),
-        PERFECT("✓ Hold steady!", Color.GREEN)
-        // REMOVED: LOW_QUALITY, TOO_BLURRY (quality check disabled)
-    }
-
-    interface CaptureListener {
-        fun onCapture(result: HandLandmarkerResult)
-    }
-
-    init {
-        initPaints()
-    }
-
-    fun setCaptureListener(listener: CaptureListener) {
-        this.captureListener = listener
+        NO_HAND("Place your hand in the box", Color.WHITE),
+        TOO_FAR("Move closer", Color.RED),
+        TOO_CLOSE("Move back", Color.RED),
+        OUTSIDE_BOX("Place hand in box", Color.YELLOW),
+        NOT_STABLE("Stay still", Color.YELLOW),
+        FOCUSING("Focusing...", Color.CYAN),
+        PERFECT("Taking Picture", Color.parseColor("#4CAF50"))  // Green
     }
 
     fun clear() {
         results = null
         previousResults = null
-        linePaint.reset()
-        pointPaint.reset()
         invalidate()
-        initPaints()
-        captureTriggered = false
         fingerprintROIs.clear()
         fingerQualityScores.clear()
+        isCapturing = false
     }
-
 
     private fun checkStability(): Boolean {
         if (results == null || previousResults == null) return false
@@ -150,145 +138,189 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         return averageDistance < 0.003f  // Stability threshold (stricter: was 0.005)
     }
 
-    private fun initPaints() {
-        linePaint.color =
-            ContextCompat.getColor(context!!, R.color.bsdk_color_primary)
-        linePaint.strokeWidth = LANDMARK_STROKE_WIDTH
-        linePaint.style = Paint.Style.STROKE
-
-        pointPaint.color = Color.YELLOW
-        pointPaint.strokeWidth = LANDMARK_STROKE_WIDTH
-        pointPaint.style = Paint.Style.FILL
-    }
-
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
 
-        // Draw guide rectangle first (always visible)
-        drawGuideRectangle(canvas)
+        // Draw the clean UI (like reference image)
+        drawGuideBox(canvas)           // Rounded rectangle guide
+        drawDistanceIndicator(canvas)  // TOO FAR / TOO CLOSE scale on left
+        drawCrosshair(canvas)          // Crosshair in center
+        drawStatusText(canvas)         // "Taking Picture" or status message
 
+        // Calculate ROIs in background (needed for capture) but don't draw them
         results?.let { handLandmarkerResult ->
-            // Finger names for reference (thumb excluded)
-            val fingerNames = mapOf(
-                8 to "Index Finger",
-                12 to "Middle Finger",
-                16 to "Ring Finger",
-                20 to "Pinky Finger"
-            )
-
-            for ((handIndex, landmark) in handLandmarkerResult.landmarks().withIndex()) {
-                // OLD AUTO-CAPTURE TRIGGER REMOVED!
-                // Was checking handNearRightEdge - this bypassed quality checks
-                // Now using ONLY the quality-based trigger in setResults()
-
-                for (normalizedLandmark in landmark) {
-                    canvas.drawPoint(
-                        normalizedLandmark.x() * imageWidth * scaleFactor,
-                        normalizedLandmark.y() * imageHeight * scaleFactor,
-                        pointPaint
-                    )
-                }
-
-                HandLandmarker.HAND_CONNECTIONS.forEach {
-                    canvas.drawLine(
-                        landmark.get(it!!.start())
-                            .x() * imageWidth * scaleFactor,
-                        landmark.get(it.start())
-                            .y() * imageHeight * scaleFactor,
-                        landmark.get(it.end())
-                            .x() * imageWidth * scaleFactor,
-                        landmark.get(it.end())
-                            .y() * imageHeight * scaleFactor,
-                        linePaint
-                    )
-                }
+            // Update hand position status
+            if (handLandmarkerResult.landmarks().isNotEmpty()) {
+                val landmarks = handLandmarkerResult.landmarks()[0]
+                handPositionStatus = checkHandPositionStatus(landmarks)
+                updateDistanceLevel(landmarks)
+            } else {
+                handPositionStatus = HandPositionStatus.NO_HAND
+                distanceLevel = 0f
             }
-
-            // Draw fingerprint ROIs
-            drawFingerprintROIs(canvas)
-
-            // Draw quality indicators
-            drawQualityIndicators(canvas)
-
-            // Draw hand position guidance
-            drawHandGuidance(canvas)
-
-            drawCapturingIndicator(canvas)
         }
     }
 
-    private fun drawGuideRectangle(canvas: Canvas) {
-        // Calculate guide box (85% width, 50% height, centered)
-        // Enlarged to allow hand to be closer while staying in frame
-        val guideWidth = width * 0.85f
-        val guideHeight = height * 0.50f
-        val left = (width - guideWidth) / 2
-        val top = height * 0.20f  // Position higher to center better
+    /**
+     * Draw rounded rectangle guide box (like reference UI)
+     */
+    private fun drawGuideBox(canvas: Canvas) {
+        // Calculate guide box - positioned to right side to leave room for distance indicator
+        val guideWidth = width * 0.75f
+        val guideHeight = height * 0.55f
+        val left = width * 0.20f  // Offset to right to make room for distance indicator
+        val top = height * 0.25f
 
         guideRect.set(left, top, left + guideWidth, top + guideHeight)
 
-        // Set color based on hand position status
-        guidePaint.color = handPositionStatus.color
-        guidePaint.strokeWidth = if (handPositionStatus == HandPositionStatus.PERFECT) 12f else 8f
-
-        // Draw the rectangle
-        canvas.drawRect(guideRect, guidePaint)
-
-        // Draw instruction text at top
-        val instructionPaint = Paint(textPaint).apply {
-            textSize = 36f
-            color = Color.WHITE
-            textAlign = Paint.Align.CENTER
-        }
-
-        val instruction = "Place hand here"
-        canvas.drawText(
-            instruction,
-            width / 2f,
-            top - 20,
-            instructionPaint
-        )
+        // Draw rounded rectangle with white border
+        guidePaint.color = Color.WHITE
+        guidePaint.strokeWidth = 3f
+        canvas.drawRoundRect(guideRect, cornerRadius, cornerRadius, guidePaint)
     }
 
-    private fun drawHandGuidance(canvas: Canvas) {
-        if (results == null || results!!.landmarks().isEmpty()) {
-            handPositionStatus = HandPositionStatus.NO_HAND
+    /**
+     * Draw distance indicator on left side (TOO FAR at top, TOO CLOSE at bottom)
+     */
+    private fun drawDistanceIndicator(canvas: Canvas) {
+        val indicatorLeft = width * 0.03f
+        val indicatorWidth = width * 0.08f
+        val indicatorTop = guideRect.top + 40f
+        val indicatorBottom = guideRect.bottom - 40f
+        val indicatorHeight = indicatorBottom - indicatorTop
+
+        // Draw "TOO FAR" text at top
+        distanceTextPaint.textSize = 20f
+        canvas.drawText("TOO", indicatorLeft + indicatorWidth / 2, indicatorTop - 25, distanceTextPaint)
+        canvas.drawText("FAR", indicatorLeft + indicatorWidth / 2, indicatorTop - 5, distanceTextPaint)
+
+        // Draw "TOO CLOSE" text at bottom
+        canvas.drawText("TOO", indicatorLeft + indicatorWidth / 2, indicatorBottom + 20, distanceTextPaint)
+        canvas.drawText("CLOSE", indicatorLeft + indicatorWidth / 2, indicatorBottom + 42, distanceTextPaint)
+
+        // Draw scale bars (like the reference image)
+        val numBars = 10
+        val barHeight = indicatorHeight / numBars
+        val barSpacing = 4f
+
+        for (i in 0 until numBars) {
+            val barTop = indicatorTop + i * barHeight + barSpacing / 2
+            val barBottom = barTop + barHeight - barSpacing
+            val barRect = RectF(indicatorLeft, barTop, indicatorLeft + indicatorWidth, barBottom)
+
+            // Calculate if this bar should be highlighted based on distance level
+            // distanceLevel: 0 = too far (top), 0.5 = perfect (middle), 1 = too close (bottom)
+            val barPosition = i.toFloat() / numBars
+
+            // Determine bar color based on distance
+            val isActive = when {
+                distanceLevel < 0.3f -> barPosition < 0.3f  // Too far - light up top bars
+                distanceLevel > 0.7f -> barPosition > 0.7f  // Too close - light up bottom bars
+                else -> barPosition in 0.3f..0.7f  // Good - light up middle bars
+            }
+
+            if (isActive && results != null && results!!.landmarks().isNotEmpty()) {
+                // Active bar - green for good, red for bad
+                distanceBarPaint.color = when {
+                    distanceLevel in 0.3f..0.7f -> Color.parseColor("#4CAF50")  // Green - good
+                    else -> Color.RED  // Red - too far or too close
+                }
+            } else {
+                // Inactive bar - dark gray
+                distanceBarPaint.color = Color.parseColor("#333333")
+            }
+
+            canvas.drawRoundRect(barRect, 4f, 4f, distanceBarPaint)
+        }
+
+        // Draw arrow indicator showing current position
+        if (results != null && results!!.landmarks().isNotEmpty()) {
+            val arrowY = indicatorTop + distanceLevel * indicatorHeight
+            val arrowPaint = Paint().apply {
+                color = Color.parseColor("#4CAF50")  // Green arrow
+                style = Paint.Style.FILL
+                isAntiAlias = true
+            }
+
+            // Draw triangle arrow pointing right
+            val path = android.graphics.Path()
+            path.moveTo(indicatorLeft + indicatorWidth + 5, arrowY)
+            path.lineTo(indicatorLeft + indicatorWidth + 20, arrowY - 10)
+            path.lineTo(indicatorLeft + indicatorWidth + 20, arrowY + 10)
+            path.close()
+            canvas.drawPath(path, arrowPaint)
+        }
+    }
+
+    /**
+     * Draw crosshair/target in center of guide box
+     */
+    private fun drawCrosshair(canvas: Canvas) {
+        val centerX = guideRect.centerX()
+        val centerY = guideRect.centerY()
+        val crosshairSize = 30f
+        val circleRadius = 20f
+
+        crosshairPaint.color = Color.WHITE
+        crosshairPaint.strokeWidth = 2f
+
+        // Draw circle
+        canvas.drawCircle(centerX, centerY, circleRadius, crosshairPaint)
+
+        // Draw crosshair lines
+        canvas.drawLine(centerX - crosshairSize, centerY, centerX - circleRadius - 5, centerY, crosshairPaint)
+        canvas.drawLine(centerX + circleRadius + 5, centerY, centerX + crosshairSize, centerY, crosshairPaint)
+        canvas.drawLine(centerX, centerY - crosshairSize, centerX, centerY - circleRadius - 5, crosshairPaint)
+        canvas.drawLine(centerX, centerY + circleRadius + 5, centerX, centerY + crosshairSize, crosshairPaint)
+    }
+
+    /**
+     * Draw status text at top (like "Taking Picture")
+     */
+    private fun drawStatusText(canvas: Canvas) {
+        val statusY = guideRect.top - 30f
+
+        // Set color based on status
+        statusTextPaint.color = when (handPositionStatus) {
+            HandPositionStatus.PERFECT -> Color.parseColor("#4CAF50")  // Green
+            HandPositionStatus.NO_HAND -> Color.WHITE
+            else -> Color.parseColor("#FFEB3B")  // Yellow for warnings
+        }
+
+        canvas.drawText(handPositionStatus.message, guideRect.centerX(), statusY, statusTextPaint)
+    }
+
+    /**
+     * Update distance level based on finger width (for distance indicator)
+     */
+    private fun updateDistanceLevel(landmarks: List<NormalizedLandmark>) {
+        // Calculate average finger width to determine distance
+        val fingerWidths = mutableListOf<Float>()
+        val fingers = listOf(
+            Pair(7, 6), Pair(11, 10), Pair(15, 14), Pair(19, 18)
+        )
+
+        for ((pipIndex, dipIndex) in fingers) {
+            val width = calculateFingerWidth(landmarks, pipIndex, dipIndex)
+            if (width > 0) fingerWidths.add(width)
+        }
+
+        if (fingerWidths.isEmpty()) {
+            distanceLevel = 0f
             return
         }
 
-        // Get hand position status
-        val landmarks = results!!.landmarks()[0]
-        handPositionStatus = checkHandPositionStatus(landmarks)
+        val avgWidth = fingerWidths.average().toFloat()
 
-        // Draw status message
-        val messagePaint = Paint(textPaint).apply {
-            textSize = 44f
-            color = handPositionStatus.color
-            textAlign = Paint.Align.CENTER
-            isFakeBoldText = true
-        }
-
-        val y = guideRect.bottom + 80
-
-        // Draw background for message
-        val textBounds = android.graphics.Rect()
-        messagePaint.getTextBounds(handPositionStatus.message, 0, handPositionStatus.message.length, textBounds)
-        canvas.drawRect(
-            width / 2f - textBounds.width() / 2 - 20,
-            y - textBounds.height() - 10,
-            width / 2f + textBounds.width() / 2 + 20,
-            y + 10,
-            textBackgroundPaint
-        )
-
-        // Draw message
-        canvas.drawText(
-            handPositionStatus.message,
-            width / 2f,
-            y,
-            messagePaint
-        )
+        // Map finger width to distance level
+        // minFingerWidth (70) = too far (0.0)
+        // maxFingerWidth (150) = too close (1.0)
+        // perfect (110) = 0.5
+        val minWidth = 40f
+        val maxWidth = 150f
+        distanceLevel = ((avgWidth - minWidth) / (maxWidth - minWidth)).coerceIn(0f, 1f)
     }
+
 
     private fun checkHandPositionStatus(landmarks: List<NormalizedLandmark>): HandPositionStatus {
         // 1. Check distance to camera (PRIORITY: must be close enough for fingerprints)
@@ -310,58 +342,15 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
             return HandPositionStatus.NOT_STABLE
         }
 
-        // 5. DISABLED: Quality check (user doesn't want lighting/quality constraints)
-        // Users can capture regardless of lighting conditions
-        /*
-        val avgQuality = if (fingerQualityScores.isNotEmpty()) {
-            fingerQualityScores.values.average()
-        } else {
-            0.0
+        // 5. Check focus state - must be focused before capture
+        if (isFocusing || !isFocused) {
+            return HandPositionStatus.FOCUSING
         }
-
-        // Require VERY HIGH quality for fingerprint matching (85%+)
-        if (avgQuality < 85.0) {
-            return HandPositionStatus.LOW_QUALITY
-        }
-        */
 
         // All checks passed! Ready for capture
         return HandPositionStatus.PERFECT
     }
 
-    private fun areFingersSpread(landmarks: List<NormalizedLandmark>): Boolean {
-        // Calculate spacing between fingertips
-        // Index (8), Middle (12), Ring (16), Pinky (20)
-        val indexTip = PointF(landmarks[8].x() * imageWidth, landmarks[8].y() * imageHeight)
-        val middleTip = PointF(landmarks[12].x() * imageWidth, landmarks[12].y() * imageHeight)
-        val ringTip = PointF(landmarks[16].x() * imageWidth, landmarks[16].y() * imageHeight)
-        val pinkyTip = PointF(landmarks[20].x() * imageWidth, landmarks[20].y() * imageHeight)
-
-        // Calculate average spacing between adjacent fingers
-        val spacing1 = distance(indexTip, middleTip)
-        val spacing2 = distance(middleTip, ringTip)
-        val spacing3 = distance(ringTip, pinkyTip)
-        val avgSpacing = (spacing1 + spacing2 + spacing3) / 3
-
-        // If average spacing > 60px, fingers are spread
-        val threshold = 60f
-        Log.d(TAG, "Finger spacing: $avgSpacing (threshold: $threshold)")
-        return avgSpacing > threshold
-    }
-
-    private fun isHandHorizontal(landmarks: List<NormalizedLandmark>): Boolean {
-        // Check orientation by comparing wrist to middle fingertip
-        val wrist = PointF(landmarks[0].x() * imageWidth, landmarks[0].y() * imageHeight)
-        val middleTip = PointF(landmarks[12].x() * imageWidth, landmarks[12].y() * imageHeight)
-
-        val dx = kotlin.math.abs(middleTip.x - wrist.x)
-        val dy = kotlin.math.abs(middleTip.y - wrist.y)
-
-        // If horizontal distance > vertical distance, hand is horizontal
-        val isHorizontal = dx > dy
-        Log.d(TAG, "Hand orientation: dx=$dx, dy=$dy, isHorizontal=$isHorizontal")
-        return isHorizontal
-    }
 
     private fun isHandInsideGuideBox(landmarks: List<NormalizedLandmark>): Boolean {
         // ONLY check FINGERTIPS, not entire hand!
@@ -393,12 +382,6 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         return isInside
     }
 
-    private fun distance(p1: PointF, p2: PointF): Float {
-        val dx = p2.x - p1.x
-        val dy = p2.y - p1.y
-        return sqrt(dx * dx + dy * dy)
-    }
-
     private fun checkCameraDistance(landmarks: List<NormalizedLandmark>): HandPositionStatus? {
         // Calculate average finger width across all fingers (except thumb)
         val fingerWidths = mutableListOf<Float>()
@@ -425,25 +408,31 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
         val avgFingerWidth = fingerWidths.average().toFloat()
 
-        // Also check if ROIs are large enough (additional validation)
-        // ROIs should be at least 84×60 for horizontal fingerprints (60% of 140×100 target)
+        // ROIs must be large enough for good fingerprint quality
+        // Increased thresholds to require hand to be CLOSER to camera
+        val minROIWidth = 120   // Was 84 - now requires larger ROIs
+        val minROIHeight = 80   // Was 60 - now requires larger ROIs
         val hasSmallROIs = fingerprintROIs.values.any { roi ->
-            roi.width() < 84 || roi.height() < 60
+            roi.width() < minROIWidth || roi.height() < minROIHeight
         }
 
-        Log.d(TAG, "Camera distance check: avgFingerWidth=$avgFingerWidth, hasSmallROIs=$hasSmallROIs")
+        // Minimum finger width threshold - INCREASED to require closer hand
+        val minFingerWidth = 70f   // Was 40 - now requires hand to be much closer
+        val maxFingerWidth = 150f  // Was 130 - slightly increased for flexibility
+
+        Log.d(TAG, "Camera distance: avgFingerWidth=$avgFingerWidth (need >$minFingerWidth), smallROIs=$hasSmallROIs")
 
         return when {
-            avgFingerWidth < 40f || hasSmallROIs -> {
-                Log.d(TAG, "Hand TOO_FAR: avgWidth=$avgFingerWidth (min 40)")
+            avgFingerWidth < minFingerWidth || hasSmallROIs -> {
+                Log.d(TAG, "Hand TOO_FAR: avgWidth=$avgFingerWidth (need >$minFingerWidth) or ROIs too small")
                 HandPositionStatus.TOO_FAR
             }
-            avgFingerWidth > 130f -> {
-                Log.d(TAG, "Hand TOO_CLOSE: avgWidth=$avgFingerWidth (max 130)")
+            avgFingerWidth > maxFingerWidth -> {
+                Log.d(TAG, "Hand TOO_CLOSE: avgWidth=$avgFingerWidth (max $maxFingerWidth)")
                 HandPositionStatus.TOO_CLOSE
             }
             else -> {
-                Log.d(TAG, "Distance GOOD: avgWidth=$avgFingerWidth")
+                Log.d(TAG, "Distance GOOD: avgWidth=$avgFingerWidth ✓")
                 null  // Distance is good, check other conditions
             }
         }
@@ -484,191 +473,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
     fun resetCapture() {
         isCapturing = false
-        stableFrameCount = 0
-        framesSinceLastReset = 0
         Log.d(TAG, "Capture reset")
     }
 
-
-    private fun drawCapturingIndicator(canvas: Canvas) {
-        if (stableFrameCount > 0 && !isCapturing) {
-            val progress = stableFrameCount.toFloat() / REQUIRED_STABLE_FRAMES
-            val text = "Hold steady... ${(progress * 100).toInt()}%"
-
-            val x = width / 2f
-            val y = 100f
-
-            // Draw background
-            val textBounds = android.graphics.Rect()
-            textPaint.getTextBounds(text, 0, text.length, textBounds)
-            textPaint.textAlign = Paint.Align.CENTER
-
-            canvas.drawRect(
-                x - textBounds.width() / 2 - 20,
-                y - textBounds.height() - 10,
-                x + textBounds.width() / 2 + 20,
-                y + 10,
-                textBackgroundPaint
-            )
-
-            // Draw text
-            val indicatorPaint = Paint(textPaint).apply {
-                color = Color.YELLOW
-                textSize = 40f
-            }
-            canvas.drawText(text, x, y, indicatorPaint)
-
-            // Reset text align
-            textPaint.textAlign = Paint.Align.LEFT
-        }
-
-        if (isCapturing) {
-            val text = "✓ CAPTURING..."
-            val x = width / 2f
-            val y = 100f
-
-            val textBounds = android.graphics.Rect()
-            textPaint.getTextBounds(text, 0, text.length, textBounds)
-            textPaint.textAlign = Paint.Align.CENTER
-
-            canvas.drawRect(
-                x - textBounds.width() / 2 - 20,
-                y - textBounds.height() - 10,
-                x + textBounds.width() / 2 + 20,
-                y + 10,
-                textBackgroundPaint
-            )
-
-            val capturingPaint = Paint(textPaint).apply {
-                color = Color.GREEN
-                textSize = 40f
-            }
-            canvas.drawText(text, x, y, capturingPaint)
-
-            textPaint.textAlign = Paint.Align.LEFT
-        }
-    }
-
-    private fun drawFingerprintROIs(canvas: Canvas) {
-        if (results == null || fingerprintROIs.isEmpty()) return
-
-        for ((fingerType, roi) in fingerprintROIs) {
-            // Scale ROI to canvas coordinates
-            val scaledRect = RectF(
-                roi.left * scaleFactor,
-                roi.top * scaleFactor,
-                roi.right * scaleFactor,
-                roi.bottom * scaleFactor
-            )
-
-            // Choose paint based on overall hand status, not just quality
-            // GREEN boxes = PERFECT (ready to capture)
-            // RED boxes = Problems detected (show user what's wrong)
-            val paint = if (handPositionStatus == HandPositionStatus.PERFECT) {
-                roiPaint  // Green - all conditions met!
-            } else {
-                roiPaintLowQuality  // Red dashed - problems detected
-            }
-
-            // Make boxes thicker when PERFECT to show confidence
-            paint.strokeWidth = if (handPositionStatus == HandPositionStatus.PERFECT) 6f else 4f
-
-            // Draw rectangle
-            canvas.drawRect(scaledRect, paint)
-
-            // Draw finger label with quality score
-            val quality = fingerQualityScores[fingerType] ?: 0f
-            val label = "${fingerType.name} ${quality.toInt()}%"
-            val textX = scaledRect.left + 5
-            val textY = scaledRect.top - 5
-
-            // Draw background for text
-            val textBounds = android.graphics.Rect()
-            textPaint.getTextBounds(label, 0, label.length, textBounds)
-            canvas.drawRect(
-                textX - 2,
-                textY - textBounds.height() - 2,
-                textX + textBounds.width() + 2,
-                textY + 2,
-                textBackgroundPaint
-            )
-
-            // Draw text with color matching box
-            val labelPaint = Paint(textPaint).apply {
-                color = if (handPositionStatus == HandPositionStatus.PERFECT) Color.GREEN else Color.RED
-            }
-            canvas.drawText(label, textX, textY, labelPaint)
-        }
-    }
-
-    private fun drawQualityIndicators(canvas: Canvas) {
-        if (fingerQualityScores.isEmpty()) return
-
-        // Draw overall quality score
-        val avgQuality = fingerQualityScores.values.average()
-        val qualityText = "Quality: ${avgQuality.toInt()}%"
-        val statusText = if (avgQuality >= 85) "EXCELLENT" else if (avgQuality >= 70) "GOOD" else if (avgQuality >= 50) "FAIR" else "POOR"
-
-        Log.d(TAG, "=== Overall Quality: $avgQuality | Status: $statusText ===")
-
-        val x = 20f
-        val y = 60f
-
-        // Background
-        val textBounds = android.graphics.Rect()
-        textPaint.getTextBounds("$qualityText - $statusText", 0, "$qualityText - $statusText".length, textBounds)
-        canvas.drawRect(
-            x - 5,
-            y - textBounds.height() - 5,
-            x + textBounds.width() + 5,
-            y + 5,
-            textBackgroundPaint
-        )
-
-        // Text with color based on quality
-        val qualityPaint = Paint(textPaint).apply {
-            color = when {
-                avgQuality >= 85 -> Color.GREEN  // Increased from 70
-                avgQuality >= 70 -> Color.YELLOW  // Increased from 50
-                else -> Color.RED
-            }
-        }
-        canvas.drawText("$qualityText - $statusText", x, y, qualityPaint)
-
-        // Draw individual finger quality
-        var yOffset = y + 40f
-        for ((finger, quality) in fingerQualityScores) {
-            val fingerText = "${finger.name}: ${quality.toInt()}%"
-            canvas.drawRect(
-                x - 5,
-                yOffset - 25,
-                x + 150,
-                yOffset + 5,
-                textBackgroundPaint
-            )
-
-            qualityPaint.color = when {
-                quality >= 85 -> Color.GREEN  // Increased from 70
-                quality >= 70 -> Color.YELLOW  // Increased from 50
-                else -> Color.RED
-            }
-            canvas.drawText(fingerText, x, yOffset, qualityPaint)
-            yOffset += 35f
-        }
-    }
-
-    // Method to check if capture should be triggered
-    fun shouldTriggerCapture(): Boolean {
-        if (fingerQualityScores.isEmpty()) return false
-
-        // Require at least 4 fingers with good quality
-        val goodQualityCount = fingerQualityScores.values.count { it >= 60 }
-        val avgQuality = fingerQualityScores.values.average()
-
-        Log.d(TAG, "shouldTriggerCapture: Good fingers: $goodQualityCount/5 | Avg: $avgQuality | Trigger: ${goodQualityCount >= 4 && avgQuality >= 45}")
-
-        return goodQualityCount >= 4 && avgQuality >= 70
-    }
 
     // Get current fingerprint ROIs for capture
     fun getFingerprintROIs(): Map<FingerprintExtractor.FingerType, RectF> {
@@ -696,57 +503,29 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         if (handLandmarkerResult.landmarks().isNotEmpty()) {
             calculateFingerprintROIs(imageHeight, imageWidth)
 
-            // Check if quality is good and hand is stable
-            val avgQuality = if (fingerQualityScores.isNotEmpty()) {
-                fingerQualityScores.values.average()
-            } else {
-                0.0
-            }
-
-            // Check hand position status (includes ALL checks: distance, stability, quality, position)
+            // Check hand position status (includes ALL checks: distance, stability, position)
             val landmarks = handLandmarkerResult.landmarks()[0]
             val positionStatus = checkHandPositionStatus(landmarks)
 
-            // CRITICAL: Only capture when status is PERFECT!
-            // This means ALL conditions are met:
-            // ✓ Hand close enough to camera
-            // ✓ Fingertips inside guide box
-            // ✓ Hand completely stable
-            if (positionStatus == HandPositionStatus.PERFECT && !isCapturing) {
-                stableFrameCount++
-                framesSinceLastReset = 0  // Reset grace period
-                Log.d(TAG, "✓ PERFECT! Stable frames: $stableFrameCount/$REQUIRED_STABLE_FRAMES")
+            // INSTANT CAPTURE when 3 conditions are met:
+            // 1. Hand is STABLE (not moving)
+            // 2. Hand is CLOSE to camera (not too far, not too close)
+            // 3. ROI COORDINATES exist (fingerprintROIs not empty)
+            val hasROIs = fingerprintROIs.isNotEmpty()
 
-                if (stableFrameCount >= REQUIRED_STABLE_FRAMES) {
-                    // All conditions perfect for sufficient time - CAPTURE NOW!
-                    isCapturing = true
-                    onReadyToCapture?.invoke()
-                    Log.d(TAG, "🎯 CAPTURING - All quality checks passed!")
-                }
-            } else {
-                // More forgiving reset - allow brief detection loss
-                framesSinceLastReset++
-
-                // Only reset if conditions bad for more than 5 frames (~166ms)
-                if (framesSinceLastReset > 5) {
-                    if (stableFrameCount > 0) {
-                        Log.d(TAG, "Reset after ${framesSinceLastReset} frames: Status=$positionStatus (need PERFECT)")
-                    }
-                    stableFrameCount = 0
-                } else {
-                    // Grace period - keep existing count
-                    Log.d(TAG, "Grace period: ${framesSinceLastReset}/5 frames, keeping count: $stableFrameCount")
-                }
+            if (positionStatus == HandPositionStatus.PERFECT && hasROIs && !isCapturing) {
+                // All conditions met - CAPTURE IMMEDIATELY!
+                isCapturing = true
+                Log.d(TAG, "🎯 INSTANT CAPTURE - Stable: ✓ | Close: ✓ | ROIs: ${fingerprintROIs.size}")
+                onReadyToCapture?.invoke()
             }
 
         } else {
             fingerprintROIs.clear()
             fingerQualityScores.clear()
-            stableFrameCount = 0
-            framesSinceLastReset = 0
         }
 
-        // Store for next frame comparison
+        // Store for next frame comparison (needed for stability check)
         previousResults = results
         results = handLandmarkerResult
 
@@ -771,33 +550,44 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         val landmarks = results!!.landmarks()[0]
         fingerprintROIs.clear()
 
-        // Define finger landmark indices (same as in FingerprintExtractor)
+        // Detect handedness (RIGHT or LEFT) - MediaPipe detects correctly
+        val isRightHand = if (results!!.handedness().isNotEmpty()) {
+            results!!.handedness()[0][0].categoryName() == "Right"
+        } else {
+            true  // Default to right hand if unknown
+        }
+        val handName = if (isRightHand) "RIGHT" else "LEFT"
+
+        // Define finger landmark indices using BaseFinger
         // Thumb excluded - unreliable for horizontal hands
         val fingerLandmarks = mapOf(
-            FingerprintExtractor.FingerType.INDEX to listOf(5, 6, 7, 8),
-            FingerprintExtractor.FingerType.MIDDLE to listOf(9, 10, 11, 12),
-            FingerprintExtractor.FingerType.RING to listOf(13, 14, 15, 16),
-            FingerprintExtractor.FingerType.PINKY to listOf(17, 18, 19, 20)
+            FingerprintExtractor.BaseFinger.INDEX to listOf(5, 6, 7, 8),
+            FingerprintExtractor.BaseFinger.MIDDLE to listOf(9, 10, 11, 12),
+            FingerprintExtractor.BaseFinger.RING to listOf(13, 14, 15, 16),
+            FingerprintExtractor.BaseFinger.LITTLE to listOf(17, 18, 19, 20)
         )
 
-        // Calculate ROI for each finger
-        for ((fingerType, landmarkIndices) in fingerLandmarks) {
+        // Calculate ROI for each finger with proper naming
+        for ((baseFinger, landmarkIndices) in fingerLandmarks) {
             try {
+                // Convert to standard FingerType with handedness
+                val fingerType = FingerprintExtractor.FingerType.fromBaseAndHand(baseFinger, isRightHand)
+
                 val roi = calculateFingerROI(landmarks, landmarkIndices, imageWidth, imageHeight)
                 fingerprintROIs[fingerType] = roi
 
-                // Use hand detection confidence instead of z-values
+                // Use hand detection confidence
                 val handConfidence = if (results!!.handedness().isNotEmpty()) {
-                    results!!.handedness()[0][0].score() * 100f  // Convert to percentage
+                    results!!.handedness()[0][0].score() * 100f
                 } else {
-                    50f  // Default fallback
+                    50f
                 }
 
                 fingerQualityScores[fingerType] = handConfidence
 
-                Log.d(TAG, "Finger: $fingerType | Hand Confidence: ${handConfidence}%")
+                Log.d(TAG, "Finger: $fingerType ($handName) | Confidence: ${handConfidence.toInt()}%")
             } catch (e: Exception) {
-                Log.e(TAG, "Error calculating ROI for $fingerType", e)
+                Log.e(TAG, "Error calculating ROI for $baseFinger", e)
             }
         }
     }
@@ -819,7 +609,6 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
     }
 
     companion object {
-        private const val LANDMARK_STROKE_WIDTH = 8F
         private const val TAG = "OverlayView"
     }
 }

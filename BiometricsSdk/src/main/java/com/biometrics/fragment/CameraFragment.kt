@@ -97,11 +97,16 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
     private var cameraFacing = CameraSelector.LENS_FACING_BACK
     private var latestHandLandmarkerResult: HandLandmarkerResult? = null
     private var isFocusing = false
+    private var isFocused = false  // Track if focus has completed successfully
     private var lastFocusTime = 0L
     private var isProcessingCapture = false
 
     // Store current ROIs from OverlayView for direct capture (in preview coordinates!)
+    // These already contain correct finger types with handedness (e.g., RIGHT_INDEX)
     private var currentFingerROIs = mutableMapOf<FingerprintExtractor.FingerType, android.graphics.RectF>()
+
+    // LOCKED ROIs - snapshot taken at capture trigger time (won't change during 50ms delay)
+    private var lockedFingerROIs: Map<FingerprintExtractor.FingerType, android.graphics.RectF>? = null
 
 
     private val requestPermissionLauncher =
@@ -250,6 +255,11 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
             if (!isProcessingCapture) {
                 isProcessingCapture = true
 
+                // CRITICAL: Lock the ROIs NOW before any delay!
+                // This prevents handedness from changing during the 50ms screenshot delay
+                lockedFingerROIs = currentFingerROIs.toMap()
+                Log.d(TAG, "🔒 Locked ${lockedFingerROIs?.size} ROIs: ${lockedFingerROIs?.keys?.map { it.name }}")
+
                 // Capture screenshot of preview surface using PixelCopy (async callback)
                 capturePreviewScreenshot { screenshotBitmap ->
                     if (screenshotBitmap != null && latestHandLandmarkerResult != null) {
@@ -260,6 +270,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                     } else {
                         Log.e(TAG, "Failed to capture screenshot or no landmarks available")
                         isProcessingCapture = false
+                        lockedFingerROIs = null
                         activity?.runOnUiThread {
                             Toast.makeText(requireContext(), "Screenshot capture failed. Try again.", Toast.LENGTH_SHORT).show()
                             fragmentCameraBinding.overlay.resetCapture()
@@ -530,27 +541,58 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                 )
 
                 // Store current ROIs for direct capture (these are the green boxes!)
+                // ROIs already have correct finger types with handedness from OverlayView
                 currentFingerROIs = fragmentCameraBinding.overlay.getFingerprintROIs().toMutableMap()
 
-                // Trigger auto-focus on hand detection
+                // Auto-focus on FINGERTIPS when hand is detected and close enough
                 if (resultBundle.results.first().landmarks().isNotEmpty()) {
-                    if (!isFocusing && (System.currentTimeMillis() - lastFocusTime > 1000)) {
+                    val landmarks = resultBundle.results.first().landmarks().first()
+
+                    // Focus on fingertips center (index 8, 12, 16, 20) - not whole hand
+                    val fingertipIndices = listOf(8, 12, 16, 20)
+                    val fingertipX = fingertipIndices.map { landmarks[it].x() }.average().toFloat()
+                    val fingertipY = fingertipIndices.map { landmarks[it].y() }.average().toFloat()
+
+                    val viewWidth = fragmentCameraBinding.viewFinder.width
+                    val viewHeight = fragmentCameraBinding.viewFinder.height
+
+                    // Trigger focus if not currently focusing and enough time has passed
+                    // Focus more frequently (every 500ms) for better tracking
+                    if (!isFocusing && (System.currentTimeMillis() - lastFocusTime > 500)) {
                         isFocusing = true
-                        val landmarks = resultBundle.results.first().landmarks().first()
-                        val centerX = landmarks.map { it.x() }.average().toFloat()
-                        val centerY = landmarks.map { it.y() }.average().toFloat()
+                        isFocused = false  // Reset focus state while focusing
 
-                        val viewWidth = fragmentCameraBinding.viewFinder.width
-                        val viewHeight = fragmentCameraBinding.viewFinder.height
+                        Log.d(TAG, "🔍 Focusing on fingertips at (${(fingertipX * 100).toInt()}%, ${(fingertipY * 100).toInt()}%)")
 
-                        val point = fragmentCameraBinding.viewFinder.meteringPointFactory.createPoint(centerX * viewWidth, centerY * viewHeight)
-                        val action = FocusMeteringAction.Builder(point).build()
+                        val point = fragmentCameraBinding.viewFinder.meteringPointFactory.createPoint(
+                            fingertipX * viewWidth,
+                            fingertipY * viewHeight
+                        )
+                        val action = FocusMeteringAction.Builder(point)
+                            .setAutoCancelDuration(2, java.util.concurrent.TimeUnit.SECONDS)
+                            .build()
+
                         val future = camera?.cameraControl?.startFocusAndMetering(action)
                         future?.addListener({
+                            try {
+                                val result = future.get()
+                                isFocused = result?.isFocusSuccessful == true
+                                Log.d(TAG, "🔍 Focus ${if (isFocused) "SUCCESS ✓" else "failed"}")
+                            } catch (e: Exception) {
+                                Log.w(TAG, "Focus error: ${e.message}")
+                                isFocused = true  // Assume focused on error to not block capture
+                            }
                             isFocusing = false
                             lastFocusTime = System.currentTimeMillis()
                         }, ContextCompat.getMainExecutor(requireContext()))
                     }
+
+                    // Pass focus state to overlay for capture decision
+                    fragmentCameraBinding.overlay.setFocusState(isFocused, isFocusing)
+                } else {
+                    // No hand detected - reset focus state
+                    isFocused = false
+                    fragmentCameraBinding.overlay.setFocusState(false, false)
                 }
 
                 // Force a redraw
@@ -732,29 +774,34 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                 camera?.cameraControl?.enableTorch(false)
             }
 
+            // Use LOCKED ROIs (snapshot taken at capture trigger) - NOT current ROIs!
+            val roisToUse = lockedFingerROIs ?: currentFingerROIs
+
             Log.d(TAG, "====================================================")
             Log.d(TAG, "🎯 SCREENSHOT-BASED CAPTURE (What you see = What you get!)")
             Log.d(TAG, "📸 Screenshot bitmap: ${bitmap.width}x${bitmap.height}, format: ${bitmap.config}")
-            Log.d(TAG, "📦 Green boxes to capture: ${currentFingerROIs.size}")
-            Log.d(TAG, "✅ ROIs are in preview coordinates (perfect match!)")
+            Log.d(TAG, "📦 Using ${if (lockedFingerROIs != null) "LOCKED" else "current"} ROIs: ${roisToUse.size}")
+            Log.d(TAG, "🔑 Finger types: ${roisToUse.keys.map { it.name }}")
 
             // Check if we have valid ROIs
-            if (currentFingerROIs.isEmpty()) {
+            if (roisToUse.isEmpty()) {
                 Log.e(TAG, "❌ No ROIs available - aborting capture")
                 activity?.runOnUiThread {
                     Toast.makeText(requireContext(), "No fingerprint regions detected. Try again.", Toast.LENGTH_SHORT).show()
                     fragmentCameraBinding.progressBar.visibility = View.GONE
                     isProcessingCapture = false
+                        lockedFingerROIs = null
                     fragmentCameraBinding.overlay.resetCapture()
                 }
                 return
             }
 
-            // Directly crop fingerprint regions from bitmap using stored ROIs
+            // Directly crop fingerprint regions from bitmap using LOCKED ROIs
             val fingerprints = mutableListOf<FingerprintExtractor.FingerprintImage>()
 
-            for ((fingerType, roi) in currentFingerROIs) {
+            for ((fingerType, roi) in roisToUse) {
                 try {
+                    // fingerType already has correct handedness from OverlayView - use directly!
                     // Debug: Log ROI coordinates
                     Log.d(TAG, "🔲 $fingerType ROI: " +
                         "L=${roi.left.toInt()}, T=${roi.top.toInt()}, " +
@@ -855,6 +902,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                     Toast.makeText(requireContext(), "Failed to capture fingerprints. Try again.", Toast.LENGTH_LONG).show()
                     fragmentCameraBinding.progressBar.visibility = View.GONE
                     isProcessingCapture = false
+                        lockedFingerROIs = null
                     fragmentCameraBinding.overlay.resetCapture()
                 }
             }
@@ -864,10 +912,12 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                 Toast.makeText(requireContext(), "Capture error. Please try again.", Toast.LENGTH_SHORT).show()
                 fragmentCameraBinding.progressBar.visibility = View.GONE
                 isProcessingCapture = false
+                        lockedFingerROIs = null
                 fragmentCameraBinding.overlay.resetCapture()
             }
         } finally {
             isProcessingCapture = false
+                        lockedFingerROIs = null
         }
     }
 
