@@ -135,7 +135,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         }
 
         val averageDistance = totalDistance / currentHand.size
-        return averageDistance < 0.003f  // Stability threshold (stricter: was 0.005)
+        // Relaxed threshold: MediaPipe has natural jitter even with still hand
+        // 0.003 was too strict, 0.01 allows for detection noise while still requiring stillness
+        return averageDistance < 0.01f
     }
 
     override fun draw(canvas: Canvas) {
@@ -323,31 +325,49 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
 
     private fun checkHandPositionStatus(landmarks: List<NormalizedLandmark>): HandPositionStatus {
+        // DEBUG: Track all check results
+        val debugChecks = mutableListOf<String>()
+
         // 1. Check distance to camera (PRIORITY: must be close enough for fingerprints)
         val distanceStatus = checkCameraDistance(landmarks)
         if (distanceStatus != null) {
+            debugChecks.add("❌ Distance: ${distanceStatus.name}")
+            Log.d(TAG, "🔍 STATUS CHECK: ${debugChecks.joinToString(" | ")} → ${distanceStatus.name}")
             return distanceStatus
         }
+        debugChecks.add("✓ Distance OK")
 
         // 2. REMOVED: Finger spacing check (user doesn't want this constraint)
         // Users can have fingers naturally positioned without strict spacing requirements
 
         // 3. Check if hand is inside guide box
-        if (!isHandInsideGuideBox(landmarks)) {
+        val insideBox = isHandInsideGuideBox(landmarks)
+        if (!insideBox) {
+            debugChecks.add("❌ Outside box")
+            Log.d(TAG, "🔍 STATUS CHECK: ${debugChecks.joinToString(" | ")} → OUTSIDE_BOX")
             return HandPositionStatus.OUTSIDE_BOX
         }
+        debugChecks.add("✓ In box")
 
         // 4. Check stability (must be stable to capture good fingerprints)
-        if (!checkStability()) {
+        val isStable = checkStability()
+        if (!isStable) {
+            debugChecks.add("❌ Not stable")
+            Log.d(TAG, "🔍 STATUS CHECK: ${debugChecks.joinToString(" | ")} → NOT_STABLE")
             return HandPositionStatus.NOT_STABLE
         }
+        debugChecks.add("✓ Stable")
 
         // 5. Check focus state - must be focused before capture
         if (isFocusing || !isFocused) {
+            debugChecks.add("❌ Focus (focusing=$isFocusing, focused=$isFocused)")
+            Log.d(TAG, "🔍 STATUS CHECK: ${debugChecks.joinToString(" | ")} → FOCUSING")
             return HandPositionStatus.FOCUSING
         }
+        debugChecks.add("✓ Focused")
 
         // All checks passed! Ready for capture
+        Log.d(TAG, "🔍 STATUS CHECK: ${debugChecks.joinToString(" | ")} → ✅ PERFECT!")
         return HandPositionStatus.PERFECT
     }
 
@@ -370,8 +390,8 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         val fingertipsTop = fingertipPoints.minOf { it.y }
         val fingertipsBottom = fingertipPoints.maxOf { it.y }
 
-        // Check if ALL fingertips are inside guide box (with small margin)
-        val margin = 0.05f  // Small margin for edge tolerance
+        // Check if ALL fingertips are inside guide box (with generous margin)
+        val margin = 0.20f  // Larger margin for more lenient box validation
         val isInside =
             fingertipsLeft >= guideRect.left - (guideRect.width() * margin) &&
             fingertipsRight <= guideRect.right + (guideRect.width() * margin) &&
@@ -473,7 +493,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
 
     fun resetCapture() {
         isCapturing = false
-        Log.d(TAG, "Capture reset")
+        Log.d(TAG, "🔄 CAPTURE RESET - Ready for new capture")
     }
 
 
@@ -497,6 +517,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
         imageWidth: Int,
         runningMode: RunningMode = RunningMode.IMAGE
     ) {
+        // IMPORTANT: Save previous results BEFORE updating current results
+        // This is needed for stability comparison between consecutive frames
+        previousResults = results
         results = handLandmarkerResult
 
         // Calculate fingerprint ROIs
@@ -513,11 +536,16 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
             // 3. ROI COORDINATES exist (fingerprintROIs not empty)
             val hasROIs = fingerprintROIs.isNotEmpty()
 
+            // DEBUG: Log capture decision
+            Log.d(TAG, "📊 CAPTURE DECISION: status=${positionStatus.name} | hasROIs=$hasROIs (${fingerprintROIs.size}) | isCapturing=$isCapturing")
+
             if (positionStatus == HandPositionStatus.PERFECT && hasROIs && !isCapturing) {
                 // All conditions met - CAPTURE IMMEDIATELY!
                 isCapturing = true
-                Log.d(TAG, "🎯 INSTANT CAPTURE - Stable: ✓ | Close: ✓ | ROIs: ${fingerprintROIs.size}")
+                Log.d(TAG, "🎯 INSTANT CAPTURE TRIGGERED! - Stable: ✓ | Close: ✓ | ROIs: ${fingerprintROIs.size}")
                 onReadyToCapture?.invoke()
+            } else if (positionStatus == HandPositionStatus.PERFECT && isCapturing) {
+                Log.d(TAG, "⏳ Already capturing - ignoring PERFECT status")
             }
 
         } else {
@@ -525,9 +553,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
             fingerQualityScores.clear()
         }
 
-        // Store for next frame comparison (needed for stability check)
-        previousResults = results
-        results = handLandmarkerResult
+        // previousResults is now set at the START of this method (before stability check)
 
         this.imageHeight = imageHeight
         this.imageWidth = imageWidth

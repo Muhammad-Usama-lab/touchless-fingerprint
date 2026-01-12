@@ -251,9 +251,10 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
         // NEW: Quality-based capture trigger (using screenshot, not camera frame!)
         fragmentCameraBinding.overlay.onReadyToCapture = {
             // All quality checks passed - capture screenshot NOW!
-            Log.d(TAG, "✓ Quality-based capture triggered - capturing preview screenshot via PixelCopy")
+            Log.d(TAG, "📸 CAPTURE CALLBACK RECEIVED - isProcessingCapture=$isProcessingCapture")
             if (!isProcessingCapture) {
                 isProcessingCapture = true
+                Log.d(TAG, "📸 Starting capture process...")
 
                 // CRITICAL: Lock the ROIs NOW before any delay!
                 // This prevents handedness from changing during the 50ms screenshot delay
@@ -557,12 +558,15 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                     val viewHeight = fragmentCameraBinding.viewFinder.height
 
                     // Trigger focus if not currently focusing and enough time has passed
-                    // Focus more frequently (every 500ms) for better tracking
-                    if (!isFocusing && (System.currentTimeMillis() - lastFocusTime > 500)) {
-                        isFocusing = true
-                        isFocused = false  // Reset focus state while focusing
+                    // Focus every 2 seconds to avoid interrupting capture flow
+                    val timeSinceLastFocus = System.currentTimeMillis() - lastFocusTime
+                    Log.d(TAG, "🔍 FOCUS STATE: isFocusing=$isFocusing | isFocused=$isFocused | timeSince=${timeSinceLastFocus}ms | isProcessing=$isProcessingCapture")
 
-                        Log.d(TAG, "🔍 Focusing on fingertips at (${(fingertipX * 100).toInt()}%, ${(fingertipY * 100).toInt()}%)")
+                    if (!isFocusing && (timeSinceLastFocus > 2000)) {
+                        isFocusing = true
+                        // Don't reset isFocused - allow capture to proceed with previous focus
+
+                        Log.d(TAG, "🔍 STARTING FOCUS on fingertips at (${(fingertipX * 100).toInt()}%, ${(fingertipY * 100).toInt()}%)")
 
                         val point = fragmentCameraBinding.viewFinder.meteringPointFactory.createPoint(
                             fingertipX * viewWidth,
@@ -577,13 +581,14 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                             try {
                                 val result = future.get()
                                 isFocused = result?.isFocusSuccessful == true
-                                Log.d(TAG, "🔍 Focus ${if (isFocused) "SUCCESS ✓" else "failed"}")
+                                Log.d(TAG, "🔍 FOCUS COMPLETE: ${if (isFocused) "SUCCESS ✓" else "FAILED ✗"}")
                             } catch (e: Exception) {
-                                Log.w(TAG, "Focus error: ${e.message}")
+                                Log.w(TAG, "🔍 FOCUS ERROR: ${e.message}")
                                 isFocused = true  // Assume focused on error to not block capture
                             }
                             isFocusing = false
                             lastFocusTime = System.currentTimeMillis()
+                            Log.d(TAG, "🔍 FOCUS FINISHED: isFocusing=$isFocusing | isFocused=$isFocused")
                         }, ContextCompat.getMainExecutor(requireContext()))
                     }
 
