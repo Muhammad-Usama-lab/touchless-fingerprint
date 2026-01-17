@@ -17,8 +17,9 @@ package com.rmst.biometrics.fragment
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
-import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Bitmap
+import android.graphics.RectF
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -38,46 +39,46 @@ import androidx.camera.core.AspectRatio
 import androidx.camera.core.FocusMeteringAction
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.rmst.biometrics.HandLandmarkerHelper
 import com.rmst.biometrics.MainViewModel
 import com.rmst.biometrics.OverlayView
 import com.rmst.biometrics.R
-
-
+import com.rmst.biometrics.api.FingerprintApiService
 import com.rmst.biometrics.databinding.FragmentCameraBinding
+import com.rmst.biometrics.model.ProcessResponse
 import com.google.mediapipe.tasks.vision.core.RunningMode
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-import android.net.Uri
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-
-import android.util.Base64
-import android.graphics.Bitmap
-import org.json.JSONObject
-import kotlinx.coroutines.Dispatchers
-import com.rmst.biometrics.BiometricsCompletedDialogFragment
-import androidx.navigation.fragment.findNavController
-import java.io.ByteArrayOutputStream
-
-
-class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener, BiometricsCompletedDialogFragment.BiometricsCompletedListener {
+class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, OverlayView.CaptureListener {
 
     companion object {
         private const val TAG = "Hand Landmarker"
+
+        // Finger landmark indices (tip landmarks)
+        private val FINGER_TIP_LANDMARKS = mapOf(
+            "INDEX" to 8,
+            "MIDDLE" to 12,
+            "RING" to 16,
+            "LITTLE" to 20
+        )
+
+        // Padding for fingerprint ROI
+        private const val ROI_PADDING = 0.4f
     }
 
     private var _fragmentCameraBinding: FragmentCameraBinding? = null
@@ -96,6 +97,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     private var latestHandLandmarkerResult: HandLandmarkerResult? = null
     private var isFocusing = false
     private var lastFocusTime = 0L
+
+    // Capture state
+    private var isCapturing = false
 
     /** Blocking ML operations are performed using this executor */
     private lateinit var backgroundExecutor: ExecutorService
@@ -201,8 +205,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 
             fragmentCameraBinding.overlay.setCaptureListener(this)
 
-            // Initialize progress bar
-            fragmentCameraBinding.progressBar.visibility = View.GONE
+            // Initialize loading overlay
+            fragmentCameraBinding.loadingOverlay.visibility = View.GONE
 
             // Hide capture button
             fragmentCameraBinding.captureButton.visibility = View.GONE
@@ -488,8 +492,14 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
     }
 
     private fun takePhoto() {
+        if (isCapturing) return
+        isCapturing = true
+
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
+
+        // Show loading overlay
+        showLoading("Capturing...")
 
         // Create time-stamped name and MediaStore entry.
         val name = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.US)
@@ -515,133 +525,257 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
                     Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+                    hideLoading()
+                    isCapturing = false
+                    Toast.makeText(requireContext(), "Capture failed: ${exc.message}", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun
-                    onImageSaved(output: ImageCapture.OutputFileResults){
-                    val msg = "Photo saved locally: ${output.savedUri}"
-                    Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    val savedUri = output.savedUri
+                    Log.d(TAG, "Photo saved: $savedUri")
 
-                    // === API UPLOAD DISABLED - IMAGE SAVED LOCALLY ===
-                    // uploadImageToApi(output.savedUri)
-
-                    Log.d(TAG, msg)
-
-                    // Show biometrics completed dialog
-                    activity?.runOnUiThread {
-                        val dialog = BiometricsCompletedDialogFragment()
-                        dialog.show(childFragmentManager, BiometricsCompletedDialogFragment.TAG)
-                    }
+                    // Process the saved image and upload to API
+                    processAndUploadImage(savedUri)
                 }
             }
         )
     }
 
-
-    // ========================================================================
-    // === API UPLOAD CODE - COMMENTED OUT (IMAGES NOW SAVED LOCALLY) ===
-    // ========================================================================
-    /*
-    private fun uploadImageToApi(imageUri: Uri?) {
-        if (imageUri == null) return
+    /**
+     * Process the captured image and upload fingerprints to API
+     */
+    private fun processAndUploadImage(imageUri: android.net.Uri?) {
+        if (imageUri == null) {
+            hideLoading()
+            isCapturing = false
+            Toast.makeText(requireContext(), "Failed to save image", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         lifecycleScope.launch(Dispatchers.IO) {
-            activity?.runOnUiThread {
-                fragmentCameraBinding.progressBar.visibility = View.VISIBLE
-                camera?.cameraControl?.enableTorch(false)
-            }
-
             try {
-                // Get token
-                val sharedPreferences = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-                val token = sharedPreferences.getString("auth_token", null)
+                withContext(Dispatchers.Main) {
+                    fragmentCameraBinding.loadingText.text = "Processing fingerprints..."
+                }
 
-                if (token == null) {
-                    Log.e(TAG, "Token not found in SharedPreferences")
+                // Load the captured image
+                val bitmap = MediaStore.Images.Media.getBitmap(
+                    requireContext().contentResolver,
+                    imageUri
+                )
+
+                // Get landmarks for fingerprint extraction
+                val landmarks = latestHandLandmarkerResult?.landmarks()?.firstOrNull()
+
+                if (landmarks == null || landmarks.isEmpty()) {
+                    withContext(Dispatchers.Main) {
+                        hideLoading()
+                        isCapturing = false
+                        Toast.makeText(requireContext(), "No hand detected in image", Toast.LENGTH_LONG).show()
+                    }
                     return@launch
                 }
 
-                // Decode and compress the image
-                val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
-                val outputStream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
-                val compressedBytes = outputStream.toByteArray()
+                // Determine handedness
+                val thumbTip = landmarks[4]
+                val pinkyTip = landmarks[20]
+                val isRightHand = thumbTip.x() < pinkyTip.x()
+                val handPrefix = if (isRightHand) "RIGHT" else "LEFT"
 
-                // Convert to Base64
-                val base64Image = Base64.encodeToString(compressedBytes, Base64.NO_WRAP)
+                Log.d(TAG, "Processing ${if (isRightHand) "RIGHT" else "LEFT"} hand")
 
-                // Create JSON body
-                val json = JSONObject().apply {
-                    put("imageData", base64Image)
-                }
-                val requestBody = RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
+                // Extract fingerprints
+                val fingerprints = mutableMapOf<String, Bitmap>()
 
-                // Build request
-                val client = OkHttpClient()
-                val request = Request.Builder()
-                    .url("https://demo.rmstservices.com/biometrics/register")
-                    .post(requestBody)
-                    .addHeader("Authorization", "Token " + token)
-                    .build()
-
-                // Send
-                val response = client.newCall(request).execute()
-                if (response.isSuccessful) {
-                    Log.d(TAG, "Upload success: ${response.body?.string()}")
-                    // Delete the image after successful upload
+                for ((fingerName, tipIndex) in FINGER_TIP_LANDMARKS) {
                     try {
-                        val rowsDeleted = requireContext().contentResolver.delete(imageUri, null, null)
-                        if (rowsDeleted > 0) {
-                            Log.d(TAG, "Image deleted successfully: $imageUri")
-                        } else {
-                            Log.e(TAG, "Failed to delete image: $imageUri")
+                        val roi = calculateFingerROI(landmarks, tipIndex, bitmap.width, bitmap.height)
+                        if (roi != null) {
+                            val fingerBitmap = cropFingerprint(bitmap, roi)
+                            if (fingerBitmap != null) {
+                                val fullName = "${handPrefix}_$fingerName"
+                                fingerprints[fullName] = fingerBitmap
+                                Log.d(TAG, "  Extracted $fullName: ${fingerBitmap.width}x${fingerBitmap.height}")
+                            }
                         }
                     } catch (e: Exception) {
-                        Log.e(TAG, "Error deleting image: $imageUri", e)
+                        Log.e(TAG, "Error extracting $fingerName: ${e.message}")
                     }
-
-                    // Show biometrics completed dialog
-                    activity?.runOnUiThread {
-                        val dialog = BiometricsCompletedDialogFragment()
-                        dialog.show(childFragmentManager, BiometricsCompletedDialogFragment.TAG)
-                    }
-                } else {
-                    Log.e(TAG, "Upload failed: ${response.code} ${response.message}")
                 }
+
+                if (fingerprints.isEmpty()) {
+                    withContext(Dispatchers.Main) {
+                        hideLoading()
+                        isCapturing = false
+                        Toast.makeText(requireContext(), "No fingerprints extracted", Toast.LENGTH_LONG).show()
+                    }
+                    return@launch
+                }
+
+                Log.d(TAG, "Extracted ${fingerprints.size} fingerprints, uploading to API...")
+
+                withContext(Dispatchers.Main) {
+                    fragmentCameraBinding.loadingText.text = "Uploading to server..."
+                }
+
+                // Upload to API
+                val result = FingerprintApiService.processFingerprints(fingerprints)
+
+                withContext(Dispatchers.Main) {
+                    hideLoading()
+                    isCapturing = false
+
+                    result.fold(
+                        onSuccess = { response ->
+                            // Delete the local image after successful upload
+                            try {
+                                requireContext().contentResolver.delete(imageUri, null, null)
+                                Log.d(TAG, "Deleted local image after upload")
+                            } catch (e: Exception) {
+                                Log.e(TAG, "Failed to delete local image: ${e.message}")
+                            }
+
+                            // Navigate to results
+                            navigateToResults(response)
+                        },
+                        onFailure = { error ->
+                            Log.e(TAG, "API error: ${error.message}")
+                            Toast.makeText(
+                                requireContext(),
+                                "Upload failed: ${error.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    )
+                }
+
             } catch (e: Exception) {
-                Log.e(TAG, "Upload error", e)
-            } finally {
-                activity?.runOnUiThread {
-                    fragmentCameraBinding.progressBar.visibility = View.GONE
+                Log.e(TAG, "Processing error", e)
+                withContext(Dispatchers.Main) {
+                    hideLoading()
+                    isCapturing = false
+                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
-    */
-    // ========================================================================
 
-    
+    /**
+     * Calculate ROI for a finger based on landmark positions
+     */
+    private fun calculateFingerROI(
+        landmarks: List<com.google.mediapipe.tasks.components.containers.NormalizedLandmark>,
+        tipIndex: Int,
+        imageWidth: Int,
+        imageHeight: Int
+    ): RectF? {
+        try {
+            // Get tip and DIP landmarks
+            val tip = landmarks[tipIndex]
+            val dip = landmarks[tipIndex - 1]
+            val pip = landmarks[tipIndex - 2]
+
+            // Convert normalized coordinates to pixel coordinates
+            val tipX = tip.x() * imageWidth
+            val tipY = tip.y() * imageHeight
+            val dipX = dip.x() * imageWidth
+            val dipY = dip.y() * imageHeight
+            val pipX = pip.x() * imageWidth
+            val pipY = pip.y() * imageHeight
+
+            // Calculate finger width based on DIP-PIP distance
+            val fingerWidth = kotlin.math.sqrt(
+                (pipX - dipX) * (pipX - dipX) + (pipY - dipY) * (pipY - dipY)
+            ) * 1.5f
+
+            // Calculate ROI centered on fingertip
+            val padding = fingerWidth * ROI_PADDING
+            val halfWidth = fingerWidth / 2 + padding
+
+            val left = (tipX - halfWidth).coerceIn(0f, imageWidth.toFloat())
+            val right = (tipX + halfWidth).coerceIn(0f, imageWidth.toFloat())
+            val top = (tipY - fingerWidth - padding).coerceIn(0f, imageHeight.toFloat())
+            val bottom = (tipY + padding).coerceIn(0f, imageHeight.toFloat())
+
+            // Validate ROI size
+            val width = right - left
+            val height = bottom - top
+            if (width < 30 || height < 30) {
+                Log.w(TAG, "ROI too small: ${width.toInt()}x${height.toInt()}")
+                return null
+            }
+
+            return RectF(left, top, right, bottom)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error calculating ROI: ${e.message}")
+            return null
+        }
+    }
+
+    /**
+     * Crop fingerprint from image using ROI
+     */
+    private fun cropFingerprint(bitmap: Bitmap, roi: RectF): Bitmap? {
+        return try {
+            val x = roi.left.toInt().coerceIn(0, bitmap.width - 1)
+            val y = roi.top.toInt().coerceIn(0, bitmap.height - 1)
+            val width = roi.width().toInt().coerceAtMost(bitmap.width - x)
+            val height = roi.height().toInt().coerceAtMost(bitmap.height - y)
+
+            if (width < 30 || height < 30) {
+                return null
+            }
+
+            Bitmap.createBitmap(bitmap, x, y, width, height)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error cropping fingerprint: ${e.message}")
+            null
+        }
+    }
+
+    /**
+     * Navigate to results screen
+     */
+    private fun navigateToResults(response: ProcessResponse) {
+        val bundle = bundleOf(ResultFragment.ARG_PROCESS_RESPONSE to response)
+        findNavController().navigate(R.id.action_camera_to_result, bundle)
+    }
+
+    /**
+     * Show loading overlay
+     */
+    private fun showLoading(message: String) {
+        fragmentCameraBinding.loadingOverlay.visibility = View.VISIBLE
+        fragmentCameraBinding.loadingText.text = message
+        camera?.cameraControl?.enableTorch(false)
+    }
+
+    /**
+     * Hide loading overlay
+     */
+    private fun hideLoading() {
+        fragmentCameraBinding.loadingOverlay.visibility = View.GONE
+        camera?.cameraControl?.enableTorch(true)
+    }
 
     override fun onCapture(result: HandLandmarkerResult) {
         latestHandLandmarkerResult = result
         activity?.runOnUiThread {
-            val landmarks = result.landmarks().first()
-            val centerX = landmarks.map { it.x() }.average().toFloat()
-            val centerY = landmarks.map { it.y() }.average().toFloat()
+            if (!isCapturing) {
+                val landmarks = result.landmarks().first()
+                val centerX = landmarks.map { it.x() }.average().toFloat()
+                val centerY = landmarks.map { it.y() }.average().toFloat()
 
-            val viewWidth = fragmentCameraBinding.viewFinder.width
-            val viewHeight = fragmentCameraBinding.viewFinder.height
+                val viewWidth = fragmentCameraBinding.viewFinder.width
+                val viewHeight = fragmentCameraBinding.viewFinder.height
 
-            val point = fragmentCameraBinding.viewFinder.meteringPointFactory.createPoint(centerX * viewWidth, centerY * viewHeight)
-            val action = FocusMeteringAction.Builder(point).build()
-            val future = camera?.cameraControl?.startFocusAndMetering(action)
-            future?.addListener({
-                takePhoto()
-            }, ContextCompat.getMainExecutor(requireContext()))
+                val point = fragmentCameraBinding.viewFinder.meteringPointFactory.createPoint(centerX * viewWidth, centerY * viewHeight)
+                val action = FocusMeteringAction.Builder(point).build()
+                val future = camera?.cameraControl?.startFocusAndMetering(action)
+                future?.addListener({
+                    takePhoto()
+                }, ContextCompat.getMainExecutor(requireContext()))
+            }
         }
-    }
-
-    override fun onBiometricsCompleted() {
-        findNavController().popBackStack(R.id.start_biometrics_fragment, false)
     }
 }

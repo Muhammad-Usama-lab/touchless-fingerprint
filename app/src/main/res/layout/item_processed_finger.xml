@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Image Container -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F5F5F5">
+
+            <ImageView
+                android:id="@+id/fingerprintImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="Processed fingerprint"
+                android:scaleType="fitCenter"
+                tools:src="@drawable/fingerprint" />
+
+            <!-- Loading indicator for image -->
+            <ProgressBar
+                android:id="@+id/imageLoadingProgress"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <!-- Error indicator -->
+            <LinearLayout
+                android:id="@+id/imageErrorContainer"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="Error"
+                    android:src="@drawable/ic_error"
+                    app:tint="#9E9E9E" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Failed to load image"
+                    android:textColor="#9E9E9E"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- Info and Buttons Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Finger Name -->
+            <TextView
+                android:id="@+id/fingerNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mp_color_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Right Index" />
+
+            <!-- File Name -->
+            <TextView
+                android:id="@+id/fileNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="monospace"
+                android:textColor="#757575"
+                android:textSize="12sp"
+                tools:text="RIGHT_INDEX_processed.png" />
+
+            <!-- Download Buttons Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <!-- Download PNG Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/downloadPngButton"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:text="PNG"
+                    android:textColor="@color/mp_color_primary"
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/ic_download"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/mp_color_primary"
+                    app:strokeColor="@color/mp_color_primary"
+                    app:strokeWidth="1dp" />
+
+                <!-- Download WSQ Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/downloadWsqButton"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="WSQ"
+                    android:textColor="@color/mp_color_secondary"
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/ic_download"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/mp_color_secondary"
+                    app:strokeColor="@color/mp_color_secondary"
+                    app:strokeWidth="1dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

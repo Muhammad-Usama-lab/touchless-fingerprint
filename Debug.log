@@ -1,0 +1,1294 @@
+
+01-12 21:38:38.666  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:38.666  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:38.667  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=false | timeSince=1768235918667ms | isProcessing=false
+01-12 21:38:38.668  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (22%, 48%)
+01-12 21:38:38.678  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:38.784  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:38.784  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:38.786  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=false | timeSince=1768235918786ms | isProcessing=false
+01-12 21:38:38.806  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:38.882  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:38.882  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:38.883  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=false | timeSince=1768235918883ms | isProcessing=false
+01-12 21:38:38.888  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.013  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.014  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:39.015  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=false | timeSince=1768235919015ms | isProcessing=false
+01-12 21:38:39.023  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.089  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.089  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:39.090  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=false | timeSince=1768235919090ms | isProcessing=false
+01-12 21:38:39.105  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.229  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.229  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:39.230  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=false | timeSince=1768235919230ms | isProcessing=false
+01-12 21:38:39.239  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.357  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.357  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:39.359  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=false | timeSince=1768235919359ms | isProcessing=false
+01-12 21:38:39.372  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.446  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.447  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:39.448  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=false | timeSince=1768235919448ms | isProcessing=false
+01-12 21:38:39.455  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.538  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:38:39.538  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:38:39.556  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.556  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:39.557  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=19ms | isProcessing=false
+01-12 21:38:39.571  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.702  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.702  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:39.703  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=165ms | isProcessing=false
+01-12 21:38:39.721  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.819  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.819  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:39.820  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=282ms | isProcessing=false
+01-12 21:38:39.838  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.915  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:39.915  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:39.917  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=379ms | isProcessing=false
+01-12 21:38:39.922  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.028  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.029  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.030  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=492ms | isProcessing=false
+01-12 21:38:40.038  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.133  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.133  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.135  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=596ms | isProcessing=false
+01-12 21:38:40.154  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.223  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.223  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.225  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=687ms | isProcessing=false
+01-12 21:38:40.238  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.323  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.323  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.324  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=786ms | isProcessing=false
+01-12 21:38:40.338  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.448  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.448  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.451  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=912ms | isProcessing=false
+01-12 21:38:40.454  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.557  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.558  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.559  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1021ms | isProcessing=false
+01-12 21:38:40.571  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.655  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.655  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.657  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1119ms | isProcessing=false
+01-12 21:38:40.670  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.753  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.754  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.756  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1218ms | isProcessing=false
+01-12 21:38:40.771  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.846  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.847  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.848  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1310ms | isProcessing=false
+01-12 21:38:40.855  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.984  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:40.984  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:40.986  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1448ms | isProcessing=false
+01-12 21:38:41.004  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.059  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.059  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:41.061  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1523ms | isProcessing=false
+01-12 21:38:41.070  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.162  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.162  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:41.164  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1626ms | isProcessing=false
+01-12 21:38:41.170  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.274  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.274  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:41.275  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1737ms | isProcessing=false
+01-12 21:38:41.288  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.418  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.419  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:41.421  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1883ms | isProcessing=false
+01-12 21:38:41.436  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.511  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.511  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:41.513  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1975ms | isProcessing=false
+01-12 21:38:41.521  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.620  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.620  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:41.621  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2083ms | isProcessing=false
+01-12 21:38:41.622  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (23%, 54%)
+01-12 21:38:41.636  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.757  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.758  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:41.760  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2222ms | isProcessing=false
+01-12 21:38:41.771  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.882  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.882  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:41.883  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2345ms | isProcessing=false
+01-12 21:38:41.903  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.992  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:41.992  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:41.994  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2456ms | isProcessing=false
+01-12 21:38:42.004  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.095  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.096  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:42.098  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2559ms | isProcessing=false
+01-12 21:38:42.103  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.192  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.192  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:42.193  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2655ms | isProcessing=false
+01-12 21:38:42.203  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.316  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.316  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:42.318  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2779ms | isProcessing=false
+01-12 21:38:42.336  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.398  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.398  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:42.399  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2861ms | isProcessing=false
+01-12 21:38:42.404  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.496  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.496  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:42.497  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2959ms | isProcessing=false
+01-12 21:38:42.503  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.589  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.589  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:42.591  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3052ms | isProcessing=false
+01-12 21:38:42.602  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.636  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:38:42.636  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:38:42.725  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.725  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:42.725  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=89ms | isProcessing=false
+01-12 21:38:42.735  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.832  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.832  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:38:42.833  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=197ms | isProcessing=false
+01-12 21:38:42.836  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:38:42.944  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:42.944  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:42.948  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=312ms | isProcessing=false
+01-12 21:38:42.954  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:43.042  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:43.042  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:43.043  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=407ms | isProcessing=false
+01-12 21:38:43.055  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:43.160  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:43.161  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:43.163  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=527ms | isProcessing=false
+01-12 21:38:43.172  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:43.257  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:43.257  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:43.258  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=622ms | isProcessing=false
+01-12 21:38:43.271  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:43.365  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:43.365  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:43.366  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=730ms | isProcessing=false
+01-12 21:38:43.386  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:43.475  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:43.476  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:43.476  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=840ms | isProcessing=false
+01-12 21:38:43.486  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:43.595  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:43.595  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:43.596  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=960ms | isProcessing=false
+01-12 21:38:43.604  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:43.720  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:43.720  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:43.722  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1085ms | isProcessing=false
+01-12 21:38:43.736  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:43.815  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:43.815  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:43.817  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1181ms | isProcessing=false
+01-12 21:38:43.836  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:43.908  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:43.909  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:43.913  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1277ms | isProcessing=false
+01-12 21:38:43.920  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:44.027  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:44.027  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:44.028  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1392ms | isProcessing=false
+01-12 21:38:44.038  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:44.142  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:44.142  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:44.143  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1507ms | isProcessing=false
+01-12 21:38:44.152  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:44.235  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:44.235  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:44.236  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1600ms | isProcessing=false
+01-12 21:38:44.253  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:44.340  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:44.340  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:44.341  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1705ms | isProcessing=false
+01-12 21:38:44.353  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:44.450  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:44.450  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:44.452  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1815ms | isProcessing=false
+01-12 21:38:44.470  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:44.580  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:44.581  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:44.582  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1946ms | isProcessing=false
+01-12 21:38:44.584  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:44.688  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:44.689  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:44.690  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2054ms | isProcessing=false
+01-12 21:38:44.690  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (22%, 54%)
+01-12 21:38:44.702  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:44.807  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:44.807  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:44.808  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2172ms | isProcessing=false
+01-12 21:38:44.820  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:44.893  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:44.893  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:44.895  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2258ms | isProcessing=false
+01-12 21:38:44.900  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:45.023  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.023  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.025  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2388ms | isProcessing=false
+01-12 21:38:45.036  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:45.122  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.123  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.124  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2488ms | isProcessing=false
+01-12 21:38:45.135  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:45.230  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.231  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.232  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2596ms | isProcessing=false
+01-12 21:38:45.252  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:45.323  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.323  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.325  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2688ms | isProcessing=false
+01-12 21:38:45.335  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:45.457  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.457  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.459  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2822ms | isProcessing=false
+01-12 21:38:45.470  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:45.557  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.557  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.559  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2923ms | isProcessing=false
+01-12 21:38:45.569  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:45.617  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:38:45.617  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:38:45.659  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.659  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.661  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=43ms | isProcessing=false
+01-12 21:38:45.669  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:45.761  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.761  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.763  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=145ms | isProcessing=false
+01-12 21:38:45.769  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:45.893  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.894  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.895  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=278ms | isProcessing=false
+01-12 21:38:45.902  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:45.992  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:45.993  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:45.994  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=377ms | isProcessing=false
+01-12 21:38:46.001  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:46.088  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:46.089  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:46.090  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=473ms | isProcessing=false
+01-12 21:38:46.101  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:46.189  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:46.189  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:46.191  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=574ms | isProcessing=false
+01-12 21:38:46.201  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:46.330  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:46.330  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:46.332  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=715ms | isProcessing=false
+01-12 21:38:46.351  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:46.454  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:46.454  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:46.455  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=838ms | isProcessing=false
+01-12 21:38:46.468  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:46.554  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:46.555  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:46.556  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=939ms | isProcessing=false
+01-12 21:38:46.568  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:46.656  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:46.656  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:46.658  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1040ms | isProcessing=false
+01-12 21:38:46.668  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:46.790  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:46.790  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:46.791  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1174ms | isProcessing=false
+01-12 21:38:46.801  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:46.889  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:46.889  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:46.891  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1273ms | isProcessing=false
+01-12 21:38:46.901  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:46.970  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:46.970  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:46.972  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1354ms | isProcessing=false
+01-12 21:38:46.985  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:47.089  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:47.089  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:47.092  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1474ms | isProcessing=false
+01-12 21:38:47.100  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:47.200  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:47.200  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:47.202  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1584ms | isProcessing=false
+01-12 21:38:47.218  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:47.322  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:47.323  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:47.324  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1707ms | isProcessing=false
+01-12 21:38:47.333  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:47.420  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:47.420  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:47.422  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1805ms | isProcessing=false
+01-12 21:38:47.434  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:47.528  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:47.528  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:47.529  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1912ms | isProcessing=false
+01-12 21:38:47.533  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:47.657  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:47.657  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:47.659  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2042ms | isProcessing=false
+01-12 21:38:47.659  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (22%, 54%)
+01-12 21:38:47.665  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:47.758  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:47.758  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:47.760  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2142ms | isProcessing=false
+01-12 21:38:47.767  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:47.855  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:47.856  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:47.857  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2240ms | isProcessing=false
+01-12 21:38:47.867  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:47.989  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:47.989  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:47.991  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2374ms | isProcessing=false
+01-12 21:38:47.998  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:48.120  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:48.120  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:48.121  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2504ms | isProcessing=false
+01-12 21:38:48.134  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:48.231  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:48.231  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:48.233  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2615ms | isProcessing=false
+01-12 21:38:48.248  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:48.321  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:48.322  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:48.323  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2706ms | isProcessing=false
+01-12 21:38:48.334  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:48.460  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:48.461  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:48.466  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2849ms | isProcessing=false
+01-12 21:38:48.476  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:48.562  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:48.563  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:48.564  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2947ms | isProcessing=false
+01-12 21:38:48.583  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:48.649  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:38:48.650  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:38:48.654  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:48.654  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:48.655  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=5ms | isProcessing=false
+01-12 21:38:48.666  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:48.766  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:48.766  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:48.768  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=118ms | isProcessing=false
+01-12 21:38:48.783  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:48.860  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:48.861  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:48.861  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=211ms | isProcessing=false
+01-12 21:38:48.883  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.022  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.022  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.024  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=374ms | isProcessing=false
+01-12 21:38:49.032  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.120  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.120  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.122  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=471ms | isProcessing=false
+01-12 21:38:49.133  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.194  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.194  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.195  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=545ms | isProcessing=false
+01-12 21:38:49.199  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.297  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.298  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.299  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=649ms | isProcessing=false
+01-12 21:38:49.318  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.431  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.431  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.433  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=782ms | isProcessing=false
+01-12 21:38:49.449  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.555  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.556  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.557  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=907ms | isProcessing=false
+01-12 21:38:49.565  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.655  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.656  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.657  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1007ms | isProcessing=false
+01-12 21:38:49.666  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.759  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.760  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.761  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1111ms | isProcessing=false
+01-12 21:38:49.767  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.887  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.887  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.889  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1239ms | isProcessing=false
+01-12 21:38:49.899  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:49.965  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:49.965  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:49.965  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1315ms | isProcessing=false
+01-12 21:38:49.988  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:50.090  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:50.090  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:50.092  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1442ms | isProcessing=false
+01-12 21:38:50.096  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:50.170  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:50.170  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:50.171  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1521ms | isProcessing=false
+01-12 21:38:50.182  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:50.289  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:50.289  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:50.291  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1640ms | isProcessing=false
+01-12 21:38:50.300  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:50.395  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:50.395  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:50.396  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1746ms | isProcessing=false
+01-12 21:38:50.416  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:50.490  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:50.490  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:50.491  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1841ms | isProcessing=false
+01-12 21:38:50.497  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:50.620  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:50.621  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:50.622  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1972ms | isProcessing=false
+01-12 21:38:50.632  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:50.737  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:50.737  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:50.738  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2088ms | isProcessing=false
+01-12 21:38:50.739  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (21%, 53%)
+01-12 21:38:50.749  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:50.832  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:50.833  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:50.835  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2184ms | isProcessing=false
+01-12 21:38:50.848  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:50.934  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:50.934  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:50.935  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2285ms | isProcessing=false
+01-12 21:38:50.948  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:51.025  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.025  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.026  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2376ms | isProcessing=false
+01-12 21:38:51.031  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:51.154  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.154  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.156  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2506ms | isProcessing=false
+01-12 21:38:51.163  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:51.253  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.253  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.255  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2604ms | isProcessing=false
+01-12 21:38:51.263  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:51.385  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.386  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.387  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2737ms | isProcessing=false
+01-12 21:38:51.397  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:51.466  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.467  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.469  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2819ms | isProcessing=false
+01-12 21:38:51.482  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:51.589  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.590  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.591  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2941ms | isProcessing=false
+01-12 21:38:51.597  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:51.647  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:38:51.647  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:38:51.689  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.690  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.691  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=44ms | isProcessing=false
+01-12 21:38:51.695  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:51.787  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.787  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.789  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=142ms | isProcessing=false
+01-12 21:38:51.796  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:51.889  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.889  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.891  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=243ms | isProcessing=false
+01-12 21:38:51.896  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:51.996  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:51.996  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:51.998  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=351ms | isProcessing=false
+01-12 21:38:52.014  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:52.085  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:52.085  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:52.086  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=439ms | isProcessing=false
+01-12 21:38:52.096  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:52.218  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:52.218  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:52.220  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=573ms | isProcessing=false
+01-12 21:38:52.229  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:52.290  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:52.290  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:52.291  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=644ms | isProcessing=false
+01-12 21:38:52.297  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:52.389  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:52.390  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:52.392  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=744ms | isProcessing=false
+01-12 21:38:52.398  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:52.519  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:52.519  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:52.521  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=873ms | isProcessing=false
+01-12 21:38:52.530  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:52.618  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:52.619  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:52.620  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=973ms | isProcessing=false
+01-12 21:38:52.629  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:52.725  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:52.726  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:52.727  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1080ms | isProcessing=false
+01-12 21:38:52.746  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:52.820  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:52.821  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:52.822  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1175ms | isProcessing=false
+01-12 21:38:52.829  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:52.950  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:52.951  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:52.952  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1305ms | isProcessing=false
+01-12 21:38:52.962  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:53.052  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.052  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.054  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1406ms | isProcessing=false
+01-12 21:38:53.060  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:53.152  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.152  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.154  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1506ms | isProcessing=false
+01-12 21:38:53.162  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:53.257  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.257  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.259  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1611ms | isProcessing=false
+01-12 21:38:53.280  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:53.369  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.369  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.370  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1723ms | isProcessing=false
+01-12 21:38:53.379  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:53.485  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.485  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.487  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1840ms | isProcessing=false
+01-12 21:38:53.495  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:53.587  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.588  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.589  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1942ms | isProcessing=false
+01-12 21:38:53.595  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:53.684  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.684  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.685  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2038ms | isProcessing=false
+01-12 21:38:53.685  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (21%, 54%)
+01-12 21:38:53.694  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:53.797  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.797  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.799  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2152ms | isProcessing=false
+01-12 21:38:53.812  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:53.886  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.886  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.887  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2240ms | isProcessing=false
+01-12 21:38:53.895  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:53.986  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:53.986  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:53.987  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2340ms | isProcessing=false
+01-12 21:38:53.996  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:54.105  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:54.105  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:54.106  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2459ms | isProcessing=false
+01-12 21:38:54.110  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:54.216  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:54.216  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:54.217  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2570ms | isProcessing=false
+01-12 21:38:54.229  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:54.321  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:54.322  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:54.323  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2676ms | isProcessing=false
+01-12 21:38:54.329  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:54.419  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:54.420  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:54.421  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2774ms | isProcessing=false
+01-12 21:38:54.429  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:54.521  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:54.521  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:54.522  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2875ms | isProcessing=false
+01-12 21:38:54.529  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:54.653  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:54.653  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:54.654  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3007ms | isProcessing=false
+01-12 21:38:54.662  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:54.752  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:54.752  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:54.754  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3107ms | isProcessing=false
+01-12 21:38:54.762  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:54.778  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:38:54.778  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:38:54.850  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:54.850  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:54.851  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=73ms | isProcessing=false
+01-12 21:38:54.861  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:54.948  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:54.948  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:54.949  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=171ms | isProcessing=false
+01-12 21:38:54.962  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:55.098  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:55.099  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:55.100  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=322ms | isProcessing=false
+01-12 21:38:55.111  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:55.188  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:55.188  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:55.189  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=411ms | isProcessing=false
+01-12 21:38:55.194  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:55.282  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:55.283  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:55.284  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=506ms | isProcessing=false
+01-12 21:38:55.294  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:55.392  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:55.393  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:55.394  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=616ms | isProcessing=false
+01-12 21:38:55.411  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:55.491  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:55.492  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:55.493  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=715ms | isProcessing=false
+01-12 21:38:55.513  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:55.604  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:55.604  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:55.605  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=827ms | isProcessing=false
+01-12 21:38:55.612  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:55.716  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:55.716  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:55.718  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=939ms | isProcessing=false
+01-12 21:38:55.727  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:55.815  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:55.815  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:55.816  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1038ms | isProcessing=false
+01-12 21:38:55.827  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:55.918  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:55.919  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:55.920  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1142ms | isProcessing=false
+01-12 21:38:55.927  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:56.034  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:56.034  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:56.035  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1257ms | isProcessing=false
+01-12 21:38:56.044  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:56.132  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:56.132  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:56.133  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1355ms | isProcessing=false
+01-12 21:38:56.144  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:56.256  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:56.256  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:56.258  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1480ms | isProcessing=false
+01-12 21:38:56.276  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:56.386  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:56.387  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:56.388  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1610ms | isProcessing=false
+01-12 21:38:56.398  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:56.503  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:56.503  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:56.504  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1726ms | isProcessing=false
+01-12 21:38:56.511  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:56.589  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:56.589  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:56.591  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1812ms | isProcessing=false
+01-12 21:38:56.596  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:56.682  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:56.683  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:56.684  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1906ms | isProcessing=false
+01-12 21:38:56.694  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:56.786  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:56.786  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:56.787  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2009ms | isProcessing=false
+01-12 21:38:56.787  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (24%, 53%)
+01-12 21:38:56.793  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:56.905  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:56.905  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:56.906  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2128ms | isProcessing=false
+01-12 21:38:56.912  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.019  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.020  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.021  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2243ms | isProcessing=false
+01-12 21:38:57.027  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.124  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.124  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.125  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2347ms | isProcessing=false
+01-12 21:38:57.143  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.222  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.223  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.224  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2446ms | isProcessing=false
+01-12 21:38:57.245  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.358  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.359  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.360  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2582ms | isProcessing=false
+01-12 21:38:57.377  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.463  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.463  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.464  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2686ms | isProcessing=false
+01-12 21:38:57.477  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.582  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.582  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.583  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2805ms | isProcessing=false
+01-12 21:38:57.593  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.651  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.651  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.653  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2874ms | isProcessing=false
+01-12 21:38:57.659  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.771  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.771  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.772  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2994ms | isProcessing=false
+01-12 21:38:57.792  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.879  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.879  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.880  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3102ms | isProcessing=false
+01-12 21:38:57.892  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:57.980  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:57.980  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:57.982  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3204ms | isProcessing=false
+01-12 21:38:57.992  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:58.090  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:58.091  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:58.092  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3314ms | isProcessing=false
+01-12 21:38:58.108  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:58.195  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:58.195  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:58.200  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3421ms | isProcessing=false
+01-12 21:38:58.218  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:58.303  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:58.303  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:58.304  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3526ms | isProcessing=false
+01-12 21:38:58.325  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:38:58.330  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:38:58.330  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:38:58.415  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:58.415  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:58.417  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=87ms | isProcessing=false
+01-12 21:38:58.426  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:58.518  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:58.518  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:58.520  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=189ms | isProcessing=false
+01-12 21:38:58.525  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:58.619  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:58.619  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:58.621  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=290ms | isProcessing=false
+01-12 21:38:58.625  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:58.748  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:58.748  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:58.750  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=420ms | isProcessing=false
+01-12 21:38:58.757  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:58.850  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:58.851  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:58.852  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=521ms | isProcessing=false
+01-12 21:38:58.858  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:58.949  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:58.949  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:58.950  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=620ms | isProcessing=false
+01-12 21:38:58.958  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:59.034  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:59.035  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:59.036  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=706ms | isProcessing=false
+01-12 21:38:59.040  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:59.198  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:59.198  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:59.202  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=871ms | isProcessing=false
+01-12 21:38:59.219  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:59.302  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:59.302  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:59.303  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=973ms | isProcessing=false
+01-12 21:38:59.308  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:59.386  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:59.386  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:59.387  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1057ms | isProcessing=false
+01-12 21:38:59.391  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:59.495  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:59.495  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:59.496  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1166ms | isProcessing=false
+01-12 21:38:59.506  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:59.618  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:59.618  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:59.619  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1289ms | isProcessing=false
+01-12 21:38:59.624  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:59.724  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:59.725  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:59.726  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1396ms | isProcessing=false
+01-12 21:38:59.740  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:59.811  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:59.811  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:59.812  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1482ms | isProcessing=false
+01-12 21:38:59.824  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:38:59.917  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:38:59.917  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:38:59.919  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1588ms | isProcessing=false
+01-12 21:38:59.924  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:00.046  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.046  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.047  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1717ms | isProcessing=false
+01-12 21:39:00.056  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:00.144  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.145  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.146  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1816ms | isProcessing=false
+01-12 21:39:00.158  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:00.247  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.247  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.248  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1918ms | isProcessing=false
+01-12 21:39:00.256  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:00.355  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.356  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.357  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2027ms | isProcessing=false
+01-12 21:39:00.357  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (26%, 54%)
+01-12 21:39:00.377  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:00.465  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.465  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.466  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2136ms | isProcessing=false
+01-12 21:39:00.472  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:00.579  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.579  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.580  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2250ms | isProcessing=false
+01-12 21:39:00.590  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:00.657  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.657  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.658  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2328ms | isProcessing=false
+01-12 21:39:00.673  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:00.758  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.758  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.759  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2429ms | isProcessing=false
+01-12 21:39:00.774  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:00.890  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.891  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.893  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2562ms | isProcessing=false
+01-12 21:39:00.908  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:00.975  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:00.975  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:00.976  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2646ms | isProcessing=false
+01-12 21:39:00.990  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:01.083  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:01.083  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:01.084  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2754ms | isProcessing=false
+01-12 21:39:01.090  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:01.177  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:01.177  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:01.178  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2848ms | isProcessing=false
+01-12 21:39:01.190  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:01.287  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:01.287  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:01.295  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2963ms | isProcessing=false
+01-12 21:39:01.306  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:01.397  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:01.397  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:01.398  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3068ms | isProcessing=false
+01-12 21:39:01.406  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:01.471  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:39:01.472  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:39:01.513  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:01.514  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:01.516  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=45ms | isProcessing=false
+01-12 21:39:01.523  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:01.613  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:01.613  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:01.615  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=143ms | isProcessing=false
+01-12 21:39:01.623  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:01.715  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:01.715  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:01.716  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=245ms | isProcessing=false
+01-12 21:39:01.722  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:01.831  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:01.831  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:01.832  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=361ms | isProcessing=false
+01-12 21:39:01.839  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:01.943  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:01.943  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:01.944  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=473ms | isProcessing=false
+01-12 21:39:01.956  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:02.031  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:02.031  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.032  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=561ms | isProcessing=false
+01-12 21:39:02.039  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:02.146  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:02.146  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.148  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=676ms | isProcessing=false
+01-12 21:39:02.157  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:02.266  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.266  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.269  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=798ms | isProcessing=false
+01-12 21:39:02.272  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.362  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.362  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.363  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=892ms | isProcessing=false
+01-12 21:39:02.371  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.474  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.474  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.475  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1004ms | isProcessing=false
+01-12 21:39:02.487  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.584  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.584  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.586  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1114ms | isProcessing=false
+01-12 21:39:02.591  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.709  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.709  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.710  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1238ms | isProcessing=false
+01-12 21:39:02.721  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.790  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.790  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.792  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1320ms | isProcessing=false
+01-12 21:39:02.804  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.881  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.881  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.883  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1412ms | isProcessing=false
+01-12 21:39:02.888  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.976  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:02.976  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:02.977  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1506ms | isProcessing=false
+01-12 21:39:02.990  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.090  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.090  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:03.091  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1620ms | isProcessing=false
+01-12 21:39:03.104  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.186  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.186  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:03.188  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1717ms | isProcessing=false
+01-12 21:39:03.203  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.288  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.288  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:03.290  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1819ms | isProcessing=false
+01-12 21:39:03.304  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.408  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.408  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:03.409  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1938ms | isProcessing=false
+01-12 21:39:03.422  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.519  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.519  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:03.520  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2049ms | isProcessing=false
+01-12 21:39:03.521  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (27%, 55%)
+01-12 21:39:03.536  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.642  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.642  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:03.643  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2172ms | isProcessing=false
+01-12 21:39:03.654  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.728  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.728  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:03.730  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2259ms | isProcessing=false
+01-12 21:39:03.738  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.832  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.832  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:03.834  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2363ms | isProcessing=false
+01-12 21:39:03.837  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.945  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:03.945  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:03.946  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2475ms | isProcessing=false
+01-12 21:39:03.953  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.049  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.050  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.051  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2580ms | isProcessing=false
+01-12 21:39:04.070  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.140  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.140  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.141  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2670ms | isProcessing=false
+01-12 21:39:04.153  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.244  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.244  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.245  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2774ms | isProcessing=false
+01-12 21:39:04.255  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.359  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.359  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.363  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2892ms | isProcessing=false
+01-12 21:39:04.373  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.455  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.455  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.456  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2985ms | isProcessing=false
+01-12 21:39:04.470  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.536  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:39:04.537  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:39:04.575  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.575  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.577  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=39ms | isProcessing=false
+01-12 21:39:04.586  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.665  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.665  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.666  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=129ms | isProcessing=false
+01-12 21:39:04.670  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.757  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.757  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.759  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=222ms | isProcessing=false
+01-12 21:39:04.770  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.885  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.885  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.887  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=350ms | isProcessing=false
+01-12 21:39:04.902  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.979  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:04.980  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:04.981  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=444ms | isProcessing=false
+01-12 21:39:04.985  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:05.085  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:05.086  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:05.088  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=550ms | isProcessing=false
+01-12 21:39:05.103  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:05.179  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:05.179  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=TOO_FAR | hasROIs=true (4) | isCapturing=false
+01-12 21:39:05.180  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=643ms | isProcessing=false
+01-12 21:39:05.186  2995  2995 D OverlayView: 🔍 STATUS CHECK: ❌ Distance: TOO_FAR → TOO_FAR
+01-12 21:39:05.302  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:05.302  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:05.305  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=767ms | isProcessing=false
+01-12 21:39:05.320  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:05.411  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:05.411  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:05.412  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=875ms | isProcessing=false
+01-12 21:39:05.420  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:05.513  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:05.513  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:05.514  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=977ms | isProcessing=false
+01-12 21:39:05.520  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:05.622  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:05.622  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:05.624  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1086ms | isProcessing=false
+01-12 21:39:05.634  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:05.743  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:05.743  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:05.744  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1207ms | isProcessing=false
+01-12 21:39:05.752  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:05.841  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:05.841  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:05.841  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1304ms | isProcessing=false
+01-12 21:39:05.852  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:05.940  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:05.940  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:05.942  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1405ms | isProcessing=false
+01-12 21:39:05.953  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:06.048  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:06.049  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:06.050  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1513ms | isProcessing=false
+01-12 21:39:06.068  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:06.174  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:06.182  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:06.183  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1646ms | isProcessing=false
+01-12 21:39:06.203  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:06.283  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:06.283  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:06.285  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1747ms | isProcessing=false
+01-12 21:39:06.302  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:06.376  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:06.376  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:06.378  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1841ms | isProcessing=false
+01-12 21:39:06.386  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:06.479  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:06.479  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:06.480  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1943ms | isProcessing=false
+01-12 21:39:06.486  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:06.572  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:06.573  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:06.582  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2045ms | isProcessing=false
+01-12 21:39:06.582  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (21%, 54%)
+01-12 21:39:06.589  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:06.692  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:06.692  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:06.692  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2155ms | isProcessing=false
+01-12 21:39:06.701  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:06.823  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:06.824  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:06.825  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2288ms | isProcessing=false
+01-12 21:39:06.836  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:06.906  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:06.906  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:06.906  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2369ms | isProcessing=false
+01-12 21:39:06.919  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:07.010  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:07.011  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:07.012  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2475ms | isProcessing=false
+01-12 21:39:07.020  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:07.155  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:07.155  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:07.156  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2619ms | isProcessing=false
+01-12 21:39:07.167  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:07.263  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:07.263  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:07.264  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2727ms | isProcessing=false
+01-12 21:39:07.269  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:07.356  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:07.356  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:07.357  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2820ms | isProcessing=false
+01-12 21:39:07.369  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:07.478  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:07.478  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:07.480  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2942ms | isProcessing=false
+01-12 21:39:07.486  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:07.579  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:07.579  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:07.580  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=3043ms | isProcessing=false
+01-12 21:39:07.584  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:07.635  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:39:07.635  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:39:07.675  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:07.676  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:07.677  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=42ms | isProcessing=false
+01-12 21:39:07.686  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:07.790  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:07.790  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:07.792  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=157ms | isProcessing=false
+01-12 21:39:07.802  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:07.882  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:07.882  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:07.883  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=248ms | isProcessing=false
+01-12 21:39:07.900  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.022  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.022  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.024  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=388ms | isProcessing=false
+01-12 21:39:08.036  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.118  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.118  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.119  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=484ms | isProcessing=false
+01-12 21:39:08.135  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.216  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.216  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.218  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=583ms | isProcessing=false
+01-12 21:39:08.234  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.305  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.305  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.306  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=671ms | isProcessing=false
+01-12 21:39:08.318  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.426  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.426  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.427  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=792ms | isProcessing=false
+01-12 21:39:08.435  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.513  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.513  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.515  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=879ms | isProcessing=false
+01-12 21:39:08.519  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.622  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.622  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.624  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=988ms | isProcessing=false
+01-12 21:39:08.634  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.706  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.706  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.707  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1072ms | isProcessing=false
+01-12 21:39:08.716  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.836  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.836  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.838  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1203ms | isProcessing=false
+01-12 21:39:08.849  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:08.941  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:08.941  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:08.946  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1311ms | isProcessing=false
+01-12 21:39:08.967  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:09.059  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:09.059  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:09.060  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1425ms | isProcessing=false
+01-12 21:39:09.069  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:09.165  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:09.165  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:09.166  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1531ms | isProcessing=false
+01-12 21:39:09.183  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:09.294  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:09.294  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:09.295  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1660ms | isProcessing=false
+01-12 21:39:09.318  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:09.391  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:09.391  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:09.392  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1757ms | isProcessing=false
+01-12 21:39:09.401  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:09.499  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:09.499  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:09.499  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1864ms | isProcessing=false
+01-12 21:39:09.518  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:09.600  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:09.600  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:09.601  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1966ms | isProcessing=false
+01-12 21:39:09.615  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:09.735  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:09.736  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:09.738  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=2102ms | isProcessing=false
+01-12 21:39:09.738  2995  2995 D RMST Biomterics: 🔍 STARTING FOCUS on fingertips at (19%, 55%)
+01-12 21:39:09.750  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:09.837  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:09.837  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:09.837  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2202ms | isProcessing=false
+01-12 21:39:09.852  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:09.937  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:09.937  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:09.938  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2303ms | isProcessing=false
+01-12 21:39:09.952  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:10.054  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:10.054  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:10.055  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2420ms | isProcessing=false
+01-12 21:39:10.067  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:10.161  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:10.161  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:10.163  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2528ms | isProcessing=false
+01-12 21:39:10.168  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:10.296  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:10.297  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:10.298  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2663ms | isProcessing=false
+01-12 21:39:10.316  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:10.388  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:10.388  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:10.389  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2754ms | isProcessing=false
+01-12 21:39:10.399  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:10.494  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:10.494  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:10.495  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2860ms | isProcessing=false
+01-12 21:39:10.516  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:10.588  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:10.589  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:10.590  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=true | isFocused=true | timeSince=2955ms | isProcessing=false
+01-12 21:39:10.600  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ❌ Focus (focusing=true, focused=true) → FOCUSING
+01-12 21:39:10.702  2995  2995 D RMST Biomterics: 🔍 FOCUS COMPLETE: SUCCESS ✓
+01-12 21:39:10.703  2995  2995 D RMST Biomterics: 🔍 FOCUS FINISHED: isFocusing=false | isFocused=true
+01-12 21:39:10.719  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:10.719  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:10.720  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=17ms | isProcessing=false
+01-12 21:39:10.733  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:10.822  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:10.822  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:10.823  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=120ms | isProcessing=false
+01-12 21:39:10.832  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:10.921  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:10.921  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:10.923  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=219ms | isProcessing=false
+01-12 21:39:10.932  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:11.056  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:11.056  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:11.058  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=354ms | isProcessing=false
+01-12 21:39:11.073  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:11.190  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:11.190  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:11.193  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=488ms | isProcessing=false
+01-12 21:39:11.202  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:11.285  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:11.285  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:11.286  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=583ms | isProcessing=false
+01-12 21:39:11.297  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:11.395  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:11.395  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:11.396  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=693ms | isProcessing=false
+01-12 21:39:11.400  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:11.493  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:11.493  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:11.494  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=791ms | isProcessing=false
+01-12 21:39:11.499  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:11.622  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:11.622  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:11.623  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=920ms | isProcessing=false
+01-12 21:39:11.633  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:11.754  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:11.754  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:11.757  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1052ms | isProcessing=false
+01-12 21:39:11.766  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:11.853  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:11.853  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:11.854  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1151ms | isProcessing=false
+01-12 21:39:11.866  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:11.950  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:11.950  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:11.951  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1248ms | isProcessing=false
+01-12 21:39:11.966  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:12.086  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ❌ Outside box → OUTSIDE_BOX
+01-12 21:39:12.086  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=OUTSIDE_BOX | hasROIs=true (4) | isCapturing=false
+01-12 21:39:12.087  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1384ms | isProcessing=false
+01-12 21:39:12.098  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ❌ Outside box → OUTSIDE_BOX
+01-12 21:39:12.186  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ❌ Outside box → OUTSIDE_BOX
+01-12 21:39:12.186  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=OUTSIDE_BOX | hasROIs=true (4) | isCapturing=false
+01-12 21:39:12.187  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1484ms | isProcessing=false
+01-12 21:39:12.198  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ❌ Outside box → OUTSIDE_BOX
+01-12 21:39:12.285  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ❌ Outside box → OUTSIDE_BOX
+01-12 21:39:12.285  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=OUTSIDE_BOX | hasROIs=true (4) | isCapturing=false
+01-12 21:39:12.286  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1583ms | isProcessing=false
+01-12 21:39:12.299  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ❌ Outside box → OUTSIDE_BOX
+01-12 21:39:12.392  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ❌ Not stable → NOT_STABLE
+01-12 21:39:12.393  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=NOT_STABLE | hasROIs=true (4) | isCapturing=false
+01-12 21:39:12.395  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1692ms | isProcessing=false
+01-12 21:39:12.399  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ✓ In box | ✓ Stable | ✓ Focused → ✅ PERFECT!
+01-12 21:39:12.553  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ❌ Outside box → OUTSIDE_BOX
+01-12 21:39:12.553  2995  2995 D OverlayView: 📊 CAPTURE DECISION: status=OUTSIDE_BOX | hasROIs=true (4) | isCapturing=false
+01-12 21:39:12.554  2995  2995 D RMST Biomterics: 🔍 FOCUS STATE: isFocusing=false | isFocused=true | timeSince=1851ms | isProcessing=false
+01-12 21:39:12.564  2995  2995 D OverlayView: 🔍 STATUS CHECK: ✓ Distance OK | ❌ Outside box → OUTSIDE_BOX
+01-12 21:39:13.324  2995  2995 I ViewRootImpl@f2d5454[BiometricsActivity]: MSG_WINDOW_FOCUS_CHANGED 0 0
+01-12 21:39:13.384  2995  2995 I ViewRootImpl@20a2bee[BiometricsActivity]: MSG_WINDOW_FOCUS_CHANGED 1 0
+01-12 21:39:14.265  2995  2995 I ViewRootImpl@13c5e06[MainActivity]: MSG_WINDOW_FOCUS_CHANGED 1 0
+01-12 21:39:14.812  4984  3269 I ExynosCameraBufferManager: [CAM(0)][CAPTURE_CB_BUF]-(deinit[115]):OUT.. Buffer is not allocated
