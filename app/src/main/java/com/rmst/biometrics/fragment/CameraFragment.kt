@@ -49,9 +49,9 @@ import com.rmst.biometrics.HandLandmarkerHelper
 import com.rmst.biometrics.MainViewModel
 import com.rmst.biometrics.OverlayView
 import com.rmst.biometrics.R
-import com.rmst.biometrics.api.FingerprintApiService
+import com.biometrics.api.FingerprintApiService
+import com.biometrics.model.ProcessResponse
 import com.rmst.biometrics.databinding.FragmentCameraBinding
-import com.rmst.biometrics.model.ProcessResponse
 import com.google.mediapipe.tasks.vision.core.RunningMode
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
 import kotlinx.coroutines.Dispatchers

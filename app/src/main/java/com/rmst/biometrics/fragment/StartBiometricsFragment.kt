@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.biometrics.Biometrics
 import com.biometrics.BiometricsLauncher
 import com.biometrics.model.BiometricsResult
+import com.biometrics.model.ProcessResponse
 import com.rmst.biometrics.R
 
 class StartBiometricsFragment : Fragment() {
@@ -22,8 +25,22 @@ class StartBiometricsFragment : Fragment() {
         biometricsLauncher = Biometrics.register(this) { result ->
             when (result) {
                 is BiometricsResult.Success -> {
-                    val message = "Biometrics Success! ID: ${result.transactionId}"
+                    // SDK returned successfully with processed fingerprints
+                    val message = "Biometrics Success! Batch ID: ${result.batchId}, Files: ${result.processedFiles.size}"
                     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+
+                    // Create ProcessResponse from the result to pass to ResultFragment
+                    val processResponse = ProcessResponse(
+                        success = true,
+                        message = "Fingerprints processed successfully",
+                        processed = result.processedFiles,
+                        batch_id = result.batchId,
+                        parameters = result.parameters
+                    )
+
+                    // Navigate to ResultFragment to display the results
+                    val bundle = bundleOf(ResultFragment.ARG_PROCESS_RESPONSE to processResponse)
+                    findNavController().navigate(R.id.action_start_biometrics_to_result, bundle)
                 }
                 is BiometricsResult.Error -> {
                     val message = "Biometrics Error: ${result.message}"
@@ -31,6 +48,9 @@ class StartBiometricsFragment : Fragment() {
                 }
                 is BiometricsResult.Cancelled -> {
                     Toast.makeText(requireContext(), "Biometrics cancelled by user", Toast.LENGTH_SHORT).show()
+                }
+                null -> {
+                    Toast.makeText(requireContext(), "Biometrics returned null result", Toast.LENGTH_SHORT).show()
                 }
             }
         }

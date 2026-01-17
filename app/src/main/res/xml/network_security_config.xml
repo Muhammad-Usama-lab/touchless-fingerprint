@@ -3,6 +3,7 @@
     <!-- Allow cleartext for local development servers -->
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">192.168.0.110</domain>
+        <domain includeSubdomains="true">192.168.0.119</domain>
         <domain includeSubdomains="true">172.21.21.190</domain>
     </domain-config>
 

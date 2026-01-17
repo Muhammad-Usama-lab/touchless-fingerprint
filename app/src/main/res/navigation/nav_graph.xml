@@ -13,7 +13,9 @@
         <action
             android:id="@+id/action_start_biometrics_to_camera"
             app:destination="@id/camera_fragment" />
-
+        <action
+            android:id="@+id/action_start_biometrics_to_result"
+            app:destination="@id/result_fragment" />
     </fragment>
 
     <fragment

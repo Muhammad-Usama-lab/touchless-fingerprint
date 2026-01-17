@@ -16,55 +16,179 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Image Container -->
-        <FrameLayout
+        <!-- Images Container - Side by Side -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F5F5F5">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
-            <ImageView
-                android:id="@+id/fingerprintImage"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:contentDescription="Processed fingerprint"
-                android:scaleType="fitCenter"
-                tools:src="@drawable/fingerprint" />
+            <!-- Captured Image Container -->
+            <FrameLayout
+                android:id="@+id/capturedImageContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F5F5F5">
 
-            <!-- Loading indicator for image -->
-            <ProgressBar
-                android:id="@+id/imageLoadingProgress"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-
-            <!-- Error indicator -->
-            <LinearLayout
-                android:id="@+id/imageErrorContainer"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:contentDescription="Error"
-                    android:src="@drawable/ic_error"
-                    app:tint="#9E9E9E" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Failed to load image"
-                    android:textColor="#9E9E9E"
-                    android:textSize="12sp" />
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <!-- Label -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E3F2FD"
+                        android:gravity="center"
+                        android:paddingVertical="4dp"
+                        android:text="Captured"
+                        android:textColor="#1976D2"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
-        </FrameLayout>
+                    <!-- Captured Image -->
+                    <ImageView
+                        android:id="@+id/capturedImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:contentDescription="Captured fingerprint"
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/fingerprint" />
+
+                </LinearLayout>
+
+                <!-- Loading indicator -->
+                <ProgressBar
+                    android:id="@+id/capturedLoadingProgress"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone" />
+
+                <!-- Placeholder when no captured image -->
+                <LinearLayout
+                    android:id="@+id/capturedPlaceholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:contentDescription="No image"
+                        android:src="@drawable/ic_error"
+                        app:tint="#BDBDBD" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Not available"
+                        android:textColor="#BDBDBD"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#E0E0E0" />
+
+            <!-- Processed Image Container -->
+            <FrameLayout
+                android:id="@+id/processedImageContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F5F5F5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Label -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#E8F5E9"
+                        android:gravity="center"
+                        android:paddingVertical="4dp"
+                        android:text="Processed"
+                        android:textColor="#388E3C"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <!-- Processed Image -->
+                    <ImageView
+                        android:id="@+id/processedImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:contentDescription="Processed fingerprint"
+                        android:scaleType="fitCenter"
+                        tools:src="@drawable/fingerprint" />
+
+                </LinearLayout>
+
+                <!-- Loading indicator -->
+                <ProgressBar
+                    android:id="@+id/processedLoadingProgress"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone" />
+
+                <!-- Error indicator -->
+                <LinearLayout
+                    android:id="@+id/processedErrorContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:contentDescription="Error"
+                        android:src="@drawable/ic_error"
+                        app:tint="#9E9E9E" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Load failed"
+                        android:textColor="#9E9E9E"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <!-- Tap hint -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FAFAFA"
+            android:gravity="center"
+            android:paddingVertical="4dp"
+            android:text="Tap image to view full screen"
+            android:textColor="#9E9E9E"
+            android:textSize="10sp" />
 
         <!-- Info and Buttons Section -->
         <LinearLayout

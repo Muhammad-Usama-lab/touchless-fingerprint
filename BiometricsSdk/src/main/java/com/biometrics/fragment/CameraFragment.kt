@@ -68,6 +68,7 @@ import java.nio.ByteBuffer
 
 import androidx.activity.OnBackPressedCallback
 
+import com.biometrics.api.FingerprintApiService
 import com.biometrics.model.BiometricsResult
 import com.biometrics.utils.FingerprintExtractor
 import com.biometrics.viewmodel.BiometricsSharedViewModel
@@ -772,7 +773,7 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
      * NEW OPTIMIZED METHOD: Directly crop fingerprint ROIs from camera frame
      * No need to re-run MediaPipe! We use the green boxes already calculated by OverlayView.
      */
-    private fun captureAndProcessFrame(bitmap: Bitmap, landmarks: HandLandmarkerResult) {
+    private suspend fun captureAndProcessFrame(bitmap: Bitmap, landmarks: HandLandmarkerResult) {
         try {
             activity?.runOnUiThread {
                 fragmentCameraBinding.progressBar.visibility = View.VISIBLE
@@ -885,19 +886,65 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                 }
                 Log.d(TAG, "====================================================")
 
-                // Save fingerprints (no full hand image needed)
-                saveFingerprints(fingerprints, bitmap)
+                // Convert to map for API upload
+                val fingerprintMap = fingerprints.associate { fp ->
+                    fp.fingerType.name to fp.bitmap
+                }
 
                 activity?.runOnUiThread {
                     Toast.makeText(
                         requireContext(),
-                        "✓ Captured ${fingerprints.size} fingerprints!",
-                        Toast.LENGTH_LONG
+                        "Uploading ${fingerprints.size} fingerprints...",
+                        Toast.LENGTH_SHORT
                     ).show()
-
-                    fragmentCameraBinding.progressBar.visibility = View.GONE
-                    sharedViewModel.postResult(BiometricsResult.Success("LOCAL_SAVE_${System.currentTimeMillis()}"))
                 }
+
+                // Upload fingerprints to server
+                Log.d(TAG, "🌐 Uploading ${fingerprintMap.size} fingerprints to server...")
+                val apiResult = FingerprintApiService.processFingerprints(fingerprintMap)
+
+                apiResult.fold(
+                    onSuccess = { response ->
+                        Log.d(TAG, "✅ API SUCCESS: batch_id=${response.batch_id}, files=${response.processed.size}")
+
+                        activity?.runOnUiThread {
+                            Toast.makeText(
+                                requireContext(),
+                                "✓ Processed ${response.processed.size} fingerprints!",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                            fragmentCameraBinding.progressBar.visibility = View.GONE
+                            camera?.cameraControl?.enableTorch(true)
+
+                            // Return full result to parent app via BiometricsResult.Success
+                            sharedViewModel.postResult(
+                                BiometricsResult.Success(
+                                    batchId = response.batch_id,
+                                    processedFiles = response.processed,
+                                    parameters = response.parameters
+                                )
+                            )
+                        }
+                    },
+                    onFailure = { error ->
+                        Log.e(TAG, "❌ API ERROR: ${error.message}")
+
+                        activity?.runOnUiThread {
+                            Toast.makeText(
+                                requireContext(),
+                                "Upload failed: ${error.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                            fragmentCameraBinding.progressBar.visibility = View.GONE
+                            camera?.cameraControl?.enableTorch(true)
+                            isProcessingCapture = false
+                            lockedFingerROIs = null
+                            fragmentCameraBinding.overlay.resetCapture()
+                        }
+                    }
+                )
             } else {
                 Log.e(TAG, "====================================================")
                 Log.e(TAG, "❌ FAILURE: No valid fingerprints captured")
@@ -1163,9 +1210,11 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                     Log.d(TAG, msg)
 
                     // Show success and finish
+                    // Note: Manual capture is deprecated - use automatic capture flow instead
                     activity?.runOnUiThread {
                         fragmentCameraBinding.progressBar.visibility = View.GONE
-                        sharedViewModel.postResult(BiometricsResult.Success("LOCAL_SAVE_${System.currentTimeMillis()}"))
+                        // Manual capture doesn't upload to server, so return error
+                        sharedViewModel.postResult(BiometricsResult.Error("Manual capture not supported. Please use automatic capture."))
                     }
                 }
             }

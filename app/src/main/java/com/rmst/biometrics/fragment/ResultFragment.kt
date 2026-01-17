@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rmst.biometrics.R
 import com.rmst.biometrics.adapter.ProcessedFingersAdapter
 import com.rmst.biometrics.databinding.FragmentResultBinding
-import com.rmst.biometrics.model.ProcessedFile
-import com.rmst.biometrics.model.ProcessResponse
+import com.biometrics.model.ProcessedFile
+import com.biometrics.model.ProcessResponse
+import com.rmst.biometrics.dialog.GalleryImage
+import com.rmst.biometrics.dialog.ImageViewerDialog
 
 /**
  * Fragment to display processed fingerprint results with download options
@@ -73,13 +75,65 @@ class ResultFragment : Fragment() {
     private fun setupRecyclerView() {
         adapter = ProcessedFingersAdapter(
             onDownloadPng = { file -> downloadFile(file.processed_png, file.getPngFilename()) },
-            onDownloadWsq = { file -> downloadFile(file.processed_wsq, file.getWsqFilename()) }
+            onDownloadWsq = { file -> downloadFile(file.processed_wsq, file.getWsqFilename()) },
+            onImageClick = { imageUrl, title, imageType, filename ->
+                showImageViewer(imageUrl, title, imageType, filename)
+            }
         )
 
         binding.fingerprintsRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@ResultFragment.adapter
         }
+    }
+
+    /**
+     * Build a list of all gallery images from processed files
+     */
+    private fun buildGalleryImages(): List<GalleryImage> {
+        val response = processResponse ?: return emptyList()
+        val galleryImages = mutableListOf<GalleryImage>()
+
+        response.processed.forEach { file ->
+            val displayName = file.getDisplayName()
+
+            // Add captured image if available
+            file.captured_png?.let { capturedUrl ->
+                galleryImages.add(
+                    GalleryImage(
+                        imageUrl = capturedUrl,
+                        title = displayName,
+                        imageType = "Captured",
+                        downloadFilename = "${file.original_name.substringBeforeLast(".")}_captured.png"
+                    )
+                )
+            }
+
+            // Add processed image
+            galleryImages.add(
+                GalleryImage(
+                    imageUrl = file.processed_png,
+                    title = displayName,
+                    imageType = "Processed",
+                    downloadFilename = file.getPngFilename()
+                )
+            )
+        }
+
+        return galleryImages
+    }
+
+    private fun showImageViewer(imageUrl: String, title: String, imageType: String, filename: String) {
+        val allImages = buildGalleryImages()
+
+        // Find the starting position for the clicked image
+        val startPosition = allImages.indexOfFirst { it.imageUrl == imageUrl }.coerceAtLeast(0)
+
+        val dialog = ImageViewerDialog.newInstance(
+            images = allImages,
+            startPosition = startPosition
+        )
+        dialog.show(childFragmentManager, "ImageViewer")
     }
 
     private fun setupButtons() {
@@ -129,8 +183,11 @@ class ResultFragment : Fragment() {
     }
 
     private fun navigateBack() {
-        // Pop back to start fragment
-        findNavController().popBackStack(R.id.start_biometrics_fragment, false)
+        // Pop back to start fragment (works from both SDK flow and direct camera flow)
+        if (!findNavController().popBackStack(R.id.start_biometrics_fragment, false)) {
+            // If start fragment not in back stack, just pop current fragment
+            findNavController().popBackStack()
+        }
     }
 
     override fun onDestroyView() {
