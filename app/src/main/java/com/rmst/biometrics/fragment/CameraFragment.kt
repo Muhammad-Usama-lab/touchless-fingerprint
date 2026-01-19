@@ -614,10 +614,6 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
 
                 Log.d(TAG, "Extracted ${fingerprints.size} fingerprints, uploading to API...")
 
-                withContext(Dispatchers.Main) {
-                    fragmentCameraBinding.loadingText.text = "Uploading to server..."
-                }
-
                 // Upload to API
                 val result = FingerprintApiService.processFingerprints(fingerprints)
 

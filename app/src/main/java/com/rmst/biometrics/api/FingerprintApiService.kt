@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit
 object FingerprintApiService {
 
     private const val TAG = "FingerprintApiService"
-    private const val BASE_URL = "http://172.21.21.190:8000"
+    private const val BASE_URL = "http://demo.rmstservices.com:8001"
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)

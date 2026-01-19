@@ -891,14 +891,6 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
                     fp.fingerType.name to fp.bitmap
                 }
 
-                activity?.runOnUiThread {
-                    Toast.makeText(
-                        requireContext(),
-                        "Uploading ${fingerprints.size} fingerprints...",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
                 // Upload fingerprints to server
                 Log.d(TAG, "🌐 Uploading ${fingerprintMap.size} fingerprints to server...")
                 val apiResult = FingerprintApiService.processFingerprints(fingerprintMap)

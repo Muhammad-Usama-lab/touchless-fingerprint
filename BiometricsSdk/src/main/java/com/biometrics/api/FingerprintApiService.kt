@@ -25,7 +25,7 @@ object FingerprintApiService {
     private const val TAG = "FingerprintApiService"
 
     // Default base URL - can be configured via init()
-    private var baseUrl = "http://192.168.0.119:8000"
+    private var baseUrl = "http://demo.rmstservices.com:8001"
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
