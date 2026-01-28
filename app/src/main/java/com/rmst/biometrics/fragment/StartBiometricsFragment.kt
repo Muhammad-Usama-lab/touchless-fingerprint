@@ -1,10 +1,12 @@
 package com.rmst.biometrics.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -15,6 +17,7 @@ import com.biometrics.BiometricsLauncher
 import com.biometrics.model.BiometricsResult
 import com.biometrics.model.ProcessResponse
 import com.rmst.biometrics.R
+import org.json.JSONObject
 
 class StartBiometricsFragment : Fragment() {
 
@@ -67,6 +70,18 @@ class StartBiometricsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val companyNameText: TextView = view.findViewById(R.id.company_name_text)
+        try {
+            val prefs = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+            val companyData = prefs.getString("company_data", null)
+            if (companyData != null) {
+                val companyJson = JSONObject(companyData)
+                companyNameText.text = companyJson.getString("companyName")
+            }
+        } catch (e: Exception) {
+            companyNameText.visibility = View.GONE
+        }
+
         val startBiometricsButton: Button = view.findViewById(R.id.start_biometrics_button)
         startBiometricsButton.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_start_biometrics_to_camera)
@@ -74,8 +89,13 @@ class StartBiometricsFragment : Fragment() {
 
         val launchSdkButton: Button = view.findViewById(R.id.launch_sdk_button)
         launchSdkButton.setOnClickListener {
-            // Replace with a real token for testing
-            biometricsLauncher.launch("7b6b6da44c9b4adaa8a73dcca5667b3d92e44856b5e9340cdaa120a792f36543")
+            val prefs = requireContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+            val token = prefs.getString("auth_token", null)
+            if (token != null) {
+                biometricsLauncher.launch(token)
+            } else {
+                Toast.makeText(requireContext(), "Auth token not found. Please login again.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

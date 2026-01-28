@@ -13,6 +13,14 @@
         android:layout_marginBottom="32dp"/>
 
     <TextView
+        android:id="@+id/company_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Biometrics"

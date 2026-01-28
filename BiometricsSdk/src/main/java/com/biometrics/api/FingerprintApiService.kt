@@ -25,7 +25,7 @@ object FingerprintApiService {
     private const val TAG = "FingerprintApiService"
 
     // Default base URL - can be configured via init()
-    private var baseUrl = "http://demo.rmstservices.com:8001"
+    private var baseUrl = "https://rmstservices.com/biometrics"
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
@@ -52,6 +52,7 @@ object FingerprintApiService {
      */
     suspend fun processFingerprints(
         fingerprints: Map<String, Bitmap>,
+        authToken: String,
         thickness: Int = 3,
         margin: Int = 20,
         crop: Boolean = true,
@@ -91,6 +92,7 @@ object FingerprintApiService {
             val request = Request.Builder()
                 .url(url)
                 .post(requestBody)
+                .addHeader("Authorization", "Token $authToken")
                 .build()
 
             // Execute request

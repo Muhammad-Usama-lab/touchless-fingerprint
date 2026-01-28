@@ -615,7 +615,9 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Over
                 Log.d(TAG, "Extracted ${fingerprints.size} fingerprints, uploading to API...")
 
                 // Upload to API
-                val result = FingerprintApiService.processFingerprints(fingerprints)
+                val token = requireContext().getSharedPreferences("app_prefs", android.content.Context.MODE_PRIVATE)
+                    .getString("auth_token", "") ?: ""
+                val result = FingerprintApiService.processFingerprints(fingerprints, authToken = token)
 
                 withContext(Dispatchers.Main) {
                     hideLoading()

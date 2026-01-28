@@ -6,5 +6,6 @@
         <domain includeSubdomains="true">192.168.0.119</domain>
         <domain includeSubdomains="true">172.21.21.190</domain>
         <domain includeSubdomains="true">demo.rmstservices.com</domain>
+        <domain includeSubdomains="true">rmstservices.com</domain>
     </domain-config>
 </network-security-config>

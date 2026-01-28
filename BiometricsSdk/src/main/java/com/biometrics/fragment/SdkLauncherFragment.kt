@@ -49,7 +49,7 @@ class SdkLauncherFragment : Fragment() {
     private fun verifyToken(token: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val url = "https://demo.rmstservices.com/biometrics/verifyToken?token=$token"
+                val url = "https://rmstservices.com/biometrics/verifyToken?token=$token"
                 val client = OkHttpClient()
                 val request = Request.Builder().url(url).build()
                 val response = client.newCall(request).execute()

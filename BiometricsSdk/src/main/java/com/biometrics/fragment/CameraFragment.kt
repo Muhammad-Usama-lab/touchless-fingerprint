@@ -893,7 +893,8 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener, Conf
 
                 // Upload fingerprints to server
                 Log.d(TAG, "🌐 Uploading ${fingerprintMap.size} fingerprints to server...")
-                val apiResult = FingerprintApiService.processFingerprints(fingerprintMap)
+                val token = sharedViewModel.token ?: ""
+                val apiResult = FingerprintApiService.processFingerprints(fingerprintMap, authToken = token)
 
                 apiResult.fold(
                     onSuccess = { response ->
